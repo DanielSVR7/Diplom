@@ -1,0 +1,1036 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ApplianceStoreModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BacklightTypes">
+          <Key>
+            <PropertyRef Name="BacklightTypeID" />
+          </Key>
+          <Property Name="BacklightTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="BacklightTypeName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="smallint" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Account" Type="money" Nullable="false" />
+          <Property Name="DiscountLevel" Type="tinyint" Nullable="false" />
+          <Property Name="LastPurchase" Type="datetime2" Precision="0" />
+          <Property Name="RegisterDate" Type="datetime2" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="tinyint" Nullable="false" />
+          <Property Name="ColorName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiscountLevels">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AmountOfPurchases" Type="int" Nullable="false" />
+          <Property Name="PercentDiscount" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnergyClasses">
+          <Key>
+            <PropertyRef Name="EnergyClassID" />
+          </Key>
+          <Property Name="EnergyClassID" Type="tinyint" Nullable="false" />
+          <Property Name="EnergyClassName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FreezerLocations">
+          <Key>
+            <PropertyRef Name="FreezerLocationID" />
+          </Key>
+          <Property Name="FreezerLocationID" Type="tinyint" Nullable="false" />
+          <Property Name="FreezerLocationName" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="ManufacturerID" />
+          </Key>
+          <Property Name="ManufacturerID" Type="smallint" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TechnicalSupportNumber" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="OperatingSystems">
+          <Key>
+            <PropertyRef Name="OperatingSystemID" />
+          </Key>
+          <Property Name="OperatingSystemID" Type="tinyint" Nullable="false" />
+          <Property Name="OperatingSystemName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Category" Type="smallint" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Manufacturer" Type="smallint" />
+          <Property Name="Color" Type="tinyint" />
+          <Property Name="Width" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Height" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Depth" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Warranty" Type="smallint" />
+          <Property Name="PowerConsumption" Type="smallint" />
+          <Property Name="EnergyClass" Type="tinyint" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="FreezerLocation" Type="tinyint" />
+          <Property Name="FreshnessZone" Type="bit" />
+          <Property Name="InverterCompressor" Type="bit" />
+          <Property Name="RefrigeratorVolume" Type="smallint" />
+          <Property Name="FreezerVolume" Type="smallint" />
+          <Property Name="TemperatureDisplay" Type="bit" />
+          <Property Name="BacklightType" Type="tinyint" />
+          <Property Name="ScreenSize" Type="tinyint" />
+          <Property Name="ScreenResolution" Type="tinyint" />
+          <Property Name="SmartTVSupport" Type="bit" />
+          <Property Name="OperatingSystem" Type="tinyint" />
+          <Property Name="Bluetooth" Type="bit" />
+          <Property Name="HDRSupport" Type="bit" />
+          <Property Name="WaterConsumption" Type="int" />
+          <Property Name="NumberOfPrograms" Type="int" />
+          <Property Name="NumberOfPlacedSets" Type="int" />
+          <Property Name="LaundryLoad" Type="int" />
+          <Property Name="TemperatureRange" Type="nvarchar" MaxLength="10" />
+          <Property Name="DirectDrive" Type="bit" />
+          <Property Name="MaximumSpinSpeed" Type="int" />
+          <Property Name="InternalVolume" Type="int" />
+          <Property Name="Grill" Type="bit" />
+        </EntityType>
+        <EntityType Name="PurchaseItems">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductCount" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScreenResolutions">
+          <Key>
+            <PropertyRef Name="ScreenResolutionID" />
+          </Key>
+          <Property Name="ScreenResolutionID" Type="tinyint" Nullable="false" />
+          <Property Name="ScreenResolutionName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScreenResolution" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScreenSizes">
+          <Key>
+            <PropertyRef Name="ScreenSizeID" />
+          </Key>
+          <Property Name="ScreenSizeID" Type="tinyint" Nullable="false" />
+          <Property Name="ScreenSizeInInches" Type="tinyint" Nullable="false" />
+          <Property Name="ScreenSizeInCentimeters" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Clients_DiscountLevel">
+          <End Role="DiscountLevels" Type="Self.DiscountLevels" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountLevels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="DiscountLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_BacklightTypes">
+          <End Role="BacklightTypes" Type="Self.BacklightTypes" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BacklightTypes">
+              <PropertyRef Name="BacklightTypeID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BacklightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_EnergyClasses">
+          <End Role="EnergyClasses" Type="Self.EnergyClasses" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnergyClasses">
+              <PropertyRef Name="EnergyClassID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="EnergyClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_FreezerLocations">
+          <End Role="FreezerLocations" Type="Self.FreezerLocations" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FreezerLocations">
+              <PropertyRef Name="FreezerLocationID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="FreezerLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="ManufacturerID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_OperatingSystems">
+          <End Role="OperatingSystems" Type="Self.OperatingSystems" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperatingSystems">
+              <PropertyRef Name="OperatingSystemID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="OperatingSystem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ScreenResolutions">
+          <End Role="ScreenResolutions" Type="Self.ScreenResolutions" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScreenResolutions">
+              <PropertyRef Name="ScreenResolutionID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ScreenResolution" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ScreenSizes">
+          <End Role="ScreenSizes" Type="Self.ScreenSizes" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScreenSizes">
+              <PropertyRef Name="ScreenSizeID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ScreenSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItems_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PurchaseItems" Type="Self.PurchaseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PurchaseItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItems_Purchases">
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="1" />
+          <End Role="PurchaseItems" Type="Self.PurchaseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchases">
+              <PropertyRef Name="PurchaseID" />
+            </Principal>
+            <Dependent Role="PurchaseItems">
+              <PropertyRef Name="PurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchases_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ApplianceStoreModelContainer">
+          <EntitySet Name="BacklightTypes" EntityType="Self.BacklightTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiscountLevels" EntityType="Self.DiscountLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnergyClasses" EntityType="Self.EnergyClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FreezerLocations" EntityType="Self.FreezerLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperatingSystems" EntityType="Self.OperatingSystems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseItems" EntityType="Self.PurchaseItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenResolutions" EntityType="Self.ScreenResolutions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScreenSizes" EntityType="Self.ScreenSizes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clients_DiscountLevel" Association="Self.FK_Clients_DiscountLevel">
+            <End Role="DiscountLevels" EntitySet="DiscountLevels" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_BacklightTypes" Association="Self.FK_Products_BacklightTypes">
+            <End Role="BacklightTypes" EntitySet="BacklightTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Colors" Association="Self.FK_Products_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_EnergyClasses" Association="Self.FK_Products_EnergyClasses">
+            <End Role="EnergyClasses" EntitySet="EnergyClasses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_FreezerLocations" Association="Self.FK_Products_FreezerLocations">
+            <End Role="FreezerLocations" EntitySet="FreezerLocations" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Manufacturers" Association="Self.FK_Products_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_OperatingSystems" Association="Self.FK_Products_OperatingSystems">
+            <End Role="OperatingSystems" EntitySet="OperatingSystems" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ScreenResolutions" Association="Self.FK_Products_ScreenResolutions">
+            <End Role="ScreenResolutions" EntitySet="ScreenResolutions" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ScreenSizes" Association="Self.FK_Products_ScreenSizes">
+            <End Role="ScreenSizes" EntitySet="ScreenSizes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItems_Products" Association="Self.FK_PurchaseItems_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PurchaseItems" EntitySet="PurchaseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItems_Purchases" Association="Self.FK_PurchaseItems_Purchases">
+            <End Role="Purchases" EntitySet="Purchases" />
+            <End Role="PurchaseItems" EntitySet="PurchaseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchases_Clients" Association="Self.FK_Purchases_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Purchases" EntitySet="Purchases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApplianceStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BacklightTypes">
+          <Key>
+            <PropertyRef Name="BacklightTypeID" />
+          </Key>
+          <Property Name="BacklightTypeID" Type="Byte" Nullable="false" />
+          <Property Name="BacklightTypeName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_BacklightTypes" FromRole="BacklightTypes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int16" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Categories" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Account" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DiscountLevel" Type="Byte" Nullable="false" />
+          <Property Name="LastPurchase" Type="DateTime" Precision="0" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DiscountLevels" Relationship="Self.FK_Clients_DiscountLevel" FromRole="Clients" ToRole="DiscountLevels" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_Clients" FromRole="Clients" ToRole="Purchases" />
+        </EntityType>
+        <EntityType Name="Colors">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="Byte" Nullable="false" />
+          <Property Name="ColorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Colors" FromRole="Colors" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="DiscountLevels">
+          <Key>
+            <PropertyRef Name="LevelID" />
+          </Key>
+          <Property Name="LevelID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AmountOfPurchases" Type="Int32" Nullable="false" />
+          <Property Name="PercentDiscount" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_DiscountLevel" FromRole="DiscountLevels" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="EnergyClasses">
+          <Key>
+            <PropertyRef Name="EnergyClassID" />
+          </Key>
+          <Property Name="EnergyClassID" Type="Byte" Nullable="false" />
+          <Property Name="EnergyClassName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_EnergyClasses" FromRole="EnergyClasses" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="FreezerLocations">
+          <Key>
+            <PropertyRef Name="FreezerLocationID" />
+          </Key>
+          <Property Name="FreezerLocationID" Type="Byte" Nullable="false" />
+          <Property Name="FreezerLocationName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_FreezerLocations" FromRole="FreezerLocations" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="ManagerID" />
+          </Key>
+          <Property Name="ManagerID" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="ManufacturerID" />
+          </Key>
+          <Property Name="ManufacturerID" Type="Int16" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TechnicalSupportNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Manufacturers" FromRole="Manufacturers" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OperatingSystems">
+          <Key>
+            <PropertyRef Name="OperatingSystemID" />
+          </Key>
+          <Property Name="OperatingSystemID" Type="Byte" Nullable="false" />
+          <Property Name="OperatingSystemName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_OperatingSystems" FromRole="OperatingSystems" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="Int16" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Manufacturer" Type="Int16" />
+          <Property Name="Color" Type="Byte" />
+          <Property Name="Width" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Height" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Depth" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Warranty" Type="Int16" />
+          <Property Name="PowerConsumption" Type="Int16" />
+          <Property Name="EnergyClass" Type="Byte" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FreezerLocation" Type="Byte" />
+          <Property Name="FreshnessZone" Type="Boolean" />
+          <Property Name="InverterCompressor" Type="Boolean" />
+          <Property Name="RefrigeratorVolume" Type="Int16" />
+          <Property Name="FreezerVolume" Type="Int16" />
+          <Property Name="TemperatureDisplay" Type="Boolean" />
+          <Property Name="BacklightType" Type="Byte" />
+          <Property Name="ScreenSize" Type="Byte" />
+          <Property Name="ScreenResolution" Type="Byte" />
+          <Property Name="SmartTVSupport" Type="Boolean" />
+          <Property Name="OperatingSystem" Type="Byte" />
+          <Property Name="Bluetooth" Type="Boolean" />
+          <Property Name="HDRSupport" Type="Boolean" />
+          <Property Name="WaterConsumption" Type="Int32" />
+          <Property Name="NumberOfPrograms" Type="Int32" />
+          <Property Name="NumberOfPlacedSets" Type="Int32" />
+          <Property Name="LaundryLoad" Type="Int32" />
+          <Property Name="TemperatureRange" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DirectDrive" Type="Boolean" />
+          <Property Name="MaximumSpinSpeed" Type="Int32" />
+          <Property Name="InternalVolume" Type="Int32" />
+          <Property Name="Grill" Type="Boolean" />
+          <NavigationProperty Name="BacklightTypes" Relationship="Self.FK_Products_BacklightTypes" FromRole="Products" ToRole="BacklightTypes" />
+          <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="Colors" Relationship="Self.FK_Products_Colors" FromRole="Products" ToRole="Colors" />
+          <NavigationProperty Name="EnergyClasses" Relationship="Self.FK_Products_EnergyClasses" FromRole="Products" ToRole="EnergyClasses" />
+          <NavigationProperty Name="FreezerLocations" Relationship="Self.FK_Products_FreezerLocations" FromRole="Products" ToRole="FreezerLocations" />
+          <NavigationProperty Name="Manufacturers" Relationship="Self.FK_Products_Manufacturers" FromRole="Products" ToRole="Manufacturers" />
+          <NavigationProperty Name="OperatingSystems" Relationship="Self.FK_Products_OperatingSystems" FromRole="Products" ToRole="OperatingSystems" />
+          <NavigationProperty Name="ScreenResolutions" Relationship="Self.FK_Products_ScreenResolutions" FromRole="Products" ToRole="ScreenResolutions" />
+          <NavigationProperty Name="ScreenSizes" Relationship="Self.FK_Products_ScreenSizes" FromRole="Products" ToRole="ScreenSizes" />
+          <NavigationProperty Name="PurchaseItems" Relationship="Self.FK_PurchaseItems_Products" FromRole="Products" ToRole="PurchaseItems" />
+        </EntityType>
+        <EntityType Name="PurchaseItems">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductCount" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_PurchaseItems_Products" FromRole="PurchaseItems" ToRole="Products" />
+          <NavigationProperty Name="Purchases" Relationship="Self.FK_PurchaseItems_Purchases" FromRole="PurchaseItems" ToRole="Purchases" />
+        </EntityType>
+        <EntityType Name="Purchases">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Purchases_Clients" FromRole="Purchases" ToRole="Clients" />
+          <NavigationProperty Name="PurchaseItems" Relationship="Self.FK_PurchaseItems_Purchases" FromRole="Purchases" ToRole="PurchaseItems" />
+        </EntityType>
+        <EntityType Name="ScreenResolutions">
+          <Key>
+            <PropertyRef Name="ScreenResolutionID" />
+          </Key>
+          <Property Name="ScreenResolutionID" Type="Byte" Nullable="false" />
+          <Property Name="ScreenResolutionName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScreenResolution" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ScreenResolutions" FromRole="ScreenResolutions" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="ScreenSizes">
+          <Key>
+            <PropertyRef Name="ScreenSizeID" />
+          </Key>
+          <Property Name="ScreenSizeID" Type="Byte" Nullable="false" />
+          <Property Name="ScreenSizeInInches" Type="Byte" Nullable="false" />
+          <Property Name="ScreenSizeInCentimeters" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_ScreenSizes" FromRole="ScreenSizes" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Products_BacklightTypes">
+          <End Role="BacklightTypes" Type="Self.BacklightTypes" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BacklightTypes">
+              <PropertyRef Name="BacklightTypeID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BacklightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_DiscountLevel">
+          <End Role="DiscountLevels" Type="Self.DiscountLevels" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscountLevels">
+              <PropertyRef Name="LevelID" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="DiscountLevel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Purchases_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Purchases">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Colors">
+          <End Role="Colors" Type="Self.Colors" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colors">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_EnergyClasses">
+          <End Role="EnergyClasses" Type="Self.EnergyClasses" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnergyClasses">
+              <PropertyRef Name="EnergyClassID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="EnergyClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_FreezerLocations">
+          <End Role="FreezerLocations" Type="Self.FreezerLocations" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FreezerLocations">
+              <PropertyRef Name="FreezerLocationID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="FreezerLocation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Manufacturers">
+          <End Role="Manufacturers" Type="Self.Manufacturers" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="ManufacturerID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_OperatingSystems">
+          <End Role="OperatingSystems" Type="Self.OperatingSystems" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperatingSystems">
+              <PropertyRef Name="OperatingSystemID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="OperatingSystem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ScreenResolutions">
+          <End Role="ScreenResolutions" Type="Self.ScreenResolutions" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScreenResolutions">
+              <PropertyRef Name="ScreenResolutionID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ScreenResolution" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_ScreenSizes">
+          <End Role="ScreenSizes" Type="Self.ScreenSizes" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScreenSizes">
+              <PropertyRef Name="ScreenSizeID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ScreenSize" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItems_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PurchaseItems" Type="Self.PurchaseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PurchaseItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseItems_Purchases">
+          <End Role="Purchases" Type="Self.Purchases" Multiplicity="1" />
+          <End Role="PurchaseItems" Type="Self.PurchaseItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchases">
+              <PropertyRef Name="PurchaseID" />
+            </Principal>
+            <Dependent Role="PurchaseItems">
+              <PropertyRef Name="PurchaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ApplianceStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BacklightTypes" EntityType="Self.BacklightTypes" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Colors" EntityType="Self.Colors" />
+          <EntitySet Name="DiscountLevels" EntityType="Self.DiscountLevels" />
+          <EntitySet Name="EnergyClasses" EntityType="Self.EnergyClasses" />
+          <EntitySet Name="FreezerLocations" EntityType="Self.FreezerLocations" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="Manufacturers" EntityType="Self.Manufacturers" />
+          <EntitySet Name="OperatingSystems" EntityType="Self.OperatingSystems" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="PurchaseItems" EntityType="Self.PurchaseItems" />
+          <EntitySet Name="Purchases" EntityType="Self.Purchases" />
+          <EntitySet Name="ScreenResolutions" EntityType="Self.ScreenResolutions" />
+          <EntitySet Name="ScreenSizes" EntityType="Self.ScreenSizes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Products_BacklightTypes" Association="Self.FK_Products_BacklightTypes">
+            <End Role="BacklightTypes" EntitySet="BacklightTypes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_DiscountLevel" Association="Self.FK_Clients_DiscountLevel">
+            <End Role="DiscountLevels" EntitySet="DiscountLevels" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Purchases_Clients" Association="Self.FK_Purchases_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Purchases" EntitySet="Purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Colors" Association="Self.FK_Products_Colors">
+            <End Role="Colors" EntitySet="Colors" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_EnergyClasses" Association="Self.FK_Products_EnergyClasses">
+            <End Role="EnergyClasses" EntitySet="EnergyClasses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_FreezerLocations" Association="Self.FK_Products_FreezerLocations">
+            <End Role="FreezerLocations" EntitySet="FreezerLocations" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Manufacturers" Association="Self.FK_Products_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_OperatingSystems" Association="Self.FK_Products_OperatingSystems">
+            <End Role="OperatingSystems" EntitySet="OperatingSystems" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ScreenResolutions" Association="Self.FK_Products_ScreenResolutions">
+            <End Role="ScreenResolutions" EntitySet="ScreenResolutions" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_ScreenSizes" Association="Self.FK_Products_ScreenSizes">
+            <End Role="ScreenSizes" EntitySet="ScreenSizes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItems_Products" Association="Self.FK_PurchaseItems_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PurchaseItems" EntitySet="PurchaseItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseItems_Purchases" Association="Self.FK_PurchaseItems_Purchases">
+            <End Role="Purchases" EntitySet="Purchases" />
+            <End Role="PurchaseItems" EntitySet="PurchaseItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ApplianceStoreModelContainer" CdmEntityContainer="ApplianceStoreEntities">
+          <EntitySetMapping Name="BacklightTypes">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.BacklightTypes">
+              <MappingFragment StoreEntitySet="BacklightTypes">
+                <ScalarProperty Name="BacklightTypeID" ColumnName="BacklightTypeID" />
+                <ScalarProperty Name="BacklightTypeName" ColumnName="BacklightTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Categories">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="DiscountLevel" ColumnName="DiscountLevel" />
+                <ScalarProperty Name="LastPurchase" ColumnName="LastPurchase" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Colors">
+              <MappingFragment StoreEntitySet="Colors">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscountLevels">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.DiscountLevels">
+              <MappingFragment StoreEntitySet="DiscountLevels">
+                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AmountOfPurchases" ColumnName="AmountOfPurchases" />
+                <ScalarProperty Name="PercentDiscount" ColumnName="PercentDiscount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnergyClasses">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.EnergyClasses">
+              <MappingFragment StoreEntitySet="EnergyClasses">
+                <ScalarProperty Name="EnergyClassID" ColumnName="EnergyClassID" />
+                <ScalarProperty Name="EnergyClassName" ColumnName="EnergyClassName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FreezerLocations">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.FreezerLocations">
+              <MappingFragment StoreEntitySet="FreezerLocations">
+                <ScalarProperty Name="FreezerLocationID" ColumnName="FreezerLocationID" />
+                <ScalarProperty Name="FreezerLocationName" ColumnName="FreezerLocationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Manufacturers">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="TechnicalSupportNumber" ColumnName="TechnicalSupportNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperatingSystems">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.OperatingSystems">
+              <MappingFragment StoreEntitySet="OperatingSystems">
+                <ScalarProperty Name="OperatingSystemID" ColumnName="OperatingSystemID" />
+                <ScalarProperty Name="OperatingSystemName" ColumnName="OperatingSystemName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Manufacturer" ColumnName="Manufacturer" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Depth" ColumnName="Depth" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="PowerConsumption" ColumnName="PowerConsumption" />
+                <ScalarProperty Name="EnergyClass" ColumnName="EnergyClass" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="FreezerLocation" ColumnName="FreezerLocation" />
+                <ScalarProperty Name="FreshnessZone" ColumnName="FreshnessZone" />
+                <ScalarProperty Name="InverterCompressor" ColumnName="InverterCompressor" />
+                <ScalarProperty Name="RefrigeratorVolume" ColumnName="RefrigeratorVolume" />
+                <ScalarProperty Name="FreezerVolume" ColumnName="FreezerVolume" />
+                <ScalarProperty Name="TemperatureDisplay" ColumnName="TemperatureDisplay" />
+                <ScalarProperty Name="BacklightType" ColumnName="BacklightType" />
+                <ScalarProperty Name="ScreenSize" ColumnName="ScreenSize" />
+                <ScalarProperty Name="ScreenResolution" ColumnName="ScreenResolution" />
+                <ScalarProperty Name="SmartTVSupport" ColumnName="SmartTVSupport" />
+                <ScalarProperty Name="OperatingSystem" ColumnName="OperatingSystem" />
+                <ScalarProperty Name="Bluetooth" ColumnName="Bluetooth" />
+                <ScalarProperty Name="HDRSupport" ColumnName="HDRSupport" />
+                <ScalarProperty Name="WaterConsumption" ColumnName="WaterConsumption" />
+                <ScalarProperty Name="NumberOfPrograms" ColumnName="NumberOfPrograms" />
+                <ScalarProperty Name="NumberOfPlacedSets" ColumnName="NumberOfPlacedSets" />
+                <ScalarProperty Name="LaundryLoad" ColumnName="LaundryLoad" />
+                <ScalarProperty Name="TemperatureRange" ColumnName="TemperatureRange" />
+                <ScalarProperty Name="DirectDrive" ColumnName="DirectDrive" />
+                <ScalarProperty Name="MaximumSpinSpeed" ColumnName="MaximumSpinSpeed" />
+                <ScalarProperty Name="InternalVolume" ColumnName="InternalVolume" />
+                <ScalarProperty Name="Grill" ColumnName="Grill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseItems">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.PurchaseItems">
+              <MappingFragment StoreEntitySet="PurchaseItems">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductCount" ColumnName="ProductCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchases">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.Purchases">
+              <MappingFragment StoreEntitySet="Purchases">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenResolutions">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.ScreenResolutions">
+              <MappingFragment StoreEntitySet="ScreenResolutions">
+                <ScalarProperty Name="ScreenResolutionID" ColumnName="ScreenResolutionID" />
+                <ScalarProperty Name="ScreenResolutionName" ColumnName="ScreenResolutionName" />
+                <ScalarProperty Name="ScreenResolution" ColumnName="ScreenResolution" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScreenSizes">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.ScreenSizes">
+              <MappingFragment StoreEntitySet="ScreenSizes">
+                <ScalarProperty Name="ScreenSizeID" ColumnName="ScreenSizeID" />
+                <ScalarProperty Name="ScreenSizeInInches" ColumnName="ScreenSizeInInches" />
+                <ScalarProperty Name="ScreenSizeInCentimeters" ColumnName="ScreenSizeInCentimeters" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ApplianceStoreModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

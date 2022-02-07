@@ -1,0 +1,106 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:Controls="clr-namespace:project1.Views.Controls" x:Class="project1.Views.Windows.Catalog" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="720" Width="1280"
+        Background="#f6f6f6">
+    <Window.Resources>
+        <Style x:Key="FilterHeader" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="CornflowerBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style x:Key="BordersStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Height" Value="30"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл"/>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}"/>
+        </StatusBar>
+        <DockPanel>
+            <UniformGrid x:Name="CategoriesPanel" Rows="1" DockPanel.Dock="Top"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <!--<GroupBox Grid.Column="0" Header="Фильтр">-->
+                    <StackPanel Grid.Column="0" Margin="10">
+                        <StackPanel>
+                        <Border Style="{StaticResource BordersStyle}">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text=" Производители" 
+                                           Style="{DynamicResource FilterHeader}"/>
+                                <StackPanel x:Name="ManufacturersPanel" DockPanel.Dock="Top" MaxHeight = "40"/>
+                                <TextBlock x:Name="ManufacturersShow" Text="Показать ещё.." 
+                                           Foreground="#99000000" DockPanel.Dock="Bottom" 
+                                           Margin="10,0" MouseDown="ManufacturersShow_MouseDown"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource BordersStyle}">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text=" Цена" Style="{DynamicResource FilterHeader}"/>
+                                <StackPanel MaxHeight="70" DockPanel.Dock="Top">
+                                    <UniformGrid Columns="4" Margin="10,0">
+                                        <TextBlock Text="Цена от"/>
+                                        <TextBox/>
+                                        <TextBlock Text="до" HorizontalAlignment="Right" Margin="10,0"/>
+                                        <TextBox/>
+                                    </UniformGrid>
+                                    <Grid>
+                                        <Slider Orientation="Horizontal"/>
+                                    </Grid>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource BordersStyle}">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text=" Производители" Style="{DynamicResource FilterHeader}"/>
+                                <StackPanel DockPanel.Dock="Top" MaxHeight = "40"/>
+                                <TextBlock Text="Показать ещё.." Foreground="#99000000" DockPanel.Dock="Bottom" Margin="10,0" MouseDown="ManufacturersShow_MouseDown"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource BordersStyle}">
+                            <DockPanel>
+                                <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}"/>
+                                <StackPanel MaxHeight="70" DockPanel.Dock="Top">
+                                    <TextBox/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                    </StackPanel>
+                        <UniformGrid Columns="1" VerticalAlignment="Bottom">
+                            <Button x:Name="b1"  Content="Применить фильтр" Click="b1_Click" Margin="0,5"/>
+                        </UniformGrid>
+                    </StackPanel>
+                <!--</GroupBox>-->
+                <!--<GroupBox Grid.Column="1" Header="Основное окно">-->
+                    <StackPanel x:Name="MainBox" Margin="20" Grid.Column="1"/>
+                <!--</GroupBox>-->
+            </Grid>
+        </DockPanel>
+    </DockPanel>
+</Window>

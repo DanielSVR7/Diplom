@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce90366712a84d39aed6e210976e496f" Name="Diagram1">
+        <EntityTypeShape EntityType="ApplianceStoreModel.BacklightTypes" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Categories" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Clients" Width="1.5" PointX="0.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Colors" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.DiscountLevels" Width="1.5" PointX="1.5" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.EnergyClasses" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.FreezerLocations" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Managers" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Manufacturers" Width="1.5" PointX="0.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.OperatingSystems" Width="1.5" PointX="0.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Products" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.PurchaseItems" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.Purchases" Width="1.5" PointX="3" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.ScreenResolutions" Width="1.5" PointX="0.75" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.ScreenSizes" Width="1.5" PointX="0.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="ApplianceStoreModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_BacklightTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Clients_DiscountLevel" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Purchases_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_Colors" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_EnergyClasses" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_FreezerLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_Manufacturers" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_OperatingSystems" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_ScreenResolutions" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_Products_ScreenSizes" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_PurchaseItems_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="ApplianceStoreModel.FK_PurchaseItems_Purchases" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
