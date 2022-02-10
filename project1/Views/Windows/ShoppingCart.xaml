@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
-        Title="ShoppingCart" Height="450" Width="800"
+        Title="ShoppingCart" Height="450" Width="1000"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style x:Key="BordersStyle" TargetType="{x:Type Border}">

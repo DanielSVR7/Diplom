@@ -44,15 +44,22 @@
             <TextBlock Text="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}"/>
         </StatusBar>
         <DockPanel>
-            <UniformGrid x:Name="CategoriesPanel" Rows="1" DockPanel.Dock="Top"/>
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="11*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <UniformGrid x:Name="CategoriesPanel" Rows="1" Grid.Column="0"/>
+                <Button Content="{Binding ShoppingCartButtonContent, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Click="ShoppingCartButton_Click"/>
+            </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <!--<GroupBox Grid.Column="0" Header="Фильтр">-->
-                    <StackPanel Grid.Column="0" Margin="10">
-                        <StackPanel>
+                <StackPanel Grid.Column="0" Margin="10">
+                    <StackPanel>
                         <Border Style="{StaticResource BordersStyle}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text=" Производители" 
@@ -95,13 +102,13 @@
                             </DockPanel>
                         </Border>
                     </StackPanel>
-                        <UniformGrid Columns="1" VerticalAlignment="Bottom">
-                            <Button x:Name="b1"  Content="Применить фильтр" Click="b1_Click" Margin="0,5"/>
-                        </UniformGrid>
-                    </StackPanel>
+                    <UniformGrid Columns="1" VerticalAlignment="Bottom">
+                        <Button x:Name="b1"  Content="Применить фильтр" Click="b1_Click" Margin="0,5"/>
+                    </UniformGrid>
+                </StackPanel>
                 <!--</GroupBox>-->
                 <!--<GroupBox Grid.Column="1" Header="Основное окно">-->
-                    <StackPanel x:Name="MainBox" Margin="20" Grid.Column="1"/>
+                <StackPanel x:Name="MainBox" Margin="20" Grid.Column="1"/>
                 <!--</GroupBox>-->
             </Grid>
         </DockPanel>

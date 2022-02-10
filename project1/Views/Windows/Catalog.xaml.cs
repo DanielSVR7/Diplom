@@ -21,13 +21,20 @@ namespace project1.Views.Windows
         Categories _SelectedCategory;
         List<Products> DisplayedProducts;
         List<Manufacturers> SelectedManufacturers = new List<Manufacturers>();
-        
+
+        private string _ShoppingCartButtonContent = "Корзина";
+        public string ShoppingCartButtonContent 
+        { 
+            get => _ShoppingCartButtonContent; 
+            set => Set(ref _ShoppingCartButtonContent, value);
+        }
         public Categories SelectedCategory
         {
             get => _SelectedCategory;
             set => Set(ref _SelectedCategory, value);
         }
 
+        private List<Products> ShoppingCartList = new List<Products>();
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string PropertyName = null)
@@ -121,7 +128,7 @@ namespace project1.Views.Windows
                 MainBox.Children.Clear();
                 foreach (var p in products)
                 {
-                    ProductPreview pw = new ProductPreview(p);
+                    ProductPreview pw = new ProductPreview(p, this);
                     MainBox.Children.Add(pw);
                 }
             }
@@ -130,7 +137,7 @@ namespace project1.Views.Windows
         {
             if (product != null)
             {
-                ProductPreview pw = new ProductPreview(product);
+                ProductPreview pw = new ProductPreview(product, this);
                 MainBox.Children.Add(pw);
             }
         }
@@ -163,9 +170,20 @@ namespace project1.Views.Windows
 
         private void ShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
-            ShoppingCart s = new ShoppingCart();
+            ShoppingCart s = new ShoppingCart(ShoppingCartList);
             s.Owner = this;
             s.Show();
+        }
+        public bool AddToShoppingCart(Products product)
+        {
+            if (ShoppingCartList.Contains(product))
+                return true;
+            else
+            {
+                ShoppingCartButtonContent = "Корзина (" + (ShoppingCartList.Count + 1) + ')';
+                ShoppingCartList.Add(product);
+                return true;
+            }
         }
     }
 }

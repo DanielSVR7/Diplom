@@ -49,9 +49,11 @@ namespace project1.Views.Controls
             get => _Price;
             set => Set(ref _Price, value);
         }
-        public ProductPreview(Products product)
+        Catalog Owner;
+        public ProductPreview(Products product, Catalog owner)
         {
-            this.Product = product;
+            Owner = owner;
+            Product = product;
             DataContext = this;
             InitializeComponent();
             if (Product != null)
@@ -62,8 +64,8 @@ namespace project1.Views.Controls
                 ImagePath = @"pack://application:,,,/" + Product.Image;
                 if (Product.Category == 1)
                 {
-                    ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + '"' +
-                         " (" + Product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
+                    ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + "\" (" + 
+                        Product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
                          "Телевизор " + Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' +
                          Product.Colors.ColorName + " [" + Product.ScreenResolutions.ScreenResolutionName + ", " +
                          Product.ScreenResolutions.ScreenResolution + ", " + Product.BacklightTypes.BacklightTypeName + ", " +
@@ -106,8 +108,16 @@ namespace project1.Views.Controls
 
         private void MainBorder_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DetailedProductView d = new DetailedProductView(Product);
+            DetailedProductView d = new DetailedProductView(Product, this);
+            d.Owner = Owner; 
             d.Show();
+        }
+        private void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(Owner.AddToShoppingCart(Product))
+            {
+                ((Button)sender).IsEnabled = false;
+            };
         }
     }
 }

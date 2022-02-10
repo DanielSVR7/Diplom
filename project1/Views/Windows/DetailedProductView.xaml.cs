@@ -28,6 +28,7 @@ namespace project1.Views.Windows
             return true;
         }
         #endregion
+        
         private string _ImagePath;
         public string ImagePath
         {
@@ -55,14 +56,15 @@ namespace project1.Views.Windows
             get => _Description;
             set => Set(ref _Description, value);
         }
+        private Products Product;
 
-        public DetailedProductView(Products product)
+        public DetailedProductView(Products product, ProductPreview pw)
         {
+            Product = product;
             DataContext = this;
             InitializeComponent();
             ImagePath = @"pack://application:,,,/" + product.Image;
-            ProductPreview p = new ProductPreview(product);
-            ProductTitle = p.ProductTitle;
+            ProductTitle = pw.ProductTitle;
             Price = product.Price;
             Description = product.Description;
 
@@ -106,7 +108,11 @@ namespace project1.Views.Windows
                 }
                 ParametersPanel.Children.Add(dg);
             }
-            
+        }
+        private void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            Catalog c = (Catalog)Owner;
+            c.AddToShoppingCart(Product);
         }
     }
 }

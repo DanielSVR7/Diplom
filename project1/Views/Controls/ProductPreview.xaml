@@ -43,7 +43,7 @@
                 <TextBlock Text="{Binding Price}" HorizontalAlignment="Right" 
                            Margin="10,10" FontSize="18"/>
                 <Button Content="Купить в 1 клик" Margin="10,10"/>
-                <Button Content="Добавить в корзину" Margin="10,10"/>
+                <Button Content="Добавить в корзину" Margin="10,10" Click="AddToShoppingCartButton_Click"/>
             </UniformGrid>
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top" Text="{Binding Path=ProductTitle}" 
