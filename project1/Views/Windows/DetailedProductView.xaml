@@ -3,19 +3,103 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:project1.Views.Windows"
+        xmlns:local="clr-namespace:project1.Views.Windows" 
+        d:DataContext="{d:DesignInstance Type=local:DetailedProductView}"
         mc:Ignorable="d"
-        Title="DetailedProductView" Height="450" Width="800">
+        Title="DetailedProductView" Height="600" Width="1000"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="MainBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+        <Style x:Key="ParametersHeader" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="CornflowerBlue"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HeadersVisibility" Value="None"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
+            <Setter Property="VerticalGridLinesBrush" Value="Transparent"/>
+            <Setter Property="MinRowHeight" Value="12"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="CanUserSortColumns" Value="False"/>
+            <Setter Property="RowHeight" Value="25"/>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="IsHitTestVisible" Value="False"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ColumnWidth" Value="1*"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top"/>
-
-        <StatusBar DockPanel.Dock="Bottom"/>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="12312312312"/>
+        </StatusBar>
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <Image/>
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0">
+                <Image Source="{Binding Path=ImagePath, TargetNullValue={x:Null}}"/>
+                <Border Style="{StaticResource MainBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Описание" FontSize="20"/>
+                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding ProductTitle}"
+                       FontSize="18" TextWrapping="Wrap" Margin="160,5" FontWeight="Bold"/>
+            
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0">
+                    <Grid Height="40" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border  CornerRadius="15" Grid.Column="0" >
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,0" StartPoint="1,0" >
+                                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                                    <GradientStop Color="White" Offset="0.77"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <TextBlock Text="{Binding Price}" FontSize="16"/>
+                        </Border>
+                        <UniformGrid Grid.Column="1" Columns="2" Margin="60,0,0,0">
+                            <Button Content="Купить в 1 клик" Margin="5,0" />
+                            <Button Content="Добавить в корзину" Margin="5,0" />
+                        </UniformGrid>
+                    </Grid>
+                <Border  Style="{StaticResource MainBorder}" Margin="0,20">
+                    <StackPanel x:Name="ParametersPanel">
+                        <TextBlock Text="Общие параметры" Style="{StaticResource ParametersHeader}"/>
+                    </StackPanel>
+                    
+                </Border>
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>

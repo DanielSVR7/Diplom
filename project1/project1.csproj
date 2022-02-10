@@ -138,6 +138,9 @@
     <Compile Include="Views\Windows\DetailedProductView.xaml.cs">
       <DependentUpon>DetailedProductView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\ShoppingCart.xaml.cs">
+      <DependentUpon>ShoppingCart.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\Controls\ProductPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\DetailedProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ShoppingCart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

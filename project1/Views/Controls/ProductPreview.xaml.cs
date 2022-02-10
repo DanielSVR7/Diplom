@@ -1,4 +1,5 @@
 ﻿using project1.Models;
+using project1.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +10,6 @@ using System.Windows.Controls;
 
 namespace project1.Views.Controls
 {
-    /// <summary>
-    /// Логика взаимодействия для ProductPreview.xaml
-    /// </summary>
     public partial class ProductPreview : UserControl, INotifyPropertyChanged
     {
 
@@ -30,11 +28,12 @@ namespace project1.Views.Controls
         }
         #endregion
 
-        private string _Title;
-        public string Title 
-        { 
-            get => _Title;
-            set => Set(ref _Title, value);
+        private Products Product;
+        private string _ProductTitle;
+        public string ProductTitle
+        {
+            get => _ProductTitle;
+            set => Set(ref _ProductTitle, value);
         }
 
         private string _ImagePath;
@@ -52,52 +51,51 @@ namespace project1.Views.Controls
         }
         public ProductPreview(Products product)
         {
+            this.Product = product;
             DataContext = this;
             InitializeComponent();
-            if (product != null)
+            if (Product != null)
             {
-                img.Height = 120;
-                Price = product.Price;
-                ManufacturerName.Text = product.Manufacturers.CompanyName;
-                Warranty.Text = product.Warranty.ToString() + " месяцев";
-                ImagePath = @"pack://application:,,,/" + product.Image;
-                if (product.Category == 1)
+                Price = Product.Price;
+                ManufacturerName.Text = Product.Manufacturers.CompanyName;
+                Warranty.Text = Product.Warranty.ToString() + " месяцев";
+                ImagePath = @"pack://application:,,,/" + Product.Image;
+                if (Product.Category == 1)
                 {
-                    Title = product.ScreenSizes.ScreenSizeInInches.ToString() + '"' +
-                         " (" + product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
-                         "Телевизор " + product.Manufacturers.CompanyName + ' ' + product.Model + ' ' +
-                         product.Colors.ColorName + " [" + product.ScreenResolutions.ScreenResolutionName + ", " +
-                         product.ScreenResolutions.ScreenResolution + ", " + product.BacklightTypes.BacklightTypeName + ", " +
-                         product.OperatingSystems.OperatingSystemName + ']';
+                    ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + '"' +
+                         " (" + Product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
+                         "Телевизор " + Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' +
+                         Product.Colors.ColorName + " [" + Product.ScreenResolutions.ScreenResolutionName + ", " +
+                         Product.ScreenResolutions.ScreenResolution + ", " + Product.BacklightTypes.BacklightTypeName + ", " +
+                         Product.OperatingSystems.OperatingSystemName + ']';
                     Property1.Text = "Разрешение экрана";
                     Property2.Text = "Поддержка SmartTV";
                     Property3.Text = "Поддержка HDR";
-                    Value1.Text = product.ScreenResolutions.ScreenResolutionName + " (" + product.ScreenResolutions.ScreenResolution + ')';
-                    if (product.SmartTVSupport == false || product.SmartTVSupport == null)
+                    Value1.Text = Product.ScreenResolutions.ScreenResolutionName + " (" + Product.ScreenResolutions.ScreenResolution + ')';
+                    if (Product.SmartTVSupport == false || Product.SmartTVSupport == null)
                         Value2.Text = "Нет";
                     else
                         Value2.Text = "Есть";
-                    if (product.HDRSupport == false || product.HDRSupport == null)
+                    if (Product.HDRSupport == false || Product.HDRSupport == null)
                         Value3.Text = "Нет";
                     else
                         Value3.Text = "Есть";
                 }
-                if (product.Category == 2)
+                if (Product.Category == 2)
                 {
-                    img.Height = 180;
-                    Title = "Холодильник " + product.FreezerLocations.FreezerLocationName + ' ' + product.Manufacturers.CompanyName + ' ' +
-                        product.Model + ' ' + product.Colors.ColorName + " [" + (product.RefrigeratorVolume + product.FreezerVolume).ToString() + " л, " +
-                        product.Width + " см x " + product.Height + " см x " + product.Depth + " см]";
+                    ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ' + Product.Manufacturers.CompanyName + ' ' +
+                        Product.Model + ' ' + Product.Colors.ColorName + " [" + (Product.RefrigeratorVolume + Product.FreezerVolume).ToString() + " л, " +
+                        Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
                     Property1.Text = "Компоновка";
                     Property2.Text = "Инверторный компрессор";
                     Property3.Text = "Зона свежести";
                     TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-                    Value1.Text = ti.ToTitleCase(product.FreezerLocations.FreezerLocationName);
-                    if (product.InverterCompressor == false || product.InverterCompressor == null)
+                    Value1.Text = ti.ToTitleCase(Product.FreezerLocations.FreezerLocationName);
+                    if (Product.InverterCompressor == false || Product.InverterCompressor == null)
                         Value2.Text = "Нет";
                     else
                         Value2.Text = "Есть";
-                    if (product.FreshnessZone == false || product.FreshnessZone == null)
+                    if (Product.FreshnessZone == false || Product.FreshnessZone == null)
                         Value3.Text = "Нет";
                     else
                         Value3.Text = "Есть";
@@ -108,7 +106,8 @@ namespace project1.Views.Controls
 
         private void MainBorder_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            DetailedProductView d = new DetailedProductView(Product);
+            d.Show();
         }
     }
 }

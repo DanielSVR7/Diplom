@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:project1.Views.Controls"
+             xmlns:local="clr-namespace:project1.Views.Controls" 
+             d:DataContext="{d:DesignInstance Type=local:ProductPreview}"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="1000">
+             d:DesignHeight="200" d:DesignWidth="1200">
     <UserControl.Resources>
         <Style x:Key="MainBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="LightGray"/>
@@ -13,12 +14,12 @@
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="15"/>
             <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="Width" Value="800"/>
+            <Setter Property="Width" Value="850"/>
             <Setter Property="Height" Value="180"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Margin" Value="10,2"/>
-                    <Setter Property="Width" Value="806"/>
+                    <Setter Property="Width" Value="856"/>
                     <Setter Property="Height" Value="186"/>
                     <Setter Property="Padding" Value="3"/>
                 </Trigger>
@@ -37,7 +38,7 @@
     <Border x:Name="MainBorder"  Style="{StaticResource ResourceKey=MainBorder}" MouseUp="MainBorder_MouseUp" >
         <DockPanel>
             <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=ImagePath, TargetNullValue={x:Null}}" 
-                   Margin="15,10" MinWidth="80" Height="160" Stretch="Uniform"/>
+                   Margin="15,10" MinWidth="80" Height="160"/>
             <UniformGrid Rows="3" DockPanel.Dock="Right" >
                 <TextBlock Text="{Binding Price}" HorizontalAlignment="Right" 
                            Margin="10,10" FontSize="18"/>
@@ -45,7 +46,7 @@
                 <Button Content="Добавить в корзину" Margin="10,10"/>
             </UniformGrid>
             <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="{Binding Path=Title}" 
+                <TextBlock DockPanel.Dock="Top" Text="{Binding Path=ProductTitle}" 
                            FontSize="16" TextWrapping="Wrap" Margin="20,5"/>
                 <StackPanel>
                     <DockPanel Margin="30,10,30,0" >

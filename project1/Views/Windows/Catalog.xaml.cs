@@ -67,6 +67,7 @@ namespace project1.Views.Windows
                 ManufacturersPanel.Children.Add(cb);
             }
         }
+
         public void ManufacturersCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             MainBox.Children.Clear();
@@ -158,6 +159,13 @@ namespace project1.Views.Windows
 
                 }
             }
+        }
+
+        private void ShoppingCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShoppingCart s = new ShoppingCart();
+            s.Owner = this;
+            s.Show();
         }
     }
 }
