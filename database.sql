@@ -48,10 +48,12 @@ IF EXISTS (SELECT * FROM sys.tables WHERE NAME = 'Clients')
 	DROP TABLE Clients;						
 GO
 CREATE TABLE Clients
-(	ClientID    	INT				NOT NULL,	                        /*  */
+(	ClientID    	INT				NOT NULL,	                /*  */
 	PhoneNumber		NVARCHAR(25)    NOT NULL UNIQUE,	        /*  */
 	Password		NVARCHAR(16)    NOT NULL,	                /*  */
-    FullName        NVARCHAR(100)   NOT NULL,                   /*  */             
+	Surname        	NVARCHAR(25)   	NOT NULL,                   /*  */   
+	Firstname       NVARCHAR(25)   	NOT NULL,                   /*  */   
+    Lastname        NVARCHAR(25)  	NOT NULL,                   /*  */             
 	Account			Money           NOT NULL DEFAULT 0,         /*  */
 	DiscountLevel	TINYINT        	NOT NULL DEFAULT 0,    		/*  */
 	LastPurchase	DATETIME2(0),			                    /*  */
@@ -347,7 +349,8 @@ GO
 INSERT INTO Clients(ClientID, PhoneNumber, Password, FullName, Account)
 	VALUES
 (1, '79276214383', 'pass', 'Иванова Виктория Тимофеевна', 12000),
-(2, '79176549988', 'pw', 'Денисов Владислав Мирославович', 0);
+(2, '79176549988', 'pw', 'Денисов Владислав Мирославович', 0),
+(3, '1', '1', 'Свириденко Даниил Дмитриевич', 0);
 GO
 
 

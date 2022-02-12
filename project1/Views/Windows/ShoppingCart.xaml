@@ -94,7 +94,7 @@
                         <TextBlock x:Name="NumTextBox" Text="0 товара" Margin="10,0"/>
                         <TextBlock x:Name="SumTextBox" Text="на 0 ₽" Margin="10,0"/>
                     </StackPanel>
-                    <Button Content="Оформить заказ" Margin="10" Height="30" Grid.Row="1"/>
+                    <Button x:Name="CheckoutButton" Content="Оформить заказ" Margin="10" Height="30" Grid.Row="1" Click="CheckoutButton_Click"/>
                 </Grid>
             </Border>
         </Grid>

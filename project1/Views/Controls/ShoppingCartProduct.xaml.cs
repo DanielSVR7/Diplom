@@ -38,7 +38,10 @@ namespace project1.Views.Controls
             return true;
         }
         #endregion
+        public int ProductID { get; set; }
 
+        private short _ProductCount = 1;
+        public short ProductCount { get => _ProductCount; set => Set(ref _ProductCount, value); }
         private string _ImagePath;
         public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
 
@@ -56,6 +59,7 @@ namespace project1.Views.Controls
             DataContext = this;
             Owner = owner;
             InitializeComponent();
+            ProductID = product.ProductID;
             ImagePath = @"pack://application:,,,/" + product.Image;
             Price = product.Price;
             if (product.Category == 1)
@@ -72,27 +76,29 @@ namespace project1.Views.Controls
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
-            CountTextBlock.Text = (int.Parse(CountTextBlock.Text) + 1).ToString();
-            Owner.AddProduct(Price);
+            ProductCount++;
+            Owner.AddProduct(Price, 1);
         }
 
         private void MinusButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CountTextBlock.Text != "1")
+            if (ProductCount != 1)
             {
-                CountTextBlock.Text = (int.Parse(CountTextBlock.Text) - 1).ToString();
-                Owner.RemoveProduct(Price);
+                ProductCount--;
+                Owner.RemoveProduct(Price, 1);
             }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            Owner.AddProduct(Price);
+            Owner.AddProduct(Price, ProductCount);
+            CountPanel.IsEnabled = true;
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            Owner.RemoveProduct(Price);
+            Owner.RemoveProduct(Price, ProductCount);
+            CountPanel.IsEnabled = false;
         }
     }
 }

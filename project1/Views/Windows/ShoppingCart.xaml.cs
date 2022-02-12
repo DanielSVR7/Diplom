@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace project1.Views.Windows
 {
@@ -27,7 +28,7 @@ namespace project1.Views.Windows
             return true;
         }
         #endregion
-
+        ApplianceStoreEntities db = new ApplianceStoreEntities();
         private decimal DisplayedSum = 0;
         private int DisplayedNum = 0;
         private List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
@@ -53,16 +54,16 @@ namespace project1.Views.Windows
             }
             SelectAllCheckBox.IsChecked = true;
         }
-        public void AddProduct(decimal? sum)
+        public void AddProduct(decimal? sum, int count)
         {
             DisplayedSum += sum ?? 0;
-            DisplayedNum += 1;
+            DisplayedNum += count;
             UpdateInfo();
         }
-        public void RemoveProduct(decimal? sum)
+        public void RemoveProduct(decimal? sum, int count)
         {
             DisplayedSum -= sum ?? 0;
-            DisplayedNum -= 1;
+            DisplayedNum -= count;
             UpdateInfo();
         }
         private void UpdateInfo()
@@ -90,6 +91,40 @@ namespace project1.Views.Windows
             foreach (var item in ProductsPanel.Children)
             {
                 ((ShoppingCartProduct)item).IsSelected = true;
+            }
+        }
+
+        private void CheckoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены что хотите распечатать этот заказ?", "Подтвердите действие", 
+                MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+            {
+                Purchases purchase = new Purchases { };
+                foreach(ShoppingCartProduct p in ShoppingCartList)
+                {
+                    PurchaseItems item = new PurchaseItems
+                    {
+                        ProductID = p.ProductID,
+                        ProductCount = p.ProductCount
+                    };
+                    db.PurchaseItems.Add(item);
+                }
+                //PrintToWord();
+            }
+
+        }
+        private void PrintToWord()
+        {
+            Word.Application app = new Word.Application();
+            string Source = @"..\Data\WordTemplates\CheckoutTemplate.dotx";
+            Word.Document doc = app.Documents.Add(Source);
+            Word.Bookmarks bookmarks = doc.Bookmarks;
+            foreach (Word.Bookmark bookmark in bookmarks)
+            {
+                switch (bookmark.Name)
+                {
+                    
+                }
             }
         }
     }
