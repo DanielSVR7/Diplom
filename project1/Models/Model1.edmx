@@ -27,7 +27,9 @@
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="16" Nullable="false" />
-          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="25" />
           <Property Name="Account" Type="money" Nullable="false" />
           <Property Name="DiscountLevel" Type="tinyint" Nullable="false" />
           <Property Name="LastPurchase" Type="datetime2" Precision="0" />
@@ -161,16 +163,6 @@
           <Property Name="ScreenSizeID" Type="tinyint" Nullable="false" />
           <Property Name="ScreenSizeInInches" Type="tinyint" Nullable="false" />
           <Property Name="ScreenSizeInCentimeters" Type="tinyint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Clients_DiscountLevel">
           <End Role="DiscountLevels" Type="Self.DiscountLevels" Multiplicity="1" />
@@ -344,7 +336,6 @@
           <EntitySet Name="Purchases" EntityType="Self.Purchases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScreenResolutions" EntityType="Self.ScreenResolutions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScreenSizes" EntityType="Self.ScreenSizes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Clients_DiscountLevel" Association="Self.FK_Clients_DiscountLevel">
             <End Role="DiscountLevels" EntitySet="DiscountLevels" />
             <End Role="Clients" EntitySet="Clients" />
@@ -427,7 +418,9 @@
           <Property Name="ClientID" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Account" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="DiscountLevel" Type="Byte" Nullable="false" />
           <Property Name="LastPurchase" Type="DateTime" Precision="0" />
@@ -585,16 +578,6 @@
           <Property Name="ScreenSizeInInches" Type="Byte" Nullable="false" />
           <Property Name="ScreenSizeInCentimeters" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_ScreenSizes" FromRole="ScreenSizes" ToRole="Products" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Products_BacklightTypes">
           <End Role="BacklightTypes" Type="Self.BacklightTypes" Multiplicity="0..1" />
@@ -768,7 +751,6 @@
           <EntitySet Name="Purchases" EntityType="Self.Purchases" />
           <EntitySet Name="ScreenResolutions" EntityType="Self.ScreenResolutions" />
           <EntitySet Name="ScreenSizes" EntityType="Self.ScreenSizes" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="FK_Products_BacklightTypes" Association="Self.FK_Products_BacklightTypes">
             <End Role="BacklightTypes" EntitySet="BacklightTypes" />
             <End Role="Products" EntitySet="Products" />
@@ -851,7 +833,9 @@
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
                 <ScalarProperty Name="Account" ColumnName="Account" />
                 <ScalarProperty Name="DiscountLevel" ColumnName="DiscountLevel" />
                 <ScalarProperty Name="LastPurchase" ColumnName="LastPurchase" />
@@ -996,17 +980,6 @@
                 <ScalarProperty Name="ScreenSizeID" ColumnName="ScreenSizeID" />
                 <ScalarProperty Name="ScreenSizeInInches" ColumnName="ScreenSizeInInches" />
                 <ScalarProperty Name="ScreenSizeInCentimeters" ColumnName="ScreenSizeInCentimeters" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ApplianceStoreModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

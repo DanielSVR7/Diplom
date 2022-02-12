@@ -40,6 +40,5 @@ namespace project1.Models
         public DbSet<Purchases> Purchases { get; set; }
         public DbSet<ScreenResolutions> ScreenResolutions { get; set; }
         public DbSet<ScreenSizes> ScreenSizes { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

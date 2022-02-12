@@ -32,9 +32,10 @@ namespace project1.Views.Windows
             {
                 string _login = loginTextBox.Text;
                 string _password = PasswordBox.Password;
-                var name = (from client in db.Clients where _login == client.PhoneNumber && _password == client.Password select client.FullName).Single();
+                var name = (from client in db.Clients where _login == client.PhoneNumber && _password == client.Password select client.Firstname + " " + client.Lastname).Single();
                 WelcomeMessage.Text += "\n" + name + '!';
                 WelcomeMessage.Visibility = Visibility.Visible;
+                LoginButton.IsEnabled = false;
                 await Task.Delay(2000);
                 Catalog c = new Catalog();
                 c.Show();

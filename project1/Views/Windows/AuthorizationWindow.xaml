@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="" Height="340" Width="300">
+        Title="" Height="360" Width="300">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Microsoft JhengHei"/>
@@ -52,7 +52,7 @@
         <PasswordBox x:Name="PasswordBox" Height="30" Width="200" FontFamily="Segoe UI Light" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Button x:Name="LoginButton" Content="Войти" Margin="128,20,0,0" Width="100" Height="30" 
                 Background="#FF0067B9" Foreground="White" BorderBrush="#0067b8" FontSize="14" Click="LoginButton_Click"/>
-        <TextBlock x:Name="WelcomeMessage" Text="Приветствуем, " FontSize="16" Margin="10" Foreground="#FFDE0000" TextWrapping="Wrap"/>
+        <TextBlock x:Name="WelcomeMessage" Text="Приветствуем, " TextAlignment="Center" FontSize="16" Margin="10" Foreground="#FFDE0000" TextWrapping="Wrap"/>
 
     </StackPanel>
 </Window>

@@ -77,7 +77,6 @@ namespace project1.Views.Controls
         private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
             ProductCount++;
-            Owner.AddProduct(Price, 1);
         }
 
         private void MinusButton_Click(object sender, RoutedEventArgs e)
@@ -85,20 +84,24 @@ namespace project1.Views.Controls
             if (ProductCount != 1)
             {
                 ProductCount--;
-                Owner.RemoveProduct(Price, 1);
             }
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            Owner.AddProduct(Price, ProductCount);
             CountPanel.IsEnabled = true;
+            Owner.UpdateInfo();
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            Owner.RemoveProduct(Price, ProductCount);
             CountPanel.IsEnabled = false;
+            Owner.UpdateInfo();
+        }
+
+        private void CountTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Owner.UpdateInfo();
         }
     }
 }

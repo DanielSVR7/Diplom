@@ -22,7 +22,9 @@ namespace project1.Models
         public int ClientID { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
-        public string FullName { get; set; }
+        public string Surname { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public decimal Account { get; set; }
         public byte DiscountLevel { get; set; }
         public Nullable<System.DateTime> LastPurchase { get; set; }

@@ -43,33 +43,27 @@ namespace project1.Views.Windows
                 ProductsPanel.Children.Add(p);
                 ShoppingCartList.Add(p);
             }
+            UpdateInfo();
+            SelectAllCheckBox.IsChecked = true;
+        }
+        public void ChangeCount()
+        {
+            UpdateInfo();
+        }
+        public void UpdateInfo()
+        {
+            DisplayedSum = 0;
+            DisplayedNum = 0;
             foreach (var item in ShoppingCartList)
             {
                 if (item.IsSelected)
                 {
-                    DisplayedSum += item.Price ?? 0;
+                    DisplayedNum += item.ProductCount;
+                    DisplayedSum += item.Price * item.ProductCount ?? 0;
                 }
                 NumTextBox.Text = DisplayedNum.ToString() + ' ' + Generate(DisplayedNum, "товар", "товара", "товаров");
                 SumTextBox.Text = "на " + DisplayedSum + " ₽";
             }
-            SelectAllCheckBox.IsChecked = true;
-        }
-        public void AddProduct(decimal? sum, int count)
-        {
-            DisplayedSum += sum ?? 0;
-            DisplayedNum += count;
-            UpdateInfo();
-        }
-        public void RemoveProduct(decimal? sum, int count)
-        {
-            DisplayedSum -= sum ?? 0;
-            DisplayedNum -= count;
-            UpdateInfo();
-        }
-        private void UpdateInfo()
-        {
-            NumTextBox.Text = DisplayedNum.ToString() + ' ' + Generate(DisplayedNum, "товар", "товара", "товаров");
-            SumTextBox.Text = "на " + DisplayedSum + " ₽";
         }
         public static string Generate(int number, string nominativ, string genetiv, string plural)
         {

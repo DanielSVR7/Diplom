@@ -53,7 +53,7 @@ CREATE TABLE Clients
 	Password		NVARCHAR(16)    NOT NULL,	                /*  */
 	Surname        	NVARCHAR(25)   	NOT NULL,                   /*  */   
 	Firstname       NVARCHAR(25)   	NOT NULL,                   /*  */   
-    Lastname        NVARCHAR(25)  	NOT NULL,                   /*  */             
+    Lastname        NVARCHAR(25),                  				/*  */             
 	Account			Money           NOT NULL DEFAULT 0,         /*  */
 	DiscountLevel	TINYINT        	NOT NULL DEFAULT 0,    		/*  */
 	LastPurchase	DATETIME2(0),			                    /*  */
@@ -346,11 +346,11 @@ INSERT INTO DiscountLevels(LevelID, Name, AmountOfPurchases, PercentDiscount)
 GO
 
 
-INSERT INTO Clients(ClientID, PhoneNumber, Password, FullName, Account)
+INSERT INTO Clients(ClientID, PhoneNumber, Password, Surname, Firstname, Lastname, Account)
 	VALUES
-(1, '79276214383', 'pass', 'Иванова Виктория Тимофеевна', 12000),
-(2, '79176549988', 'pw', 'Денисов Владислав Мирославович', 0),
-(3, '1', '1', 'Свириденко Даниил Дмитриевич', 0);
+(1, '79276214383', 'pass', 'Иванова', 'Виктория', 'Тимофеевна', 12000),
+(2, '79176549988', 'pw', 'Денисов', 'Владислав', 'Мирославович', 0),
+(3, '1', '1', 'Свириденко', 'Даниил', 'Дмитриевич', 0);
 GO
 
 
