@@ -1,22 +1,95 @@
 ﻿using project1.Models;
 using project1.Views.Controls;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-
+using System.Windows.Controls;
 
 namespace project1.Views.Windows
 {
     /// <summary>
     /// Логика взаимодействия для ShoppingCart.xaml
     /// </summary>
-    public partial class ShoppingCart : Window
+    public partial class ShoppingCart : Window, INotifyPropertyChanged
     {
-        public ShoppingCart(List<Products> ShoppingCartList)
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+        private bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
+        {
+            if (Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(PropertyName);
+            return true;
+        }
+        #endregion
+
+        private decimal DisplayedSum = 0;
+        private int DisplayedNum = 0;
+        private List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
+        private List<Products> Products = new List<Products>();
+        public ShoppingCart(List<Products> products)
         {
             InitializeComponent();
-            foreach (var product in ShoppingCartList)
+            Products = products;
+            foreach (var product in Products)
             {
-                ProductsPanel.Children.Add(new ShoppingCartProduct(product));
+                var p = new ShoppingCartProduct(product, this);
+                ProductsPanel.Children.Add(p);
+                ShoppingCartList.Add(p);
+            }
+            foreach (var item in ShoppingCartList)
+            {
+                if (item.IsSelected)
+                {
+                    DisplayedSum += item.Price ?? 0;
+                }
+                NumTextBox.Text = DisplayedNum.ToString() + ' ' + Generate(DisplayedNum, "товар", "товара", "товаров");
+                SumTextBox.Text = "на " + DisplayedSum + " ₽";
+            }
+            SelectAllCheckBox.IsChecked = true;
+        }
+        public void AddProduct(decimal? sum)
+        {
+            DisplayedSum += sum ?? 0;
+            DisplayedNum += 1;
+            UpdateInfo();
+        }
+        public void RemoveProduct(decimal? sum)
+        {
+            DisplayedSum -= sum ?? 0;
+            DisplayedNum -= 1;
+            UpdateInfo();
+        }
+        private void UpdateInfo()
+        {
+            NumTextBox.Text = DisplayedNum.ToString() + ' ' + Generate(DisplayedNum, "товар", "товара", "товаров");
+            SumTextBox.Text = "на " + DisplayedSum + " ₽";
+        }
+        public static string Generate(int number, string nominativ, string genetiv, string plural)
+        {
+            var titles = new[] { nominativ, genetiv, plural };
+            var cases = new[] { 2, 0, 1, 1, 1, 2 };
+            return titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in ProductsPanel.Children)
+            {
+                ((ShoppingCartProduct)item).IsSelected = false;
+            }
+        }
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in ProductsPanel.Children)
+            {
+                ((ShoppingCartProduct)item).IsSelected = true;
             }
         }
     }

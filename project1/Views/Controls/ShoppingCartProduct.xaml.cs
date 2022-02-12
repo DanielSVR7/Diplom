@@ -1,4 +1,5 @@
 ﻿using project1.Models;
+using project1.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,7 @@ namespace project1.Views.Controls
             return true;
         }
         #endregion
+
         private string _ImagePath;
         public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
 
@@ -45,9 +47,14 @@ namespace project1.Views.Controls
 
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
-        public ShoppingCartProduct(Products product)
+
+        private bool _IsSelected;
+        public bool IsSelected { get => _IsSelected; set => Set(ref _IsSelected, value); }
+        ShoppingCart Owner;
+        public ShoppingCartProduct(Products product, ShoppingCart owner)
         {
             DataContext = this;
+            Owner = owner;
             InitializeComponent();
             ImagePath = @"pack://application:,,,/" + product.Image;
             Price = product.Price;
@@ -57,7 +64,7 @@ namespace project1.Views.Controls
             }
             else if (product.Category == 2)
             {
-                ProductTitle = product.FreezerLocations.FreezerLocationName + "Холодильник ";
+                ProductTitle = "Холодильник " + product.FreezerLocations.FreezerLocationName + ' ';
             }
             else { ProductTitle = "fucked up"; }
             ProductTitle += product.Manufacturers.CompanyName + ' ' + product.Model + ' ' + product.Colors.ColorName;
@@ -65,15 +72,27 @@ namespace project1.Views.Controls
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
         {
-            CountTextBox.Text = (int.Parse(CountTextBox.Text) + 1).ToString();
+            CountTextBlock.Text = (int.Parse(CountTextBlock.Text) + 1).ToString();
+            Owner.AddProduct(Price);
         }
 
         private void MinusButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CountTextBox.Text != "1")
+            if (CountTextBlock.Text != "1")
             {
-                CountTextBox.Text = (int.Parse(CountTextBox.Text) - 1).ToString();
+                CountTextBlock.Text = (int.Parse(CountTextBlock.Text) - 1).ToString();
+                Owner.RemoveProduct(Price);
             }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Owner.AddProduct(Price);
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Owner.RemoveProduct(Price);
         }
     }
 }

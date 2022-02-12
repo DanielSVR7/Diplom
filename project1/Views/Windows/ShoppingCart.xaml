@@ -5,9 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
-        Title="ShoppingCart" Height="450" Width="1000"
+        Title="ShoppingCart" Height="600" Width="1000"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Height" Value="30"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="Link" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DimGray"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="DarkBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="BordersStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -30,17 +49,20 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <StackPanel x:Name="ProductsPanel" Grid.Column="0" >
+                <StackPanel Grid.Column="0" >
                     <Grid>
                         <TextBlock Text="Корзина" FontSize="20" FontWeight="Bold" Margin="20,20,0,0"/>
                         <TextBlock Text="{Binding NumberOfProducts}" Foreground="LightGray"/>
                     </Grid>
                     <Border Style="{StaticResource BordersStyle}">
                         <Grid>
-                            <CheckBox Content="Выбрать все"/>
-                            <TextBlock Text="Удалить выбранные" Foreground="Gray" HorizontalAlignment="Right"/>
+                            <CheckBox x:Name="SelectAllCheckBox" Content="Выбрать все" 
+                                      Unchecked="SelectAllCheckBox_Unchecked" Checked="SelectAllCheckBox_Checked"/>
+                            <TextBlock Style="{StaticResource Link}" Text="Удалить выбранные" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>
+                    <StackPanel x:Name="ProductsPanel">
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
             <Border Style="{StaticResource BordersStyle}" Grid.Column="1">
@@ -69,8 +91,8 @@
                         <Separator/>
                         <TextBlock Text="Итого:" Margin="10,10,0,0"/>
                         <Separator/>
-                        <TextBlock Text="3 товара" Margin="10,0"/>
-                        <TextBlock Text="на 65 541 ₽" Margin="10,0"/>
+                        <TextBlock x:Name="NumTextBox" Text="0 товара" Margin="10,0"/>
+                        <TextBlock x:Name="SumTextBox" Text="на 0 ₽" Margin="10,0"/>
                     </StackPanel>
                     <Button Content="Оформить заказ" Margin="10" Height="30" Grid.Row="1"/>
                 </Grid>

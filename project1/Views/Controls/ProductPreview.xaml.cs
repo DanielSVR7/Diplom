@@ -30,25 +30,16 @@ namespace project1.Views.Controls
 
         private Products Product;
         private string _ProductTitle;
-        public string ProductTitle
-        {
-            get => _ProductTitle;
-            set => Set(ref _ProductTitle, value);
-        }
+        public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
 
         private string _ImagePath;
-        public string ImagePath 
-        { 
-            get => _ImagePath;
-            set => Set(ref _ImagePath, value);
-        }
+        public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
 
         private decimal? _Price;
-        public decimal? Price
-        {
-            get => _Price;
-            set => Set(ref _Price, value);
-        }
+        public decimal? Price { get => _Price; set => Set(ref _Price, value); }
+
+        private bool _IsButtonEnabled = true;
+        public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value);}
         Catalog Owner;
         public ProductPreview(Products product, Catalog owner)
         {
@@ -112,11 +103,11 @@ namespace project1.Views.Controls
             d.Owner = Owner; 
             d.Show();
         }
-        private void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
+        public void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
             if(Owner.AddToShoppingCart(Product))
             {
-                ((Button)sender).IsEnabled = false;
+                IsButtonEnabled = false;
             };
         }
     }

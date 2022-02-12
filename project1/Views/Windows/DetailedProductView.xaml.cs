@@ -30,43 +30,32 @@ namespace project1.Views.Windows
         #endregion
         
         private string _ImagePath;
-        public string ImagePath
-        {
-            get => _ImagePath;
-            set => Set(ref _ImagePath, value);
-        }
+        public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
 
         private string _ProductTitle;
-        public string ProductTitle
-        {
-            get => _ProductTitle;
-            set => Set(ref _ProductTitle, value);
-        }
+        public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
 
         private decimal? _Price;
-        public decimal? Price
-        {
-            get => _Price;
-            set => Set(ref _Price, value);
-        }
+        public decimal? Price { get => _Price; set => Set(ref _Price, value); }
 
         private string _Description;
-        public string Description
-        {
-            get => _Description;
-            set => Set(ref _Description, value);
-        }
-        private Products Product;
+        public string Description { get => _Description; set => Set(ref _Description, value); }
 
+        private bool _IsButtonEnabled = true;
+        public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value); }
+        private Products Product;
+        ProductPreview owner;
         public DetailedProductView(Products product, ProductPreview pw)
         {
             Product = product;
+            this.owner = pw;
             DataContext = this;
             InitializeComponent();
             ImagePath = @"pack://application:,,,/" + product.Image;
             ProductTitle = pw.ProductTitle;
             Price = product.Price;
             Description = product.Description;
+            IsButtonEnabled = pw.IsButtonEnabled;
 
             DataGrid dg = new DataGrid();
             dg.Columns.Add(new DataGridTextColumn { Binding = new Binding() { Path = new PropertyPath("P") }, Width = 400 });
@@ -111,8 +100,7 @@ namespace project1.Views.Windows
         }
         private void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
-            Catalog c = (Catalog)Owner;
-            c.AddToShoppingCart(Product);
+            owner.AddToShoppingCartButton_Click(sender, e);
         }
     }
 }
