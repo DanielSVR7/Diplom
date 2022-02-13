@@ -37,10 +37,10 @@
     </UserControl.Resources>
     <Border x:Name="MainBorder"  Style="{StaticResource ResourceKey=MainBorder}" MouseUp="MainBorder_MouseUp" >
         <DockPanel>
-            <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=ImagePath, TargetNullValue={x:Null}}" 
+            <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=Product.Image, TargetNullValue={x:Null}}" 
                    Margin="15,10" MinWidth="80" Height="160"/>
             <UniformGrid Rows="3" DockPanel.Dock="Right" >
-                <TextBlock Text="{Binding Price}" HorizontalAlignment="Right" 
+                <TextBlock Text="{Binding Product.Price}" HorizontalAlignment="Right" 
                            Margin="10,10" FontSize="18"/>
                 <Button Content="Купить в 1 клик" Margin="10,10"/>
                 <Button Content="Добавить в корзину" Margin="10,10" IsEnabled="{Binding IsButtonEnabled}" Click="AddToShoppingCartButton_Click"/>

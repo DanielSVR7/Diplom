@@ -38,40 +38,36 @@ namespace project1.Views.Controls
             return true;
         }
         #endregion
-        public int ProductID { get; set; }
 
         private short _ProductCount = 1;
         public short ProductCount { get => _ProductCount; set => Set(ref _ProductCount, value); }
-        private string _ImagePath;
-        public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
-
-        private decimal? _Price;
-        public decimal? Price { get => _Price; set => Set(ref _Price, value); }
 
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
 
-        private bool _IsSelected;
+        private bool _IsSelected = true;
         public bool IsSelected { get => _IsSelected; set => Set(ref _IsSelected, value); }
+
+        private Products _Product;
+        public Products Product { get => _Product; set => Set(ref _Product, value); }
+
         ShoppingCart Owner;
         public ShoppingCartProduct(Products product, ShoppingCart owner)
         {
             DataContext = this;
             Owner = owner;
+            Product = product;
             InitializeComponent();
-            ProductID = product.ProductID;
-            ImagePath = @"pack://application:,,,/" + product.Image;
-            Price = product.Price;
-            if (product.Category == 1)
+            if (Product.Category == 1)
             {
-                ProductTitle = product.ScreenSizes.ScreenSizeInInches + "\" " + "Телевизор ";
+                ProductTitle = Product.ScreenSizes.ScreenSizeInInches + "\" " + "Телевизор ";
             }
-            else if (product.Category == 2)
+            else if (Product.Category == 2)
             {
-                ProductTitle = "Холодильник " + product.FreezerLocations.FreezerLocationName + ' ';
+                ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ';
             }
             else { ProductTitle = "fucked up"; }
-            ProductTitle += product.Manufacturers.CompanyName + ' ' + product.Model + ' ' + product.Colors.ColorName;
+            ProductTitle += Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName;
         }
 
         private void PlusButton_Click(object sender, RoutedEventArgs e)
@@ -87,21 +83,22 @@ namespace project1.Views.Controls
             }
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CountPanel.IsEnabled = true;
-            Owner.UpdateInfo();
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CountPanel.IsEnabled = false;
-            Owner.UpdateInfo();
-        }
-
         private void CountTextBlock_TextChanged(object sender, TextChangedEventArgs e)
         {
             Owner.UpdateInfo();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Owner.Products.Remove(Product);
+            Owner.UpdateProducts();
+            ((Catalog)Owner.Owner).DisplayProducts();
+        }
+
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            Owner.UpdateInfo();
+            Owner.CheckCheckBoxes();
         }
     }
 }

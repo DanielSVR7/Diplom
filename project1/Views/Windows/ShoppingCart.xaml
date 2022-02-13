@@ -56,8 +56,7 @@
                     </Grid>
                     <Border Style="{StaticResource BordersStyle}">
                         <Grid>
-                            <CheckBox x:Name="SelectAllCheckBox" Content="Выбрать все" 
-                                      Unchecked="SelectAllCheckBox_Unchecked" Checked="SelectAllCheckBox_Checked"/>
+                            <CheckBox x:Name="SelectAllCheckBox" Content="Выбрать все" Click="SelectAllCheckBox_Click" IsChecked="True"/>
                             <TextBlock Style="{StaticResource Link}" Text="Удалить выбранные" HorizontalAlignment="Right"/>
                         </Grid>
                     </Border>

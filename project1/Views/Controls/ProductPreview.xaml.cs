@@ -28,15 +28,10 @@ namespace project1.Views.Controls
         }
         #endregion
 
-        private Products Product;
+        private Products _Product;
+        public Products Product { get => _Product; set => Set(ref _Product, value); }
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
-
-        private string _ImagePath;
-        public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
-
-        private decimal? _Price;
-        public decimal? Price { get => _Price; set => Set(ref _Price, value); }
 
         private bool _IsButtonEnabled = true;
         public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value);}
@@ -49,10 +44,8 @@ namespace project1.Views.Controls
             InitializeComponent();
             if (Product != null)
             {
-                Price = Product.Price;
                 ManufacturerName.Text = Product.Manufacturers.CompanyName;
                 Warranty.Text = Product.Warranty.ToString() + " месяцев";
-                ImagePath = @"pack://application:,,,/" + Product.Image;
                 if (Product.Category == 1)
                 {
                     ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + "\" (" + 
@@ -105,10 +98,8 @@ namespace project1.Views.Controls
         }
         public void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Owner.AddToShoppingCart(Product))
-            {
-                IsButtonEnabled = false;
-            };
+            Owner.ShoppingCartList.Add(Product);
+            IsButtonEnabled = false;
         }
     }
 }

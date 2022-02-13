@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:windows="clr-namespace:project1.Views.Windows" 
+        d:DataContext="{d:DesignInstance Type=windows:Catalog}"
         x:Class="project1.Views.Windows.Catalog" 
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
@@ -41,7 +43,17 @@
             <MenuItem Header="Корзина" Click="ShoppingCartButton_Click"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}"/>
+            <StatusBar.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </StatusBar.Resources>
+            <TextBlock Text="{Binding Client.Surname}"/>
+            <TextBlock Text="{Binding Client.Firstname}"/>
+            <TextBlock Text="{Binding Client.Lastname}"/>
+            
+            <Separator/>
+            <TextBlock Text="{Binding Client.DiscountLevels.Name}"/>
         </StatusBar>
         <DockPanel>
             <Grid DockPanel.Dock="Top">
@@ -51,8 +63,14 @@
                 </Grid.ColumnDefinitions>
                 <UniformGrid x:Name="CategoriesPanel" Rows="1" Grid.Column="0"/>
                 <UniformGrid Rows="1" Grid.Column="1">
-                    <Button Content="{Binding ShoppingCartButtonContent, UpdateSourceTrigger=PropertyChanged}" 
-                            Click="ShoppingCartButton_Click" Margin="5,5,5,0"/>
+                    <Button Click="ShoppingCartButton_Click" Margin="5,5,5,0">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Корзина "/>
+                                <TextBlock Text="{Binding ShoppingCartList.Count, StringFormat=({0})}"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                 </UniformGrid>
                 
             </Grid>

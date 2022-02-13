@@ -32,14 +32,34 @@ namespace project1.Views.Windows
             {
                 string _login = loginTextBox.Text;
                 string _password = PasswordBox.Password;
-                var name = (from client in db.Clients where _login == client.PhoneNumber && _password == client.Password select client.Firstname + " " + client.Lastname).Single();
-                WelcomeMessage.Text += "\n" + name + '!';
-                WelcomeMessage.Visibility = Visibility.Visible;
-                LoginButton.IsEnabled = false;
-                await Task.Delay(2000);
-                Catalog c = new Catalog();
-                c.Show();
-                this.Close();
+                try
+                {
+                    var _client = (from client in db.Clients where _login == client.PhoneNumber && _password == client.Password select client).Single();
+                    WelcomeMessage.Text += "\n" + _client.Firstname + ' ' + _client.Lastname + '!';
+                    WelcomeMessage.Visibility = Visibility.Visible;
+                    LoginButton.IsEnabled = false;
+
+                    await Task.Delay(2000);
+                    Catalog c = new Catalog();
+                    c.Client = _client;
+                    c.Show();
+                    this.Close();
+                }
+                catch
+                {
+                    var _manager = (from manager in db.Managers where _login == manager.Login && _password == manager.Password select manager).Single();
+                    WelcomeMessage.Text = _manager.FullName;
+                    WelcomeMessage.Visibility = Visibility.Visible;
+                    LoginButton.IsEnabled = false;
+
+                    //await Task.Delay(2000);
+                    Catalog c = new Catalog();
+                    c.IsAdmin = true;
+                    c.Client = new Clients { Surname = _manager.FullName, DiscountLevels = new DiscountLevels { Name = " [Менеджер]" } };
+                    c.Show();
+                    this.Close();
+                }
+                
             }
             catch       //Если пара логина и пароля не найдена в базе данных
             {
