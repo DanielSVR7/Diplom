@@ -51,7 +51,7 @@ namespace project1.Views.Windows
             this.owner = pw;
             DataContext = this;
             InitializeComponent();
-            ImagePath = @"pack://application:,,,/" + product.Image;
+            ImagePath = product.Image;
             ProductTitle = pw.ProductTitle;
             Price = product.Price;
             Description = product.Description;

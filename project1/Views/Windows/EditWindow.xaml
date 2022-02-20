@@ -1,0 +1,40 @@
+﻿<Window x:Class="project1.Views.Windows.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:project1.Views.Windows" 
+        xmlns:windows="clr-namespace:project1.Views.Windows" 
+        d:DataContext="{d:DesignInstance Type=windows:EditWindow}"
+        mc:Ignorable="d"
+        Title="EditWindow" Height="500" Width="400">
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Bottom" Margin="100,40">
+            <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>
+        </UniformGrid>
+        <StackPanel>
+            <UniformGrid Columns="2" Rows="10" Margin="20,10">
+                <TextBlock Text="Категория"/>
+                <ComboBox x:Name="CategoriesCB" Margin="5" SelectedItem="{Binding Product.Categories}"/>
+                <TextBlock Text="Производитель"/>
+                <ComboBox x:Name="ManufacturersCB" Margin="5" SelectedItem="{Binding Product.Manufacturers}"/>
+                <TextBlock Text="Модель"/>
+                <TextBox x:Name="ModelTB" Margin="5" Text="{Binding Product.Model}"/>
+                <TextBlock Text="Цена"/>
+                <TextBox x:Name="PriceTB" Margin="5" Text="{Binding Product.Price}"/>
+                <TextBlock Text="Ширина"/>
+                <TextBox x:Name="WidthTB" Margin="5" Text="{Binding Product.Width}"/>
+                <TextBlock Text="Высота"/>
+                <TextBox x:Name="HeightTB" Margin="5" Text="{Binding Product.Height}"/>
+                <TextBlock Text="Глубина"/>
+                <TextBox x:Name="DepthTB" Margin="5" Text="{Binding Product.Depth}"/>
+                <TextBlock Text="Гарантия"/>
+                <TextBox x:Name="WarrantyTB" Margin="5" Text="{Binding Product.Warranty}"/>
+                <TextBlock Text="Цвет"/>
+                <ComboBox x:Name="ColorsCB" Margin="5" SelectedItem="{Binding Product.Colors}"/>
+                <Button x:Name="LoadImageButton" Content="Загрузить изображение" Click="LoadImageButton_Click"/>
+            </UniformGrid>
+            <TextBlock x:Name="ImageTB" Margin="5"/>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -23,5 +23,9 @@ namespace project1.Models
         public string ColorName { get; set; }
     
         public virtual ICollection<Products> Products { get; set; }
+        public override string ToString()
+        {
+            return ColorName;
+        }
     }
 }

@@ -41,6 +41,7 @@
                 <MenuItem/>
             </MenuItem>
             <MenuItem Header="Корзина" Click="ShoppingCartButton_Click"/>
+            <MenuItem x:Name="AddProductButton" Header="Добавить товар" Click="AddProductButton_Click" Visibility="Collapsed"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBar.Resources>
@@ -130,7 +131,9 @@
                 </StackPanel>
                 <!--</GroupBox>-->
                 <!--<GroupBox Grid.Column="1" Header="Основное окно">-->
-                <StackPanel x:Name="MainBox" Margin="20" Grid.Column="1"/>
+                <ScrollViewer Grid.Column="1">
+                    <StackPanel x:Name="MainBox" Margin="20"/>
+                </ScrollViewer>
                 <!--</GroupBox>-->
             </Grid>
         </DockPanel>

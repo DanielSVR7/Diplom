@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Linq;
 using Word = Microsoft.Office.Interop.Word;
 using System.Data;
+using System.Collections.ObjectModel;
+using System;
 
 namespace project1.Views.Windows
 {
@@ -29,10 +31,10 @@ namespace project1.Views.Windows
         #endregion
         private decimal DisplayedSum = 0;
         private int DisplayedNum = 0;
-        private List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
-        public List<Products> Products = new List<Products>();
+        public List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
+        public ObservableCollection<Products> Products = new ObservableCollection<Products>();
         ApplianceStoreEntities db = new ApplianceStoreEntities();
-        public ShoppingCart(List<Products> products)
+        public ShoppingCart(ObservableCollection<Products> products)
         {
             InitializeComponent();
             Products = products;
@@ -52,6 +54,7 @@ namespace project1.Views.Windows
         }
         public void UpdateInfo()
         {
+            
             DisplayedSum = 0;
             DisplayedNum = 0;
             if (ShoppingCartList.Count != 0)
@@ -63,16 +66,10 @@ namespace project1.Views.Windows
                         DisplayedNum += item.ProductCount;
                         DisplayedSum += item.Product.Price * item.ProductCount ?? 0;
                     }
-                    NumTextBox.Text = DisplayedNum.ToString() + ' ' + Generate(DisplayedNum, "товар", "товара", "товаров");
+                    NumTextBox.Text = DisplayedNum.ToString() + ' ' + RussianCases.GenerateNumEnding(DisplayedNum, "товар", "товара", "товаров");
                     SumTextBox.Text = "на " + DisplayedSum + " ₽";
                 }
             }
-        }
-        public static string Generate(int number, string nominativ, string genetiv, string plural)
-        {
-            var titles = new[] { nominativ, genetiv, plural };
-            var cases = new[] { 2, 0, 1, 1, 1, 2 };
-            return titles[number % 100 > 4 && number % 100 < 20 ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
         }
 
         private void SelectAllCheckBox_Click(object sender, RoutedEventArgs e)
@@ -117,60 +114,150 @@ namespace project1.Views.Windows
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы уверены что хотите распечатать этот заказ?", "Подтвердите действие",
-                MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+            if (ShoppingCartList.Count != 0)
             {
-                try
+                if (MessageBox.Show("Вы уверены что хотите распечатать этот заказ?", "Подтвердите действие",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                 {
-                    int _ClientID;
-                    if (((Catalog)Owner).IsAdmin)
-                        _ClientID = 0;
-                    else
-                        _ClientID = ((Catalog)Owner).Client.ClientID;
-                    var purchase = new Purchases
+                    try
                     {
-                        PurchaseID = (from p in db.Purchases select p.PurchaseID).ToList().Last() + 1,
-                        PurchaseDate = System.DateTime.Now,
-                        ClientID = _ClientID
-                    };
-                    db.Purchases.Add(purchase);
-                    db.SaveChanges();
-                    foreach (ShoppingCartProduct p in ShoppingCartList)
-                    {
-                        PurchaseItems item = new PurchaseItems
+                        int _ClientID;
+                        if (((Catalog)Owner).IsAdmin)
+                            _ClientID = 0;
+                        else
+                            _ClientID = ((Catalog)Owner).Client.ClientID;
+                        var purchase = new Purchases
                         {
-                            PurchaseID = (from pur in db.Purchases select pur).ToList().Last().PurchaseID,
-                            ProductID = p.Product.ProductID,
-                            ProductCount = p.ProductCount
+                            PurchaseID = (from p in db.Purchases
+                                          select p.PurchaseID).ToList().Last() + 1,
+                            ClientID = _ClientID
                         };
-                        db.PurchaseItems.Add(item);
-
+                        db.Purchases.Add(purchase);
                         db.SaveChanges();
-                        MessageBox.Show("Успешно");
+                        decimal sum = 0;
+                        foreach (ShoppingCartProduct p in ShoppingCartList)
+                        {
+                            if (p.IsSelected)
+                            {
+                                PurchaseItems item = new PurchaseItems
+                                {
+                                    PurchaseID = (from pur in db.Purchases
+                                                  select pur).ToList().Last().PurchaseID,
+                                    ProductID = p.Product.ProductID,
+                                    ProductCount = p.ProductCount
+                                };
+                                db.PurchaseItems.Add(item);
+                                sum += item.ProductCount *
+                                    (from product in db.Products
+                                     where product.ProductID == item.ProductID
+                                     select product)
+                                     .Single().Price ?? 0;
+                            }
+                        }
+                        var client = (from c in db.Clients
+                                      where c.ClientID == _ClientID
+                                      select c)
+                                      .Single();
+                        client.Account += sum;
+                        List<DiscountLevels> lvls = (from l in db.DiscountLevels select l).ToList();
+                        bool IsUpgraded = false;
+                        if (client.DiscountLevel != lvls.Count - 1)
+                        {
+                            for (int i = 0; i < lvls.Count - 1; i++)
+                            {
+                                if (client.Account >= lvls[client.DiscountLevel + 1].AmountOfPurchases)
+                                {
+                                    IsUpgraded = true;
+                                    client.DiscountLevel++;
+                                }
+                            }
+                            if (IsUpgraded)
+                                MessageBox.Show("Для получения товарного чека подойдите на кассу. " +
+                                    "\nУровень повышен! Теперь уровень вашего дисконта - " + lvls[client.DiscountLevel].Name +
+                                    ".\nВаша скидка составляет " + lvls[client.DiscountLevel - 1].PercentDiscount + "%.",
+                                    "Заказ оформлен успешно.", MessageBoxButton.OK, MessageBoxImage.Information);
+                            else
+                                MessageBox.Show("Для получения товарного чека подойдите на кассу. " +
+                                    "\nДо повышения уровня осталось приобрести товаров на " +
+                                    (lvls[client.DiscountLevel + 1].AmountOfPurchases - client.Account),
+                                    "Заказ оформлен успешно.", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                            MessageBox.Show("Для получения товарного чека подойдите на кассу",
+                                "Заказ оформлен успешно.", MessageBoxButton.OK, MessageBoxImage.Information);
+                        db.SaveChanges();
                         this.Close();
-                        ((Catalog)Owner).ShoppingCartList.Clear();
+                        AuthorizationWindow a = new AuthorizationWindow();
+                        a.Show();
+                        ((Catalog)Owner).Close();
+                        PrintToWord();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString(), "Ошибка - " + ex.Message);
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("Fucked up");
-                }
-                //PrintToWord();
+                else
+                    MessageBox.Show("Как скажешь");
             }
-
+            else
+                MessageBox.Show("Корзина пуста!");
         }
         private void PrintToWord()
         {
-            Word.Application app = new Word.Application();
-            string Source = @"..\Data\WordTemplates\CheckoutTemplate.dotx";
-            Word.Document doc = app.Documents.Add(Source);
-            Word.Bookmarks bookmarks = doc.Bookmarks;
-            foreach (Word.Bookmark bookmark in bookmarks)
+            try
             {
-                switch (bookmark.Name)
-                {
+                Word.Application app = new Word.Application();
+                string Source = @"C:\!Docs\!Diplom\project1\project1\Data\WordTemplates\CheckoutTemplate.dotx";
 
+                Word.Document doc = app.Documents.Add(Source);
+                doc.Activate();
+
+                Word.Bookmarks bookmarks = doc.Bookmarks;
+
+                var LastPurchase = (from purchase in db.Purchases select purchase).ToList().Last();
+                decimal Sum = 0;
+                foreach (var item in LastPurchase.PurchaseItems)
+                    Sum += item.ProductCount * item.Products.Price ?? 0;
+
+                foreach (Word.Bookmark bookmark in bookmarks)
+                {
+                    switch (bookmark.Name)
+                    {
+                        case "Адрес": bookmark.Range.Text = "Адрес"; break;
+                        case "Дата": bookmark.Range.Text = (from p in db.Purchases select p.PurchaseDate).ToList().Last().ToString(); break;
+                        case "КоличествоНаименований": bookmark.Range.Text = LastPurchase.PurchaseItems.Count.ToString(); break;
+                        case "НомерЧека": bookmark.Range.Text = LastPurchase.PurchaseID.ToString(); break;
+                        case "Продавец": bookmark.Range.Text = "Наименование магазина - продавца"; break;
+                        case "Сумма": bookmark.Range.Text = Sum.ToString(); break;
+                        case "СуммаТекстом": bookmark.Range.Text = RussianCases.RubPhrase(Sum); break;
+                        case "Телефон": bookmark.Range.Text = "Контактный телефон"; break;
+                    }
                 }
+
+                Word.Table table = doc.Tables[1];
+                int i = 2;
+                foreach(var item in LastPurchase.PurchaseItems)
+                {
+                    table.Cell(i, 1).Range.Text = (i - 1).ToString();
+                    table.Cell(i, 2).Range.Text = item.ProductID.ToString();
+                    table.Cell(i, 3).Range.Text = new ShoppingCartProduct((from p in Products where p.ProductID == item.ProductID select p).Single(), this).ProductTitle;
+                    table.Cell(i, 4).Range.Text = item.Products.Price.ToString();
+                    table.Cell(i, 5).Range.Text = item.ProductCount.ToString();
+                    table.Cell(i, 6).Range.Text = "0,00";
+                    table.Cell(i, 7).Range.Text = (item.ProductCount * item.Products.Price).ToString();
+                    table.Rows.Add();
+                    i++;
+                }
+                table.Rows[i].Cells[1].Merge(table.Rows[i].Cells[6]);
+                table.Rows[i].Range.Font.Bold = 1;
+                table.Cell(i, 2).Range.Text = Sum.ToString();
+                doc.Close();
+                doc = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка - " + ex.Message);
             }
         }
     }

@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace project1.Views.Windows
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthorizationWindow.xaml
-    /// </summary>
     public partial class AuthorizationWindow : Window
     {
         ApplianceStoreEntities db = new ApplianceStoreEntities();
@@ -39,7 +36,7 @@ namespace project1.Views.Windows
                     WelcomeMessage.Visibility = Visibility.Visible;
                     LoginButton.IsEnabled = false;
 
-                    await Task.Delay(2000);
+                    //await Task.Delay(2000);
                     Catalog c = new Catalog();
                     c.Client = _client;
                     c.Show();
@@ -55,6 +52,7 @@ namespace project1.Views.Windows
                     //await Task.Delay(2000);
                     Catalog c = new Catalog();
                     c.IsAdmin = true;
+                    c.AddProductButton.Visibility = Visibility.Visible;
                     c.Client = new Clients { Surname = _manager.FullName, DiscountLevels = new DiscountLevels { Name = " [Менеджер]" } };
                     c.Show();
                     this.Close();

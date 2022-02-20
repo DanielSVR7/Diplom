@@ -85,6 +85,10 @@ namespace project1.Views.Controls
 
         private void CountTextBlock_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if(ProductCount == 0)
+                IsSelected = false;
+            else 
+                IsSelected = true;
             Owner.UpdateInfo();
         }
 

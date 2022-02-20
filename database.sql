@@ -32,9 +32,9 @@ IF EXISTS (SELECT * FROM sys.tables WHERE NAME = 'DiscountLevels')
 	DROP TABLE DiscountLevels;						
 GO
 CREATE TABLE DiscountLevels
-(	LevelID    	        TINYINT	    NOT NULL,	        /*  */
+(	LevelID    	        TINYINT	    	NOT NULL,	        /*  */
 	Name		        NVARCHAR(20)    NOT NULL UNIQUE,	/*  */
-	AmountOfPurchases	INT		NOT NULL,
+	AmountOfPurchases	INT				NOT NULL,
 	PercentDiscount     DECIMAL(4,2)    NOT NULL,	        /*  */
 	CONSTRAINT PK_DiscountLevels
 		PRIMARY KEY (LevelID)
@@ -322,9 +322,13 @@ IF EXISTS (SELECT * FROM sys.server_triggers WHERE NAME = 'T_Purchases_Insert')
 GO  
 CREATE TRIGGER T_Purchases_Insert
 	ON Purchases AFTER INSERT
-	AS UPDATE Clients
-		SET LastPurchase = GETDATE()
-			WHERE ClientID = (SELECT ClientID FROM inserted)
+	AS 	UPDATE Clients
+			SET LastPurchase = GETDATE()
+				WHERE ClientID = (SELECT ClientID FROM inserted)
+		UPDATE Purchases
+			SET PurchaseDate = GETDATE()
+				WHERE PurchaseID = (SELECT PurchaseID FROM inserted)
+
 GO
 
 
@@ -346,12 +350,12 @@ INSERT INTO DiscountLevels(LevelID, Name, AmountOfPurchases, PercentDiscount)
 GO
 
 
-INSERT INTO Clients(ClientID, PhoneNumber, Password, Surname, Firstname, Lastname, Account)
+INSERT INTO Clients(ClientID, PhoneNumber, Password, Surname, Firstname, Lastname)
 	VALUES
-(0, 'phonenumber', 'password', 'Менеджер', '', '', 0),
-(1, '79276214383', 'pass', 'Иванова', 'Виктория', 'Тимофеевна', 12000),
-(2, '79176549988', 'pw', 'Денисов', 'Владислав', 'Мирославович', 0),
-(3, '1', '1', 'Свириденко', 'Даниил', 'Дмитриевич', 0);
+(0, 'm', 'm', 'Менеджер', '', ''),
+(1, '4', '4', 'Иванова', 'Виктория', 'Тимофеевна'),
+(2, '3', '3', 'Денисов', 'Владислав', 'Мирославович'),
+(3, '1', '1', 'Свириденко', 'Даниил', 'Дмитриевич');
 GO
 
 
@@ -481,4 +485,8 @@ INSERT INTO Products	(ProductID, Model, Category, Price, Description, Manufactur
 'Телевизор LED LG 65UP75006LF является удобным аппаратом для просмотра как стандартных телевизионных программ, так и для потоковой трансляции видео из Интернета. Он выполнен в черном корпусе с диагональю экрана 65" (165 см) и устанавливается на подставку, которая крепится по обе стороны корпуса, обеспечивая устойчивость устройства и не позволяя ему наклоняться. Благодаря модулю Wi-Fi, установленному на LG 65UP75006LF, вы сможете насладиться плавностью потоковой трансляции видео без задержек.', 
 2, 1, 12, 'pack://application:,,,/Data/Images/Products/TVs/65UP75006LF.jpg', 
 1, 10, 2, 1, 3, 1, 1);
+GO
+
+INSERT INTO Purchases	(PurchaseID, ClientID)
+	VALUES	(0, 0);
 GO

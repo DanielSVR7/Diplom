@@ -67,7 +67,7 @@ namespace project1.Views.Controls
                     else
                         Value3.Text = "Есть";
                 }
-                if (Product.Category == 2)
+                else if (Product.Category == 2)
                 {
                     ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ' + Product.Manufacturers.CompanyName + ' ' +
                         Product.Model + ' ' + Product.Colors.ColorName + " [" + (Product.RefrigeratorVolume + Product.FreezerVolume).ToString() + " л, " +
@@ -86,6 +86,22 @@ namespace project1.Views.Controls
                     else
                         Value3.Text = "Есть";
                 }
+                else
+                {
+                    ProductTitle = Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName +
+                        " [" + Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
+                    Property1.Text = "Категория";
+                    Property2.Text = "Энергетический класс";
+                    Property3.Text = "Потребление энергии";
+                    Value1.Text = Product.Categories.CategoryName;
+                    Value2.Text = Product.EnergyClasses.EnergyClassName;
+                    Value3.Text = Product.PowerConsumption.ToString();
+                }
+                if(Owner.IsAdmin)
+                {
+                    EditButton.Visibility = Visibility.Visible;
+                    DeleteButton.Visibility = Visibility.Visible;
+                }
             }
 
         }
@@ -100,6 +116,17 @@ namespace project1.Views.Controls
         {
             Owner.ShoppingCartList.Add(Product);
             IsButtonEnabled = false;
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditWindow ew = new EditWindow(Product, Owner.db);
+            ew.Show();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

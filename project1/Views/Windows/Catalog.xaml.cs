@@ -1,6 +1,7 @@
 ﻿using project1.Models;
 using project1.Views.Controls;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ namespace project1.Views.Windows
     public partial class Catalog : Window, INotifyPropertyChanged
     {
         bool IsManufacturersShowed = false;
-        ApplianceStoreEntities db = new ApplianceStoreEntities();
+        public ApplianceStoreEntities db = new ApplianceStoreEntities();
         
         List<Products> DisplayedProducts = new List<Products>();
         private Clients _Client;
@@ -24,8 +25,8 @@ namespace project1.Views.Windows
         Categories _SelectedCategory;
         public Categories SelectedCategory { get => _SelectedCategory; set => Set(ref _SelectedCategory, value); }
 
-        private List<Products> _ShoppingCartList = new List<Products>();
-        public List<Products> ShoppingCartList { get => _ShoppingCartList; set => Set(ref _ShoppingCartList, value); }
+        private ObservableCollection<Products> _ShoppingCartList = new ObservableCollection<Products>();
+        public ObservableCollection<Products> ShoppingCartList { get => _ShoppingCartList; set => Set(ref _ShoppingCartList, value); }
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string PropertyName = null)
@@ -60,8 +61,6 @@ namespace project1.Views.Windows
             {
                 var cb = new CheckBox();
                 cb.Content = m;
-                cb.Checked += new RoutedEventHandler(ManufacturersCheckBox_Checked);
-                cb.Unchecked += new RoutedEventHandler(ManufacturersCheckBox_Unchecked);
                 ManufacturersPanel.Children.Add(cb);
             }
         }
@@ -177,6 +176,12 @@ namespace project1.Views.Windows
             ShoppingCart s = new ShoppingCart(ShoppingCartList);
             s.Owner = this;
             s.Show();
+        }
+
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditWindow ew = new EditWindow(new Products(), db);
+            ew.Show();
         }
     }
 }

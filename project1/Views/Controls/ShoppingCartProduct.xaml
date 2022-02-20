@@ -39,7 +39,7 @@
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <CheckBox  Grid.Row="0" Grid.Column="0" Margin="5,5,0,0"  IsChecked="{Binding IsSelected}" Click="CheckBox_Click" />
+            <CheckBox  Grid.Row="0" Grid.Column="0" Margin="5,5,0,0"  IsChecked="{Binding IsSelected}" Click="CheckBox_Click" IsThreeState="False" />
             <DockPanel Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
 
                 <Grid>

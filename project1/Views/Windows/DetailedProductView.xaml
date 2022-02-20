@@ -9,6 +9,17 @@
         Title="DetailedProductView" Height="600" Width="1000"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Height" Value="30"/>
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Style.Resources>
+        </Style>
         <Style x:Key="MainBorder" TargetType="Border">
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -50,7 +61,6 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top"/>
         <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="12312312312"/>
         </StatusBar>
         <Grid>
             <Grid.RowDefinitions>
