@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:project1.Views.Windows" 
         d:DataContext="{d:DesignInstance Type=local:DetailedProductView}"
         mc:Ignorable="d"
-        Title="DetailedProductView" Height="600" Width="1000"
-        WindowStartupLocation="CenterOwner">
+        Title="Описание" Height="600" Width="1000"
+        WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="White"/>
@@ -96,7 +96,7 @@
                                     <GradientStop Color="White" Offset="0.77"/>
                                 </LinearGradientBrush>
                             </Border.Background>
-                            <TextBlock Text="{Binding Price}" FontSize="16"/>
+                            <TextBlock Text="{Binding Price}" FontSize="20" VerticalAlignment="Center"/>
                         </Border>
                         <UniformGrid Grid.Column="1" Columns="2" Margin="60,0,0,0">
                             <Button Content="Купить в 1 клик" Margin="5,0" />

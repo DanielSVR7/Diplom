@@ -163,12 +163,12 @@ namespace project1.Views.Windows
                         bool IsUpgraded = false;
                         if (client.DiscountLevel != lvls.Count - 1)
                         {
-                            for (int i = 0; i < lvls.Count - 1; i++)
+                            for (int i = 0; i < lvls.Count; i++)
                             {
-                                if (client.Account >= lvls[client.DiscountLevel + 1].AmountOfPurchases)
+                                if (client.Account >= lvls[i].AmountOfPurchases)
                                 {
                                     IsUpgraded = true;
-                                    client.DiscountLevel++;
+                                    client.DiscountLevel = lvls[i].LevelID;
                                 }
                             }
                             if (IsUpgraded)

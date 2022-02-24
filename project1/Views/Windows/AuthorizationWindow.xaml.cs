@@ -2,16 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace project1.Views.Windows
 {
@@ -28,10 +23,13 @@ namespace project1.Views.Windows
             try         //Попытка авторизоваться
             {
                 string _login = loginTextBox.Text;
+                //string _password = Encryption.Encode(PasswordBox.Password);
                 string _password = PasswordBox.Password;
                 try
                 {
-                    var _client = (from client in db.Clients where _login == client.PhoneNumber && _password == client.Password select client).Single();
+                    var _client = (from client in db.Clients 
+                                   where _login == client.PhoneNumber && _password == client.Password
+                                   select client).Single();
                     WelcomeMessage.Text += "\n" + _client.Firstname + ' ' + _client.Lastname + '!';
                     WelcomeMessage.Visibility = Visibility.Visible;
                     LoginButton.IsEnabled = false;
@@ -44,7 +42,9 @@ namespace project1.Views.Windows
                 }
                 catch
                 {
-                    var _manager = (from manager in db.Managers where _login == manager.Login && _password == manager.Password select manager).Single();
+                    var _manager = (from manager in db.Managers 
+                                    where _login == manager.Login && _password == manager.Password 
+                                    select manager).Single();
                     WelcomeMessage.Text = _manager.FullName;
                     WelcomeMessage.Visibility = Visibility.Visible;
                     LoginButton.IsEnabled = false;
@@ -67,6 +67,13 @@ namespace project1.Views.Windows
                 LoginLabel1.Foreground = (Brush)new BrushConverter().ConvertFrom("#BF000000");
                 LoginLabel2.Foreground = (Brush)new BrushConverter().ConvertFrom("#BF000000");
             }
+        }
+
+        private void RegisterLink_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            RegistrationWindow r = new RegistrationWindow(db);
+            r.ShowDialog();
+            db = new ApplianceStoreEntities();
         }
     }
 }

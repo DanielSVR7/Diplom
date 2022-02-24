@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="" Height="360" Width="300">
+        Title="" Height="360" Width="300" WindowStartupLocation="CenterScreen" Icon="/Views/Windows/icon.png">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Microsoft JhengHei"/>
@@ -45,7 +45,7 @@
     <StackPanel>
         <TextBlock Text="Войдите в аккаунт" FontSize="22" />
         <TextBlock Text="или" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Microsoft JhengHei"/>
-        <TextBlock x:Name="RegisterLink" Text="зарегистрируйтесь" FontSize="14" Style="{StaticResource Link}"/>
+        <TextBlock x:Name="RegisterLink" Text="зарегистрируйтесь" FontSize="14" Style="{StaticResource Link}" MouseUp="RegisterLink_MouseUp"/>
         <Label x:Name="LoginLabel1" Content="Введите номер телефона"/>
         <TextBox x:Name="loginTextBox"/>
         <Label x:Name="LoginLabel2" Content="Введите пароль" />

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
-        Title="ShoppingCart" Height="600" Width="1000"
-        WindowStartupLocation="CenterOwner">
+        Title="Корзина" Height="600" Width="1000"
+        WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="White"/>
@@ -37,12 +37,6 @@
         </Style>
     </Window.Resources>
     <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Файл"/>
-        </Menu>
-        <StatusBar DockPanel.Dock="Bottom">
-            <TextBlock Text="Готов!"/>
-        </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
@@ -83,11 +77,7 @@
                         <TextBlock Text="Даниил" Margin="10,0"/>
                         <TextBlock Text="Дмитриевич" Margin="10,0,0,10"/>
                         <Separator/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Ваша скидка:" Margin="10"/>
-                            <TextBlock Text="5%" Margin="10"/>
-                        </StackPanel>
-                        <Separator/>
+                        
                         <TextBlock Text="Итого:" Margin="10,10,0,0"/>
                         <Separator/>
                         <TextBlock x:Name="NumTextBox" Text="0 товара" Margin="10,0"/>

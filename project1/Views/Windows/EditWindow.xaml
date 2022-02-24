@@ -7,7 +7,7 @@
         xmlns:windows="clr-namespace:project1.Views.Windows" 
         d:DataContext="{d:DesignInstance Type=windows:EditWindow}"
         mc:Ignorable="d"
-        Title="EditWindow" Height="500" Width="400">
+        Title="Редактор" Height="500" Width="400" Icon="/Views/Windows/icon.png">
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom" Margin="100,40">
             <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>

@@ -7,8 +7,8 @@
         d:DataContext="{d:DesignInstance Type=windows:Catalog}"
         x:Class="project1.Views.Windows.Catalog" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280"
-        Background="#f6f6f6">
+        Title="Каталог" Height="720" Width="1280"
+        Background="#f6f6f6" Icon="/Views/Windows/icon.png">
     <Window.Resources>
         <Style x:Key="FilterHeader" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="CornflowerBlue"/>
@@ -96,31 +96,29 @@
                         <Border Style="{StaticResource BordersStyle}">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text=" Цена" Style="{DynamicResource FilterHeader}"/>
-                                <StackPanel MaxHeight="70" DockPanel.Dock="Top">
-                                    <UniformGrid Columns="4" Margin="10,0">
-                                        <TextBlock Text="Цена от"/>
-                                        <TextBox/>
-                                        <TextBlock Text="до" HorizontalAlignment="Right" Margin="10,0"/>
-                                        <TextBox/>
-                                    </UniformGrid>
+                                <StackPanel DockPanel.Dock="Top">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock Text="Цена от" Margin="10,0"/>
+                                        <TextBox Width="150"/>
+                                    </StackPanel>
                                     <Grid>
-                                        <Slider Orientation="Horizontal"/>
+                                        <Slider Width="200"/>
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock Text="Цена до" Margin="10,0"/>
+                                        <TextBox Width="150"/>
+                                    </StackPanel>
+                                    <Grid>
+                                        <Slider Width="200" Value="100"/>
                                     </Grid>
                                 </StackPanel>
                             </DockPanel>
                         </Border>
                         <Border Style="{StaticResource BordersStyle}">
                             <DockPanel>
-                                <TextBlock DockPanel.Dock="Top" Text=" Производители" Style="{DynamicResource FilterHeader}"/>
-                                <StackPanel DockPanel.Dock="Top" MaxHeight = "40"/>
-                                <TextBlock Text="Показать ещё.." Foreground="#99000000" DockPanel.Dock="Bottom" Margin="10,0" MouseDown="ManufacturersShow_MouseDown"/>
-                            </DockPanel>
-                        </Border>
-                        <Border Style="{StaticResource BordersStyle}">
-                            <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}"/>
                                 <StackPanel MaxHeight="70" DockPanel.Dock="Top">
-                                    <TextBox/>
+                                    <TextBox Margin="10" Height="20"/>
                                 </StackPanel>
                             </DockPanel>
                         </Border>

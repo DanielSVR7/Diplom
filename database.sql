@@ -57,7 +57,7 @@ CREATE TABLE Clients
 	Account			Money           NOT NULL DEFAULT 0,         /*  */
 	DiscountLevel	TINYINT        	NOT NULL DEFAULT 0,    		/*  */
 	LastPurchase	DATETIME2(0),			                    /*  */
-    RegisterDate    DATETIME2(0)    NOT NULL DEFAULT GETDATE(), /*  */
+    RegisterDate    DATETIME2(0), /*  */
 	CONSTRAINT PK_Clients
 		PRIMARY KEY (ClientID),
     CONSTRAINT FK_Clients_DiscountLevel
@@ -218,7 +218,7 @@ CREATE TABLE Products
 	Warranty			SMALLINT,
 	PowerConsumption	SMALLINT,
 	EnergyClass			TINYINT,
-	Image 				NVARCHAR(100)	DEFAULT('Data/Images/default.png'),
+	Image 				NVARCHAR(100)	DEFAULT('pack://application:,,,/Data/Images/default.png'),
 	/* Холодильники*/
 	FreezerLocation		TINYINT,						/*  */
 	FreshnessZone		BIT,
@@ -235,15 +235,15 @@ CREATE TABLE Products
 	Bluetooth			BIT,
 	HDRSupport			BIT,
 	/* Посудомойки и стиралки*/
-	WaterConsumption	INT,
-	NumberOfPrograms	INT,
-	NumberOfPlacedSets	INT,
-	LaundryLoad			INT,
+	WaterConsumption	TINYINT,
+	NumberOfPrograms	TINYINT,
+	NumberOfPlacedSets	TINYINT,
+	LaundryLoad			TINYINT,
 	TemperatureRange	NVARCHAR(10),
 	DirectDrive			BIT,
-	MaximumSpinSpeed	INT,
+	MaximumSpinSpeed	SMALLINT,
 	/* Микроволновки */
-	InternalVolume		INT,
+	InternalVolume		SMALLINT,
 	Grill				BIT,
 	CONSTRAINT PK_Products
 		PRIMARY KEY (ProductID),
@@ -317,21 +317,6 @@ CREATE TABLE PurchaseItems
 GO
 
 
-IF EXISTS (SELECT * FROM sys.server_triggers WHERE NAME = 'T_Purchases_Insert')  
-	DROP TRIGGER T_Purchases_Insert ON ALL SERVER;
-GO  
-CREATE TRIGGER T_Purchases_Insert
-	ON Purchases AFTER INSERT
-	AS 	UPDATE Clients
-			SET LastPurchase = GETDATE()
-				WHERE ClientID = (SELECT ClientID FROM inserted)
-		UPDATE Purchases
-			SET PurchaseDate = GETDATE()
-				WHERE PurchaseID = (SELECT PurchaseID FROM inserted)
-
-GO
-
-
 INSERT INTO Managers(ManagerID, FullName, Login, Password)
 	VALUES
 (1, 'Свириденко Даниил Дмитриевич', 'abc', 'def'),
@@ -350,12 +335,12 @@ INSERT INTO DiscountLevels(LevelID, Name, AmountOfPurchases, PercentDiscount)
 GO
 
 
-INSERT INTO Clients(ClientID, PhoneNumber, Password, Surname, Firstname, Lastname)
+INSERT INTO Clients(ClientID, PhoneNumber, Password, Surname, Firstname, Lastname, RegisterDate)
 	VALUES
-(0, 'm', 'm', 'Менеджер', '', ''),
-(1, '4', '4', 'Иванова', 'Виктория', 'Тимофеевна'),
-(2, '3', '3', 'Денисов', 'Владислав', 'Мирославович'),
-(3, '1', '1', 'Свириденко', 'Даниил', 'Дмитриевич');
+(0, 'm', 'm', 'Менеджер', '', '', GETDATE()),
+(1, '4', '4', 'Иванова', 'Виктория', 'Тимофеевна', GETDATE()),
+(2, '3', '3', 'Денисов', 'Владислав', 'Мирославович', GETDATE()),
+(3, '1', '1', 'Свириденко', 'Даниил', 'Дмитриевич', GETDATE());
 GO
 
 
@@ -489,4 +474,28 @@ GO
 
 INSERT INTO Purchases	(PurchaseID, ClientID)
 	VALUES	(0, 0);
+GO
+
+
+IF EXISTS (SELECT * FROM sys.server_triggers WHERE NAME = 'T_Purchases_Insert')  
+	DROP TRIGGER T_Purchases_Insert ON ALL SERVER;
+GO  
+CREATE TRIGGER T_Purchases_Insert
+	ON Purchases AFTER INSERT
+	AS 	UPDATE Clients
+			SET LastPurchase = GETDATE()
+				WHERE ClientID = (SELECT ClientID FROM inserted)
+		UPDATE Purchases
+			SET PurchaseDate = GETDATE()
+				WHERE PurchaseID = (SELECT PurchaseID FROM inserted)
+GO
+
+IF EXISTS (SELECT * FROM sys.server_triggers WHERE NAME = 'T_Clients_Insert')  
+	DROP TRIGGER T_Clients_Insert ON ALL SERVER;
+GO  
+CREATE TRIGGER T_Clients_Insert
+	ON Clients AFTER INSERT
+	AS 	UPDATE Clients
+			SET RegisterDate = GETDATE()
+				WHERE ClientID = (SELECT ClientID FROM inserted)
 GO
