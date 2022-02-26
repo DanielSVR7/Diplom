@@ -33,7 +33,7 @@
           <Property Name="Account" Type="money" Nullable="false" />
           <Property Name="DiscountLevel" Type="tinyint" Nullable="false" />
           <Property Name="LastPurchase" Type="datetime2" Precision="0" />
-          <Property Name="RegisterDate" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Colors">
           <Key>
@@ -121,14 +121,14 @@
           <Property Name="OperatingSystem" Type="tinyint" />
           <Property Name="Bluetooth" Type="bit" />
           <Property Name="HDRSupport" Type="bit" />
-          <Property Name="WaterConsumption" Type="int" />
-          <Property Name="NumberOfPrograms" Type="int" />
-          <Property Name="NumberOfPlacedSets" Type="int" />
-          <Property Name="LaundryLoad" Type="int" />
+          <Property Name="WaterConsumption" Type="tinyint" />
+          <Property Name="NumberOfPrograms" Type="tinyint" />
+          <Property Name="NumberOfPlacedSets" Type="tinyint" />
+          <Property Name="LaundryLoad" Type="tinyint" />
           <Property Name="TemperatureRange" Type="nvarchar" MaxLength="10" />
           <Property Name="DirectDrive" Type="bit" />
-          <Property Name="MaximumSpinSpeed" Type="int" />
-          <Property Name="InternalVolume" Type="int" />
+          <Property Name="MaximumSpinSpeed" Type="smallint" />
+          <Property Name="InternalVolume" Type="smallint" />
           <Property Name="Grill" Type="bit" />
         </EntityType>
         <EntityType Name="PurchaseItems">
@@ -424,7 +424,7 @@
           <Property Name="Account" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="DiscountLevel" Type="Byte" Nullable="false" />
           <Property Name="LastPurchase" Type="DateTime" Precision="0" />
-          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="DiscountLevels" Relationship="Self.FK_Clients_DiscountLevel" FromRole="Clients" ToRole="DiscountLevels" />
           <NavigationProperty Name="Purchases" Relationship="Self.FK_Purchases_Clients" FromRole="Clients" ToRole="Purchases" />
         </EntityType>
@@ -520,14 +520,14 @@
           <Property Name="OperatingSystem" Type="Byte" />
           <Property Name="Bluetooth" Type="Boolean" />
           <Property Name="HDRSupport" Type="Boolean" />
-          <Property Name="WaterConsumption" Type="Int32" />
-          <Property Name="NumberOfPrograms" Type="Int32" />
-          <Property Name="NumberOfPlacedSets" Type="Int32" />
-          <Property Name="LaundryLoad" Type="Int32" />
+          <Property Name="WaterConsumption" Type="Byte" />
+          <Property Name="NumberOfPrograms" Type="Byte" />
+          <Property Name="NumberOfPlacedSets" Type="Byte" />
+          <Property Name="LaundryLoad" Type="Byte" />
           <Property Name="TemperatureRange" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DirectDrive" Type="Boolean" />
-          <Property Name="MaximumSpinSpeed" Type="Int32" />
-          <Property Name="InternalVolume" Type="Int32" />
+          <Property Name="MaximumSpinSpeed" Type="Int16" />
+          <Property Name="InternalVolume" Type="Int16" />
           <Property Name="Grill" Type="Boolean" />
           <NavigationProperty Name="BacklightTypes" Relationship="Self.FK_Products_BacklightTypes" FromRole="Products" ToRole="BacklightTypes" />
           <NavigationProperty Name="Categories" Relationship="Self.FK_Products_Categories" FromRole="Products" ToRole="Categories" />

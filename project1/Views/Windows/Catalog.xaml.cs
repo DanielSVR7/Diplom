@@ -14,7 +14,6 @@ namespace project1.Views.Windows
 {
     public partial class Catalog : Window, INotifyPropertyChanged
     {
-        bool IsManufacturersShowed = false;
         public ApplianceStoreEntities db = new ApplianceStoreEntities();
         
         List<Products> DisplayedProducts = new List<Products>();
@@ -46,6 +45,7 @@ namespace project1.Views.Windows
         {
             DataContext = this;
             InitializeComponent();
+            ChangeCategory(1);
             Refresh();
         }
 
@@ -57,66 +57,20 @@ namespace project1.Views.Windows
                 btn.Click += new RoutedEventHandler(CtgrsClick);
                 CategoriesPanel.Children.Add(btn);
             }
-            foreach (var m in db.Manufacturers)
-            {
-                var cb = new CheckBox();
-                cb.Content = m;
-                ManufacturersPanel.Children.Add(cb);
-            }
-        }
-
-        public void ManufacturersCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            //MainBox.Children.Clear();
-            //SelectedManufacturers.Add((Manufacturers)((CheckBox)sender).Content);
-            //if (DisplayedProducts != null)
-            //{
-            //    List<Products> RemovingList = new List<Products>();
-            //    foreach (var p in DisplayedProducts)
-            //    {
-            //        if (SelectedManufacturers.Contains(p.Manufacturers))
-            //        {
-            //            AddProductToDisplay(p);
-            //        }
-            //        else
-            //            RemovingList.Add(p);
-            //    }
-            //    foreach(var p in RemovingList)
-            //        DisplayedProducts.Remove(p);
-            //}
-        }
-        public void ManufacturersCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            //SelectedManufacturers.Remove((Manufacturers)((CheckBox)sender).Content);
-            //DisplayedProducts.Remove((from d in DisplayedProducts 
-            //                          where d.Manufacturers == (Manufacturers)((CheckBox)sender).Content 
-            //                          select d).Single());
-            //if (DisplayedProducts != null)
-            //{
-            //    MainBox.Children.Clear();
-            //    foreach (var p in DisplayedProducts)
-            //    {
-            //        if (SelectedManufacturers.Contains(p.Manufacturers))
-            //            AddProductToDisplay(p);
-            //    }
-            //}
-            //if (SelectedManufacturers.Count == 0)
-            //{ 
-            //    DisplayedProducts = (from p in db.Products 
-            //                         where p.Category == SelectedCategory.CategoryID 
-            //                         select p).ToList();
-            //    DisplayProducts();
-            //}
         }
         public void CtgrsClick(object sender, RoutedEventArgs e)
         {
+            ChangeCategory(int.Parse(((Button)sender).Tag.ToString()));
+        }
+        private void ChangeCategory(int categoryID)
+        {
             DisplayedProducts.Clear();
-            int tag = int.Parse(((Button)sender).Tag.ToString());
-            SelectedCategory = (from c in db.Categories 
-                                where c.CategoryID == tag 
+            
+            SelectedCategory = (from c in db.Categories
+                                where c.CategoryID == categoryID
                                 select c).Single();
-            DisplayedProducts = (from p in db.Products 
-                                 where p.Category == SelectedCategory.CategoryID 
+            DisplayedProducts = (from p in db.Products
+                                 where p.Category == SelectedCategory.CategoryID
                                  select p).ToList();
 
             DisplayProducts();
@@ -136,6 +90,26 @@ namespace project1.Views.Windows
                 }
             }
         }
+        public void FilterProducts(string filter)
+        {
+            if (filter == null)
+                DisplayProducts();
+            else
+            {
+                MainBox.Children.Clear();
+                foreach (var p in DisplayedProducts)
+                {
+                    ProductPreview pw = new ProductPreview(p, this);
+                    if (pw.ProductTitle.ToLower().Contains(filter.ToLower()))
+                    {
+                        if (ShoppingCartList.Contains(p))
+                            pw.IsButtonEnabled = false;
+                        MainBox.Children.Add(pw);
+
+                    }
+                }
+            }
+        }
         public void AddProductToDisplay(Products product)
         {
             if (product != null)
@@ -144,37 +118,10 @@ namespace project1.Views.Windows
                 MainBox.Children.Add(pw);
             }
         }
-        private void ManufacturersShow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (IsManufacturersShowed)
-            {
-                ManufacturersPanel.MaxHeight = 40;
-                ManufacturersShow.Text = "Показать ещё..";
-                IsManufacturersShowed = false;
-            }
-            else
-            {
-                ManufacturersPanel.MaxHeight = 1000;
-                ManufacturersShow.Text = "Свернуть..";
-                IsManufacturersShowed = true;
-            }
-        }
-
-        private void b1_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (CheckBox cb in ManufacturersPanel.Children)
-            {
-                if (cb.IsChecked == true)
-                {
-
-                }
-            }
-        }
 
         private void ShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
-            ShoppingCart s = new ShoppingCart(ShoppingCartList);
-            s.Owner = this;
+            ShoppingCart s = new ShoppingCart(ShoppingCartList, Client) { Owner = this };
             s.Show();
         }
 
@@ -182,6 +129,26 @@ namespace project1.Views.Windows
         {
             EditWindow ew = new EditWindow(new Products(), db);
             ew.Show();
+        }
+
+        private void DropFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            FilterProducts(null);
+            FilterTB.Clear();
+        }
+
+        private void FilterTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(FilterTB.Text != string.Empty)
+            {
+                DropFilterButton.Visibility = Visibility.Visible;
+                FilterProducts(FilterTB.Text);
+            }
+            else
+            {
+                FilterProducts(null);
+                DropFilterButton.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

@@ -31,13 +31,16 @@ namespace project1.Views.Windows
         #endregion
         private decimal DisplayedSum = 0;
         private int DisplayedNum = 0;
+        private decimal DisplayedDiscount = 0;
         public List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
         public ObservableCollection<Products> Products = new ObservableCollection<Products>();
         ApplianceStoreEntities db = new ApplianceStoreEntities();
-        public ShoppingCart(ObservableCollection<Products> products)
+        public ShoppingCart(ObservableCollection<Products> products, Clients client)
         {
             InitializeComponent();
             Products = products;
+            DisplayedDiscount = client.DiscountLevels.PercentDiscount;
+            DiscountTextBlock.Text = DisplayedDiscount.ToString();
             UpdateProducts();
         }
         public void UpdateProducts()
@@ -54,9 +57,9 @@ namespace project1.Views.Windows
         }
         public void UpdateInfo()
         {
-            
             DisplayedSum = 0;
             DisplayedNum = 0;
+            
             if (ShoppingCartList.Count != 0)
             {
                 foreach (var item in ShoppingCartList)
@@ -64,10 +67,10 @@ namespace project1.Views.Windows
                     if (item.IsSelected)
                     {
                         DisplayedNum += item.ProductCount;
-                        DisplayedSum += item.Product.Price * item.ProductCount ?? 0;
+                        DisplayedSum += item.Product.Price / 100 * (100 - DisplayedDiscount) * item.ProductCount ?? 0;
                     }
                     NumTextBox.Text = DisplayedNum.ToString() + ' ' + RussianCases.GenerateNumEnding(DisplayedNum, "товар", "товара", "товаров");
-                    SumTextBox.Text = "на " + DisplayedSum + " ₽";
+                    SumTextBox.Text = String.Format("на {0:#.00} ₽", DisplayedSum);
                 }
             }
         }
@@ -198,7 +201,7 @@ namespace project1.Views.Windows
                     }
                 }
                 else
-                    MessageBox.Show("Как скажешь");
+                    MessageBox.Show("Заказ отменён");
             }
             else
                 MessageBox.Show("Корзина пуста!");
@@ -208,7 +211,7 @@ namespace project1.Views.Windows
             try
             {
                 Word.Application app = new Word.Application();
-                string Source = @"C:\!Docs\!Diplom\project1\project1\Data\WordTemplates\CheckoutTemplate.dotx";
+                string Source = Environment.CurrentDirectory + @"\CheckoutTemplate.dotx";
 
                 Word.Document doc = app.Documents.Add(Source);
                 doc.Activate();
@@ -218,7 +221,7 @@ namespace project1.Views.Windows
                 var LastPurchase = (from purchase in db.Purchases select purchase).ToList().Last();
                 decimal Sum = 0;
                 foreach (var item in LastPurchase.PurchaseItems)
-                    Sum += item.ProductCount * item.Products.Price ?? 0;
+                    Sum += Math.Round(item.Products.Price / 100 * (100 - DisplayedDiscount) * item.ProductCount ?? 0, 2);
 
                 foreach (Word.Bookmark bookmark in bookmarks)
                 {
@@ -244,8 +247,8 @@ namespace project1.Views.Windows
                     table.Cell(i, 3).Range.Text = new ShoppingCartProduct((from p in Products where p.ProductID == item.ProductID select p).Single(), this).ProductTitle;
                     table.Cell(i, 4).Range.Text = item.Products.Price.ToString();
                     table.Cell(i, 5).Range.Text = item.ProductCount.ToString();
-                    table.Cell(i, 6).Range.Text = "0,00";
-                    table.Cell(i, 7).Range.Text = (item.ProductCount * item.Products.Price).ToString();
+                    table.Cell(i, 6).Range.Text = DisplayedDiscount.ToString() + '%';
+                    table.Cell(i, 7).Range.Text = Math.Round((item.Products.Price / 100 * (100 - DisplayedDiscount) * item.ProductCount ?? 0), 2).ToString();
                     table.Rows.Add();
                     i++;
                 }

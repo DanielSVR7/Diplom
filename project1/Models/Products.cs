@@ -46,14 +46,14 @@ namespace project1.Models
         public Nullable<byte> OperatingSystem { get; set; }
         public Nullable<bool> Bluetooth { get; set; }
         public Nullable<bool> HDRSupport { get; set; }
-        public Nullable<int> WaterConsumption { get; set; }
-        public Nullable<int> NumberOfPrograms { get; set; }
-        public Nullable<int> NumberOfPlacedSets { get; set; }
-        public Nullable<int> LaundryLoad { get; set; }
+        public Nullable<byte> WaterConsumption { get; set; }
+        public Nullable<byte> NumberOfPrograms { get; set; }
+        public Nullable<byte> NumberOfPlacedSets { get; set; }
+        public Nullable<byte> LaundryLoad { get; set; }
         public string TemperatureRange { get; set; }
         public Nullable<bool> DirectDrive { get; set; }
-        public Nullable<int> MaximumSpinSpeed { get; set; }
-        public Nullable<int> InternalVolume { get; set; }
+        public Nullable<short> MaximumSpinSpeed { get; set; }
+        public Nullable<short> InternalVolume { get; set; }
         public Nullable<bool> Grill { get; set; }
     
         public virtual BacklightTypes BacklightTypes { get; set; }

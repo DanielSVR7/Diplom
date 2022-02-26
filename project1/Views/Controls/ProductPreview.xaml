@@ -13,7 +13,7 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
             <Setter Property="Width" Value="850"/>
             <Setter Property="Height" Value="180"/>
             <Style.Triggers>

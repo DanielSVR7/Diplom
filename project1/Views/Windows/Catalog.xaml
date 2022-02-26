@@ -41,7 +41,8 @@
                 <MenuItem/>
             </MenuItem>
             <MenuItem Header="Корзина" Click="ShoppingCartButton_Click"/>
-            <MenuItem x:Name="AddProductButton" Header="Добавить товар" Click="AddProductButton_Click" Visibility="Collapsed"/>
+            <MenuItem x:Name="AddProductButton" Header="Добавить товар" 
+                      Click="AddProductButton_Click" Visibility="Collapsed"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBar.Resources>
@@ -80,59 +81,25 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <!--<GroupBox Grid.Column="0" Header="Фильтр">-->
-                <StackPanel Grid.Column="0" Margin="10">
+                <StackPanel Grid.Column="0" Margin="10,10,0,0">
                     <StackPanel>
-                        <Border Style="{StaticResource BordersStyle}">
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Top" Text=" Производители" 
-                                           Style="{DynamicResource FilterHeader}"/>
-                                <StackPanel x:Name="ManufacturersPanel" DockPanel.Dock="Top" MaxHeight = "40"/>
-                                <TextBlock x:Name="ManufacturersShow" Text="Показать ещё.." 
-                                           Foreground="#99000000" DockPanel.Dock="Bottom" 
-                                           Margin="10,0" MouseDown="ManufacturersShow_MouseDown"/>
-                            </DockPanel>
-                        </Border>
-                        <Border Style="{StaticResource BordersStyle}">
-                            <DockPanel>
-                                <TextBlock DockPanel.Dock="Top" Text=" Цена" Style="{DynamicResource FilterHeader}"/>
-                                <StackPanel DockPanel.Dock="Top">
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <TextBlock Text="Цена от" Margin="10,0"/>
-                                        <TextBox Width="150"/>
-                                    </StackPanel>
-                                    <Grid>
-                                        <Slider Width="200"/>
-                                    </Grid>
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <TextBlock Text="Цена до" Margin="10,0"/>
-                                        <TextBox Width="150"/>
-                                    </StackPanel>
-                                    <Grid>
-                                        <Slider Width="200" Value="100"/>
-                                    </Grid>
-                                </StackPanel>
-                            </DockPanel>
-                        </Border>
-                        <Border Style="{StaticResource BordersStyle}">
+                        <Border Style="{StaticResource BordersStyle}" Margin="0,15,0,0">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}"/>
                                 <StackPanel MaxHeight="70" DockPanel.Dock="Top">
-                                    <TextBox Margin="10" Height="20"/>
+                                    <TextBox x:Name="FilterTB" Margin="10" Height="20" TextChanged="FilterTB_TextChanged"/>
                                 </StackPanel>
                             </DockPanel>
                         </Border>
                     </StackPanel>
-                    <UniformGrid Columns="1" VerticalAlignment="Bottom">
-                        <Button x:Name="b1"  Content="Применить фильтр" Click="b1_Click" Margin="0,5"/>
+                    <UniformGrid VerticalAlignment="Bottom" Rows="1">
+                        <Button x:Name="DropFilterButton"  Content="Сброс" Click="DropFilterButton_Click" Margin="5,5"/>
                     </UniformGrid>
                 </StackPanel>
-                <!--</GroupBox>-->
-                <!--<GroupBox Grid.Column="1" Header="Основное окно">-->
+
                 <ScrollViewer Grid.Column="1">
-                    <StackPanel x:Name="MainBox" Margin="20"/>
+                    <StackPanel x:Name="MainBox" Margin="0,20"/>
                 </ScrollViewer>
-                <!--</GroupBox>-->
             </Grid>
         </DockPanel>
     </DockPanel>

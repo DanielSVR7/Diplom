@@ -28,7 +28,7 @@ namespace project1.Models
         public decimal Account { get; set; }
         public byte DiscountLevel { get; set; }
         public Nullable<System.DateTime> LastPurchase { get; set; }
-        public System.DateTime RegisterDate { get; set; }
+        public Nullable<System.DateTime> RegisterDate { get; set; }
     
         public virtual DiscountLevels DiscountLevels { get; set; }
         public virtual ICollection<Purchases> Purchases { get; set; }
