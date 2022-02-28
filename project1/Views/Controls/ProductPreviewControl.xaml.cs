@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace project1.Views.Controls
 {
-    public partial class ProductPreview : UserControl, INotifyPropertyChanged
+    public partial class ProductPreviewControl : UserControl, INotifyPropertyChanged
     {
 
         #region PropertyChanged
@@ -36,8 +36,8 @@ namespace project1.Views.Controls
 
         private bool _IsButtonEnabled = true;
         public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value);}
-        Catalog Owner;
-        public ProductPreview(Products product, Catalog owner)
+        CatalogWindow Owner;
+        public ProductPreviewControl(Products product, CatalogWindow owner)
         {
             Owner = owner;
             Product = product;
@@ -109,7 +109,7 @@ namespace project1.Views.Controls
 
         private void MainBorder_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DetailedProductView d = new DetailedProductView(Product, this);
+            DetailedProductWindow d = new DetailedProductWindow(Product, this);
             d.Owner = Owner; 
             d.Show();
         }

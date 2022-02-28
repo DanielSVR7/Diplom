@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:windows="clr-namespace:project1.Views.Windows" 
-        d:DataContext="{d:DesignInstance Type=windows:Catalog}"
-        x:Class="project1.Views.Windows.Catalog" 
+        d:DataContext="{d:DesignInstance Type=windows:CatalogWindow}"
+        x:Class="project1.Views.Windows.CatalogWindow" 
         mc:Ignorable="d"
         Title="Каталог" Height="720" Width="1280"
         Background="#f6f6f6" Icon="/Views/Windows/icon.png">

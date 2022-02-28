@@ -22,7 +22,7 @@ namespace project1.Views.Controls
     /// <summary>
     /// Логика взаимодействия для ShoppingCartProduct.xaml
     /// </summary>
-    public partial class ShoppingCartProduct : UserControl, INotifyPropertyChanged
+    public partial class ShoppingCartProductControl : UserControl, INotifyPropertyChanged
     {
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,8 +51,8 @@ namespace project1.Views.Controls
         private Products _Product;
         public Products Product { get => _Product; set => Set(ref _Product, value); }
 
-        ShoppingCart Owner;
-        public ShoppingCartProduct(Products product, ShoppingCart owner)
+        ShoppingCartWindow Owner;
+        public ShoppingCartProductControl(Products product, ShoppingCartWindow owner)
         {
             DataContext = this;
             Owner = owner;
@@ -96,7 +96,7 @@ namespace project1.Views.Controls
         {
             Owner.Products.Remove(Product);
             Owner.UpdateProducts();
-            ((Catalog)Owner.Owner).DisplayProducts();
+            ((CatalogWindow)Owner.Owner).DisplayProducts();
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e)

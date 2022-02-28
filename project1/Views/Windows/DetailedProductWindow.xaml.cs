@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace project1.Views.Windows
 {
-    public partial class DetailedProductView : Window, INotifyPropertyChanged
+    public partial class DetailedProductWindow : Window, INotifyPropertyChanged
     {
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -44,8 +44,8 @@ namespace project1.Views.Windows
         private bool _IsButtonEnabled = true;
         public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value); }
         private Products Product;
-        ProductPreview owner;
-        public DetailedProductView(Products product, ProductPreview pw)
+        ProductPreviewControl owner;
+        public DetailedProductWindow(Products product, ProductPreviewControl pw)
         {
             Product = product;
             this.owner = pw;

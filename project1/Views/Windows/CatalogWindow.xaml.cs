@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace project1.Views.Windows
 {
-    public partial class Catalog : Window, INotifyPropertyChanged
+    public partial class CatalogWindow : Window, INotifyPropertyChanged
     {
         public ApplianceStoreEntities db = new ApplianceStoreEntities();
         
@@ -41,7 +41,7 @@ namespace project1.Views.Windows
         }
         #endregion
 
-        public Catalog()
+        public CatalogWindow()
         {
             DataContext = this;
             InitializeComponent();
@@ -83,7 +83,7 @@ namespace project1.Views.Windows
                 foreach (var p in DisplayedProducts)
                 {
 
-                    ProductPreview pw = new ProductPreview(p, this);
+                    ProductPreviewControl pw = new ProductPreviewControl(p, this);
                     if (ShoppingCartList.Contains(p))
                         pw.IsButtonEnabled = false;
                     MainBox.Children.Add(pw);
@@ -99,7 +99,7 @@ namespace project1.Views.Windows
                 MainBox.Children.Clear();
                 foreach (var p in DisplayedProducts)
                 {
-                    ProductPreview pw = new ProductPreview(p, this);
+                    ProductPreviewControl pw = new ProductPreviewControl(p, this);
                     if (pw.ProductTitle.ToLower().Contains(filter.ToLower()))
                     {
                         if (ShoppingCartList.Contains(p))
@@ -114,14 +114,14 @@ namespace project1.Views.Windows
         {
             if (product != null)
             {
-                ProductPreview pw = new ProductPreview(product, this);
+                ProductPreviewControl pw = new ProductPreviewControl(product, this);
                 MainBox.Children.Add(pw);
             }
         }
 
         private void ShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
-            ShoppingCart s = new ShoppingCart(ShoppingCartList, Client) { Owner = this };
+            ShoppingCartWindow s = new ShoppingCartWindow(ShoppingCartList, Client) { Owner = this };
             s.Show();
         }
 

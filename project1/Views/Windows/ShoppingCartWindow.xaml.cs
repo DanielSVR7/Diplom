@@ -13,7 +13,7 @@ using System;
 
 namespace project1.Views.Windows
 {
-    public partial class ShoppingCart : Window, INotifyPropertyChanged
+    public partial class ShoppingCartWindow : Window, INotifyPropertyChanged
     {
         #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,10 +32,10 @@ namespace project1.Views.Windows
         private decimal DisplayedSum = 0;
         private int DisplayedNum = 0;
         private decimal DisplayedDiscount = 0;
-        public List<ShoppingCartProduct> ShoppingCartList = new List<ShoppingCartProduct>();
+        public List<ShoppingCartProductControl> ShoppingCartList = new List<ShoppingCartProductControl>();
         public ObservableCollection<Products> Products = new ObservableCollection<Products>();
         ApplianceStoreEntities db = new ApplianceStoreEntities();
-        public ShoppingCart(ObservableCollection<Products> products, Clients client)
+        public ShoppingCartWindow(ObservableCollection<Products> products, Clients client)
         {
             InitializeComponent();
             Products = products;
@@ -49,7 +49,7 @@ namespace project1.Views.Windows
             ShoppingCartList.Clear();
             foreach (var product in Products)
             {
-                var p = new ShoppingCartProduct(product, this);
+                var p = new ShoppingCartProductControl(product, this);
                 ProductsPanel.Children.Add(p);
                 ShoppingCartList.Add(p);
             }
@@ -125,10 +125,10 @@ namespace project1.Views.Windows
                     try
                     {
                         int _ClientID;
-                        if (((Catalog)Owner).IsAdmin)
+                        if (((CatalogWindow)Owner).IsAdmin)
                             _ClientID = 0;
                         else
-                            _ClientID = ((Catalog)Owner).Client.ClientID;
+                            _ClientID = ((CatalogWindow)Owner).Client.ClientID;
                         var purchase = new Purchases
                         {
                             PurchaseID = (from p in db.Purchases
@@ -138,7 +138,7 @@ namespace project1.Views.Windows
                         db.Purchases.Add(purchase);
                         db.SaveChanges();
                         decimal sum = 0;
-                        foreach (ShoppingCartProduct p in ShoppingCartList)
+                        foreach (ShoppingCartProductControl p in ShoppingCartList)
                         {
                             if (p.IsSelected)
                             {
@@ -192,7 +192,7 @@ namespace project1.Views.Windows
                         this.Close();
                         AuthorizationWindow a = new AuthorizationWindow();
                         a.Show();
-                        ((Catalog)Owner).Close();
+                        ((CatalogWindow)Owner).Close();
                         PrintToWord();
                     }
                     catch (Exception ex)
@@ -247,7 +247,7 @@ namespace project1.Views.Windows
                 {
                     table.Cell(i, 1).Range.Text = (i - 1).ToString();
                     table.Cell(i, 2).Range.Text = item.ProductID.ToString();
-                    table.Cell(i, 3).Range.Text = new ShoppingCartProduct((from p in Products 
+                    table.Cell(i, 3).Range.Text = new ShoppingCartProductControl((from p in Products 
                                                                            where p.ProductID == item.ProductID 
                                                                            select p).Single(), this).ProductTitle;
                     table.Cell(i, 4).Range.Text = item.Products.Price.ToString();

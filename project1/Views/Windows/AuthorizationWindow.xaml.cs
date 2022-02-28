@@ -35,7 +35,7 @@ namespace project1.Views.Windows
                     LoginButton.IsEnabled = false;
 
                     await Task.Delay(2000);
-                    Catalog c = new Catalog();
+                    CatalogWindow c = new CatalogWindow();
                     c.Client = _client;
                     c.Show();
                     this.Close();
@@ -50,7 +50,7 @@ namespace project1.Views.Windows
                     LoginButton.IsEnabled = false;
 
                     await Task.Delay(2000);
-                    Catalog c = new Catalog();
+                    CatalogWindow c = new CatalogWindow();
                     c.IsAdmin = true;
                     c.AddProductButton.Visibility = Visibility.Visible;
                     c.Client = new Clients { Surname = _manager.FullName, DiscountLevels = new DiscountLevels { Name = " [Менеджер]" } };

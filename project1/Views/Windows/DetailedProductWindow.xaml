@@ -1,10 +1,10 @@
-﻿<Window x:Class="project1.Views.Windows.DetailedProductView"
+﻿<Window x:Class="project1.Views.Windows.DetailedProductWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:project1.Views.Windows" 
-        d:DataContext="{d:DesignInstance Type=local:DetailedProductView}"
+        d:DataContext="{d:DesignInstance Type=local:DetailedProductWindow}"
         mc:Ignorable="d"
         Title="Описание" Height="600" Width="1000"
         WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png">
