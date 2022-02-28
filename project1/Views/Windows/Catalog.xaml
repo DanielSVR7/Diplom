@@ -83,17 +83,18 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="10,10,0,0">
                     <StackPanel>
-                        <Border Style="{StaticResource BordersStyle}" Margin="0,15,0,0">
+                        <Border Style="{StaticResource BordersStyle}" Margin="5,15,0,0">
                             <DockPanel>
-                                <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}"/>
+                                <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}" Margin="5,0,0,5"/>
+                                <TextBlock DockPanel.Dock="Top" Text=" Начните вводить текст для поиска" Foreground="DarkGray"/>
                                 <StackPanel MaxHeight="70" DockPanel.Dock="Top">
-                                    <TextBox x:Name="FilterTB" Margin="10" Height="20" TextChanged="FilterTB_TextChanged"/>
+                                    <TextBox x:Name="FilterTB" Margin="3,0" Height="25" TextChanged="FilterTB_TextChanged" FontSize="16"/>
                                 </StackPanel>
                             </DockPanel>
                         </Border>
                     </StackPanel>
                     <UniformGrid VerticalAlignment="Bottom" Rows="1">
-                        <Button x:Name="DropFilterButton"  Content="Сброс" Click="DropFilterButton_Click" Margin="5,5"/>
+                        <Button x:Name="DropFilterButton"  Content="Сброс" Click="DropFilterButton_Click" Margin="5,5,0,0"/>
                     </UniformGrid>
                 </StackPanel>
 

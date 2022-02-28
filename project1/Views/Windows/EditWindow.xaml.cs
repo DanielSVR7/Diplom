@@ -66,7 +66,7 @@ namespace project1.Views.Windows
             openDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg";
             if (openDialog.ShowDialog() != true)
                 return;
-            int found = 0;
+            int found;
             found = openDialog.FileName.Replace('\\', '/').IndexOf("/Data/Images/");
             ImageTB.Text = openDialog.FileName.Replace('\\', '/').Substring(found);
         }

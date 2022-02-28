@@ -211,17 +211,20 @@ namespace project1.Views.Windows
             try
             {
                 Word.Application app = new Word.Application();
-                string Source = Environment.CurrentDirectory + @"\CheckoutTemplate.dotx";
+                string source = Environment.CurrentDirectory + @"\CheckoutTemplate.dotx";
 
-                Word.Document doc = app.Documents.Add(Source);
+                Word.Document doc = app.Documents.Add(source);
                 doc.Activate();
 
                 Word.Bookmarks bookmarks = doc.Bookmarks;
 
-                var LastPurchase = (from purchase in db.Purchases select purchase).ToList().Last();
-                decimal Sum = 0;
-                foreach (var item in LastPurchase.PurchaseItems)
-                    Sum += Math.Round(item.Products.Price / 100 * (100 - DisplayedDiscount) * item.ProductCount ?? 0, 2);
+                var lastPurchase = (from purchase 
+                                    in db.Purchases 
+                                    select purchase).ToList().Last();
+                decimal sum = 0;
+                foreach (var item in lastPurchase.PurchaseItems)
+                    sum += Math.Round(item.Products.Price / 100 * 
+                        (100 - DisplayedDiscount) * item.ProductCount ?? 0, 2);
 
                 foreach (Word.Bookmark bookmark in bookmarks)
                 {
@@ -229,22 +232,24 @@ namespace project1.Views.Windows
                     {
                         case "Адрес": bookmark.Range.Text = "Адрес"; break;
                         case "Дата": bookmark.Range.Text = (from p in db.Purchases select p.PurchaseDate).ToList().Last().ToString(); break;
-                        case "КоличествоНаименований": bookmark.Range.Text = LastPurchase.PurchaseItems.Count.ToString(); break;
-                        case "НомерЧека": bookmark.Range.Text = LastPurchase.PurchaseID.ToString(); break;
+                        case "КоличествоНаименований": bookmark.Range.Text = lastPurchase.PurchaseItems.Count.ToString(); break;
+                        case "НомерЧека": bookmark.Range.Text = lastPurchase.PurchaseID.ToString(); break;
                         case "Продавец": bookmark.Range.Text = "Наименование магазина - продавца"; break;
-                        case "Сумма": bookmark.Range.Text = Sum.ToString(); break;
-                        case "СуммаТекстом": bookmark.Range.Text = RussianCases.RubPhrase(Sum); break;
+                        case "Сумма": bookmark.Range.Text = sum.ToString(); break;
+                        case "СуммаТекстом": bookmark.Range.Text = RussianCases.RubPhrase(sum); break;
                         case "Телефон": bookmark.Range.Text = "Контактный телефон"; break;
                     }
                 }
 
                 Word.Table table = doc.Tables[1];
                 int i = 2;
-                foreach(var item in LastPurchase.PurchaseItems)
+                foreach(var item in lastPurchase.PurchaseItems)
                 {
                     table.Cell(i, 1).Range.Text = (i - 1).ToString();
                     table.Cell(i, 2).Range.Text = item.ProductID.ToString();
-                    table.Cell(i, 3).Range.Text = new ShoppingCartProduct((from p in Products where p.ProductID == item.ProductID select p).Single(), this).ProductTitle;
+                    table.Cell(i, 3).Range.Text = new ShoppingCartProduct((from p in Products 
+                                                                           where p.ProductID == item.ProductID 
+                                                                           select p).Single(), this).ProductTitle;
                     table.Cell(i, 4).Range.Text = item.Products.Price.ToString();
                     table.Cell(i, 5).Range.Text = item.ProductCount.ToString();
                     table.Cell(i, 6).Range.Text = DisplayedDiscount.ToString() + '%';
@@ -254,7 +259,7 @@ namespace project1.Views.Windows
                 }
                 table.Rows[i].Cells[1].Merge(table.Rows[i].Cells[6]);
                 table.Rows[i].Range.Font.Bold = 1;
-                table.Cell(i, 2).Range.Text = Sum.ToString();
+                table.Cell(i, 2).Range.Text = sum.ToString();
                 doc.Close();
                 doc = null;
             }

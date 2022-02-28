@@ -34,7 +34,7 @@ namespace project1.Views.Windows
                     WelcomeMessage.Visibility = Visibility.Visible;
                     LoginButton.IsEnabled = false;
 
-                    //await Task.Delay(2000);
+                    await Task.Delay(2000);
                     Catalog c = new Catalog();
                     c.Client = _client;
                     c.Show();
@@ -49,7 +49,7 @@ namespace project1.Views.Windows
                     WelcomeMessage.Visibility = Visibility.Visible;
                     LoginButton.IsEnabled = false;
 
-                    //await Task.Delay(2000);
+                    await Task.Delay(2000);
                     Catalog c = new Catalog();
                     c.IsAdmin = true;
                     c.AddProductButton.Visibility = Visibility.Visible;

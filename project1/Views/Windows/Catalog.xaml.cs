@@ -62,7 +62,7 @@ namespace project1.Views.Windows
         {
             ChangeCategory(int.Parse(((Button)sender).Tag.ToString()));
         }
-        private void ChangeCategory(int categoryID)
+        public void ChangeCategory(int categoryID)
         {
             DisplayedProducts.Clear();
             

@@ -1,6 +1,6 @@
 ﻿using project1.Models;
 using project1.Views.Windows;
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -26,8 +26,9 @@ namespace project1.Views.Controls
             OnPropertyChanged(PropertyName);
             return true;
         }
-        #endregion
-
+        #endregion 
+        
+        ApplianceStoreEntities db = new ApplianceStoreEntities();
         private Products _Product;
         public Products Product { get => _Product; set => Set(ref _Product, value); }
         private string _ProductTitle;
@@ -126,7 +127,14 @@ namespace project1.Views.Controls
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(MessageBox.Show("Вы уверены, что хотите удалить данный товар?", "Требуется подтверждение",
+                MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+            {
+                var deleted_product = (from p in db.Products where Product.ProductID == p.ProductID select p).First();
+                db.Products.Remove(deleted_product);
+                db.SaveChanges();
+                Owner.ChangeCategory(Owner.SelectedCategory.CategoryID);
+            }
         }
     }
 }
