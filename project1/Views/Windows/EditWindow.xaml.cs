@@ -77,6 +77,11 @@ namespace project1.Views.Windows
             {
                 if (CategoriesCB.SelectedIndex != -1 && ManufacturersCB.SelectedIndex != -1 && ModelTB.Text != string.Empty)
                 {
+                    bool isNew;
+                    if (Product.ProductID == 0)
+                        isNew = true;
+                    else
+                        isNew = false;
                     Product.Category = ((Categories)CategoriesCB.SelectedItem).CategoryID;
                     Product.Manufacturer = ((Manufacturers)ManufacturersCB.SelectedItem).ManufacturerID;
                     Product.Model = ModelTB.Text;
@@ -86,7 +91,12 @@ namespace project1.Views.Windows
                     Product.Depth = decimal.Parse(DepthTB.Text.Replace('.', ','));
                     Product.Warranty = short.Parse(WarrantyTB.Text);
                     Product.Color = ((Models.Colors)ColorsCB.SelectedItem).ColorID;
-                    Product.Image = "pack://application:,,," + ImageTB.Text;
+                    Product.Image = ImageTB.Text;
+                    if (isNew)
+                    {
+                        Product.ProductID = (from p in db.Products select p).ToList().Last().ProductID + 1;
+                        db.Products.Add(Product);
+                    }
                     db.SaveChanges();
                     MessageBox.Show("Успешно!");
                 }

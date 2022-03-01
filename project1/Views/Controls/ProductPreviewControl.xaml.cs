@@ -44,7 +44,7 @@ namespace project1.Views.Controls
         {
             Owner = owner;
             Product = product;
-            ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image;
+            ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image ?? "Data/Images/default.png";
             DataContext = this;
             InitializeComponent();
             if (Product != null)
@@ -99,8 +99,8 @@ namespace project1.Views.Controls
                     Property2.Text = "Энергетический класс";
                     Property3.Text = "Потребление энергии";
                     Value1.Text = Product.Categories.CategoryName;
-                    Value2.Text = Product.EnergyClasses.EnergyClassName;
-                    Value3.Text = Product.PowerConsumption.ToString();
+                    Value2.Text = "нет данных";
+                    Value3.Text = "нет данных";
                 }
                 if(Owner.IsAdmin)
                 {
