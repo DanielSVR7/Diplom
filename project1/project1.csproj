@@ -227,6 +227,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="bin\Debug\WordTemplates\CheckoutTemplate.dotx" />
     <None Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
@@ -243,12 +244,26 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Debug\Data\Images\EnergyClasses\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Windows\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bin\Debug\Data\Images\default.png" />
+    <Resource Include="bin\Debug\Data\Images\Icons\icon.png" />
+    <Resource Include="bin\Debug\Data\Images\Products\Refregerators\GA-B459CLWL.jpg" />
+    <Resource Include="bin\Debug\Data\Images\Products\Refregerators\SBS510M.png" />
+    <Resource Include="bin\Debug\Data\Images\Products\TVs\65UP75006LF.jpg" />
+    <Resource Include="bin\Debug\Data\Images\Products\TVs\MiTV4S50.jpg" />
+    <Resource Include="bin\Debug\Data\Images\Products\TVs\UE43TU7002UXRU.jpg" />
+    <Content Include="bin\Debug\ApplianceStore.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bin\Debug\ApplianceStore_log.ldf">
+      <DependentUpon>ApplianceStore.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
