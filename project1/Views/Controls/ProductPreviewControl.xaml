@@ -37,7 +37,7 @@
     </UserControl.Resources>
     <Border x:Name="MainBorder"  Style="{StaticResource ResourceKey=MainBorder}" MouseUp="MainBorder_MouseUp" >
         <DockPanel>
-            <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=Product.Image, TargetNullValue={x:Null}}" 
+            <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=ProductImage, TargetNullValue={x:Null}}" 
                    Margin="15,10" MinWidth="80" Height="160"/>
             <UniformGrid Rows="3" DockPanel.Dock="Right" >
                 <TextBlock Text="{Binding Product.Price}" HorizontalAlignment="Right" 

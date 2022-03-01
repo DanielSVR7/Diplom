@@ -3,6 +3,7 @@ using project1.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -42,6 +43,8 @@ namespace project1.Views.Controls
         private short _ProductCount = 1;
         public short ProductCount { get => _ProductCount; set => Set(ref _ProductCount, value); }
 
+        private string _ProductImage;
+        public string ProductImage { get => _ProductImage; set => Set(ref _ProductImage, value); }
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
 
@@ -57,6 +60,7 @@ namespace project1.Views.Controls
             DataContext = this;
             Owner = owner;
             Product = product;
+            ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image;
             InitializeComponent();
             if (Product.Category == 1)
             {

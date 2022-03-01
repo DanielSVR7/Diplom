@@ -10,6 +10,7 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Data;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
 
 namespace project1.Views.Windows
 {
@@ -211,7 +212,7 @@ namespace project1.Views.Windows
             try
             {
                 Word.Application app = new Word.Application();
-                string source = Environment.CurrentDirectory + @"\CheckoutTemplate.dotx";
+                string source = Directory.GetCurrentDirectory() + @"\WordTemplates\CheckoutTemplate.dotx";
 
                 Word.Document doc = app.Documents.Add(source);
                 doc.Activate();

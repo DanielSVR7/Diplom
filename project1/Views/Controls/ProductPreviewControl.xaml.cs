@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO;
 
 namespace project1.Views.Controls
 {
@@ -30,6 +31,8 @@ namespace project1.Views.Controls
         
         ApplianceStoreEntities db = new ApplianceStoreEntities();
         private Products _Product;
+        private string _ProductImage;
+        public string ProductImage { get => _ProductImage; set => Set(ref _ProductImage, value); }
         public Products Product { get => _Product; set => Set(ref _Product, value); }
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
@@ -41,6 +44,7 @@ namespace project1.Views.Controls
         {
             Owner = owner;
             Product = product;
+            ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image;
             DataContext = this;
             InitializeComponent();
             if (Product != null)

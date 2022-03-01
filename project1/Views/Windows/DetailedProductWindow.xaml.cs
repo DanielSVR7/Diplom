@@ -3,6 +3,7 @@ using project1.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -28,9 +29,9 @@ namespace project1.Views.Windows
             return true;
         }
         #endregion
-        
-        private string _ImagePath;
-        public string ImagePath { get => _ImagePath; set => Set(ref _ImagePath, value); }
+
+        private string _ProductImage;
+        public string ProductImage { get => _ProductImage; set => Set(ref _ProductImage, value); }
 
         private string _ProductTitle;
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
@@ -51,7 +52,7 @@ namespace project1.Views.Windows
             this.owner = pw;
             DataContext = this;
             InitializeComponent();
-            ImagePath = product.Image;
+            ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image;
             ProductTitle = pw.ProductTitle;
             Price = product.Price;
             Description = product.Description;

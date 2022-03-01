@@ -72,7 +72,7 @@
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="1" Margin="20,0">
-                <Image Source="{Binding Path=ImagePath, TargetNullValue={x:Null}}"/>
+                <Image Source="{Binding Path=ProductImage, TargetNullValue={x:Null}}"/>
                 <Border Style="{StaticResource MainBorder}">
                     <StackPanel>
                         <TextBlock Text="Описание" FontSize="20"/>
