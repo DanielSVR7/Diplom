@@ -53,7 +53,7 @@
             <TextBlock Text="{Binding Client.Surname}"/>
             <TextBlock Text="{Binding Client.Firstname}"/>
             <TextBlock Text="{Binding Client.Lastname}"/>
-            
+
             <Separator/>
             <TextBlock Text="{Binding Client.DiscountLevels.Name}"/>
         </StatusBar>
@@ -74,7 +74,7 @@
                         </Button.Content>
                     </Button>
                 </UniformGrid>
-                
+
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>

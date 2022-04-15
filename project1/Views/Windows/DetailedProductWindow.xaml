@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type=local:DetailedProductWindow}"
         mc:Ignorable="d"
         Title="Описание" Height="600" Width="1000"
-        WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png">
+        WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png" SizeToContent="Height">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="White"/>
