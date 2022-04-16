@@ -223,7 +223,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\WordTemplates\CheckoutTemplate.dotx" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -236,6 +235,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Data\Images\default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Images\Products\Refregerators\GA-B459CLWL.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Images\Products\Refregerators\SBS510M.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="WordTemplates\CheckoutTemplate.dotx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -244,12 +255,27 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\Data\Images\EnergyClasses\" />
+    <Folder Include="Data\Images\EnergyClasses\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Data\Images\Icons\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="Data\Images\Products\TVs\65UP75006LF.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Images\Products\TVs\MiTV4S50.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Images\Products\TVs\UE43TU7002UXRU.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Resource Include="Views\Windows\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplianceStore.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="database.sql" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -260,20 +286,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-    <Resource Include="bin\Debug\Data\Images\default.png" />
-    <Resource Include="bin\Debug\Data\Images\Icons\icon.png" />
-    <Resource Include="bin\Debug\Data\Images\Products\Refregerators\GA-B459CLWL.jpg" />
-    <Resource Include="bin\Debug\Data\Images\Products\Refregerators\SBS510M.png" />
-    <Resource Include="bin\Debug\Data\Images\Products\TVs\65UP75006LF.jpg" />
-    <Resource Include="bin\Debug\Data\Images\Products\TVs\MiTV4S50.jpg" />
-    <Resource Include="bin\Debug\Data\Images\Products\TVs\UE43TU7002UXRU.jpg" />
-    <Content Include="bin\Debug\ApplianceStore.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bin\Debug\ApplianceStore_log.ldf">
-      <DependentUpon>ApplianceStore.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
