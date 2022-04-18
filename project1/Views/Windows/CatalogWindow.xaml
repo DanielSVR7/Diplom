@@ -7,7 +7,7 @@
         d:DataContext="{d:DesignInstance Type=windows:CatalogWindow}"
         x:Class="project1.Views.Windows.CatalogWindow" 
         mc:Ignorable="d"
-        Title="Каталог" Height="720" Width="1280"
+        Title="Каталог" Height="720" Width="1200"
         Background="#f6f6f6" Icon="../../Data/Images/Icons/icon.png">
     <Window.Resources>
         <Style x:Key="FilterHeader" TargetType="{x:Type TextBlock}">
@@ -78,8 +78,8 @@
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="10,10,0,0">
                     <StackPanel>
@@ -99,7 +99,7 @@
                 </StackPanel>
 
                 <ScrollViewer Grid.Column="1">
-                    <StackPanel x:Name="MainBox" Margin="0,20"/>
+                    <WrapPanel x:Name="MainBox" Margin="20,20"/>
                 </ScrollViewer>
             </Grid>
         </DockPanel>

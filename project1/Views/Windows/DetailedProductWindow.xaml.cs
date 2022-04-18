@@ -59,6 +59,7 @@ namespace project1.Views.Windows
             IsButtonEnabled = pw.IsButtonEnabled;
 
             DataGrid dg = new DataGrid();
+            dg.FontSize = 14;
             dg.Columns.Add(new DataGridTextColumn { Binding = new Binding() { Path = new PropertyPath("P") }, Width = 400 });
             dg.Columns.Add(new DataGridTextColumn { Binding = new Binding() { Path = new PropertyPath("V") } });
             dg.Items.Add(new { P = "Тип", V = product.Categories.CategoryName });

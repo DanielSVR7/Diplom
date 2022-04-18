@@ -13,14 +13,14 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="Width" Value="850"/>
-            <Setter Property="Height" Value="180"/>
+            <Setter Property="Margin" Value="6,5"/>
+            <Setter Property="Width" Value="750"/>
+            <Setter Property="Height" Value="200"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Margin" Value="10,2"/>
-                    <Setter Property="Width" Value="856"/>
-                    <Setter Property="Height" Value="186"/>
+                    <Setter Property="Margin" Value="3,2"/>
+                    <Setter Property="Width" Value="756"/>
+                    <Setter Property="Height" Value="206"/>
                     <Setter Property="Padding" Value="3"/>
                 </Trigger>
             </Style.Triggers>
