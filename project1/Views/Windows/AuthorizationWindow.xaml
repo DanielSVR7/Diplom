@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="" Height="360" Width="300" WindowStartupLocation="CenterScreen" Icon="/Views/Windows/icon.png">
+        Title="" Height="360" Width="300" WindowStartupLocation="CenterScreen" Icon="../../Data/Images/Icons/icon.png">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Microsoft JhengHei"/>

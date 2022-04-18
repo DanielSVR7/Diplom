@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="" Height="480" Width="300" Icon="/Views/Windows/icon.png">
+        Title="" Height="480" Width="300" Icon="../../Data/Images/Icons/icon.png">
     <Window.Resources>
         <Style x:Key="helpTB" TargetType="TextBlock">
             <Setter Property="Margin" Value="40,0"/>

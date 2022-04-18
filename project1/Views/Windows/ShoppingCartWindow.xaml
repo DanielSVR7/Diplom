@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:project1.Views.Windows"
         mc:Ignorable="d"
         Title="Корзина" Height="600" Width="1000"
-        WindowStartupLocation="CenterOwner" Icon="/Views/Windows/icon.png">
+        WindowStartupLocation="CenterOwner" Icon="../../Data/Images/Icons/icon.png">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="White"/>

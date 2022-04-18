@@ -8,7 +8,7 @@
         x:Class="project1.Views.Windows.CatalogWindow" 
         mc:Ignorable="d"
         Title="Каталог" Height="720" Width="1280"
-        Background="#f6f6f6" Icon="/Views/Windows/icon.png">
+        Background="#f6f6f6" Icon="../../Data/Images/Icons/icon.png">
     <Window.Resources>
         <Style x:Key="FilterHeader" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="CornflowerBlue"/>
