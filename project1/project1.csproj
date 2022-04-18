@@ -238,12 +238,58 @@
     <None Include="Data\Images\default.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Images\Products\Refregerators\GA-B459CLWL.jpg">
+    <Content Include="ApplianceStore_log.ldf">
+      <DependentUpon>ApplianceStore.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Images\Products\Refregerators\SBS510M.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\GA-B459CLWL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\SBS510M.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\GC-Q22FTBKL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\RB37A5000SAWT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\RS62R5031B4WT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Refregerators\RTM16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Microwave\ME81MRTS.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Microwave\MO17E1S.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Microwave\MS-70.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\Microwave\MS23J5133ATBW.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\WashingMachines\F1296NDS1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\WashingMachines\F2V5NG0W.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\WashingMachines\WLP20266OE.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\TVs\F42F7000CG.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\TVs\MiTVQ175.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\TVs\UE50AU9010UXRU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="WordTemplates\CheckoutTemplate.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -259,22 +305,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\Images\Icons\icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <None Include="Data\Images\Products\TVs\65UP75006LF.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Images\Products\TVs\MiTV4S50.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Data\Images\Products\TVs\UE43TU7002UXRU.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Resource Include="Views\Windows\icon.png" />
+    <Content Include="Data\Images\Products\TVs\65UP75006LF.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\TVs\MiTV4S50.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Images\Products\TVs\UE43TU7002UXRU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplianceStore.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="database.sql" />
     <Content Include="Models\Model1.Context.tt">
