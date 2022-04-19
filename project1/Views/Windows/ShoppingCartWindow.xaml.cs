@@ -231,14 +231,14 @@ namespace project1.Views.Windows
                 {
                     switch (bookmark.Name)
                     {
-                        case "Адрес": bookmark.Range.Text = "Адрес"; break;
+                        case "Адрес": bookmark.Range.Text = "410028, Саратовская обл., Саратов, Сакко и Ванцетти, 15"; break;
                         case "Дата": bookmark.Range.Text = (from p in db.Purchases select p.PurchaseDate).ToList().Last().ToString(); break;
                         case "КоличествоНаименований": bookmark.Range.Text = lastPurchase.PurchaseItems.Count.ToString(); break;
                         case "НомерЧека": bookmark.Range.Text = lastPurchase.PurchaseID.ToString(); break;
-                        case "Продавец": bookmark.Range.Text = "Наименование магазина - продавца"; break;
+                        case "Продавец": bookmark.Range.Text = "Профессионально-педагогический колледж СГТУ им. Гагарина Ю.А."; break;
                         case "Сумма": bookmark.Range.Text = sum.ToString(); break;
                         case "СуммаТекстом": bookmark.Range.Text = RussianCases.RubPhrase(sum); break;
-                        case "Телефон": bookmark.Range.Text = "Контактный телефон"; break;
+                        case "Телефон": bookmark.Range.Text = "8 (800) 555-35-35"; break;
                     }
                 }
 
