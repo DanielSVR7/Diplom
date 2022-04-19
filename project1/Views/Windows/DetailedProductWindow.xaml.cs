@@ -44,8 +44,8 @@ namespace project1.Views.Windows
 
         private bool _IsButtonEnabled = true;
         public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value); }
-        private Products Product;
-        ProductPreviewControl owner;
+        private readonly Products Product;
+        readonly ProductPreviewControl owner;
         public DetailedProductWindow(Products product, ProductPreviewControl pw)
         {
             Product = product;
@@ -58,8 +58,10 @@ namespace project1.Views.Windows
             Description = product.Description;
             IsButtonEnabled = pw.IsButtonEnabled;
 
-            DataGrid dg = new DataGrid();
-            dg.FontSize = 14;
+            DataGrid dg = new DataGrid
+            {
+                FontSize = 14
+            };
             dg.Columns.Add(new DataGridTextColumn { Binding = new Binding() { Path = new PropertyPath("P") }, Width = 400 });
             dg.Columns.Add(new DataGridTextColumn { Binding = new Binding() { Path = new PropertyPath("V") } });
             dg.Items.Add(new { P = "Тип", V = product.Categories.CategoryName });

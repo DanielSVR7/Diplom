@@ -27,9 +27,9 @@ namespace project1.Views.Controls
             OnPropertyChanged(PropertyName);
             return true;
         }
-        #endregion 
-        
-        ApplianceStoreEntities db = new ApplianceStoreEntities();
+        #endregion
+
+        readonly ApplianceStoreEntities db = new ApplianceStoreEntities();
         private Products _Product;
         private string _ProductImage;
         public string ProductImage { get => _ProductImage; set => Set(ref _ProductImage, value); }
@@ -39,7 +39,8 @@ namespace project1.Views.Controls
 
         private bool _IsButtonEnabled = true;
         public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value);}
-        CatalogWindow Owner;
+
+        readonly CatalogWindow Owner;
         public ProductPreviewControl(Products product, CatalogWindow owner)
         {
             Owner = owner;
@@ -91,6 +92,32 @@ namespace project1.Views.Controls
                     else
                         Value3.Text = "Есть";
                 }
+                else if (product.Category == 3)
+                {
+                    ProductTitle = "Стиральная машина " + Product.Manufacturer + ' ' + Product.Model + 
+                        " [стирка -  " + Product.LaundryLoad + " кг, расход " + Product.WaterConsumption + " л, отжим - " + 
+                        Product.MaximumSpinSpeed + " об/мин, программ - " + Product.NumberOfPrograms + ']';
+                    Property1.Text = "Потребление воды";
+                    Value1.Text = Product.WaterConsumption + " л";
+                    Property2.Text = "Отжим";
+                    Value2.Text = Product.MaximumSpinSpeed + " об/мин";
+                    Property3.Text = "Диапазон температур";
+                    Value3.Text = Product.TemperatureRange + " °C";
+                }
+                else if (product.Category == 4)
+                {
+                    ProductTitle = "Микроволновая печь " + Product.Manufacturer + ' ' + Product.Model + ' ' + 
+                        Product.Colors.ColorName + "[" + Product.InternalVolume + " л]";
+                    Property1.Text = "Страна-производитель";
+                    Value1.Text = Product.Manufacturers.Country;
+                    Property2.Text = "Внутренний объём";
+                    Value2.Text = Product.InternalVolume + " л";
+                    Property3.Text = "Наличие гриля";
+                    if (Product.Grill == false || Product.Grill == null)
+                        Value3.Text = "Нет";
+                    else
+                        Value3.Text = "Есть";
+                }
                 else
                 {
                     ProductTitle = Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName +
@@ -113,8 +140,10 @@ namespace project1.Views.Controls
 
         private void MainBorder_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            DetailedProductWindow d = new DetailedProductWindow(Product, this);
-            d.Owner = Owner; 
+            DetailedProductWindow d = new DetailedProductWindow(Product, this)
+            {
+                Owner = Owner
+            };
             d.Show();
         }
         public void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)

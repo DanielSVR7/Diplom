@@ -56,31 +56,31 @@
                         <TextBlock Text="Производитель"  Style="{StaticResource ResourceKey=desc1}"/>
                         <TextBlock x:Name="ManufacturerName" Style="{StaticResource ResourceKey=desc2}"/>
                         <Rectangle HorizontalAlignment="Stretch" Height="1" SnapsToDevicePixels="True" 
-                                   Fill="Black" VerticalAlignment="Top" Margin="2,9"/>
+                                   Fill="LightGray" VerticalAlignment="Top" Margin="2,9"/>
                     </DockPanel>
                     <DockPanel Margin="30,0,30,0" >
                         <TextBlock x:Name="Property1" Style="{StaticResource ResourceKey=desc1}"/>
                         <TextBlock x:Name="Value1" Style="{StaticResource ResourceKey=desc2}"/>
                         <Rectangle HorizontalAlignment="Stretch" Height="1" SnapsToDevicePixels="True" 
-                                   Fill="Black" VerticalAlignment="Top" Margin="2,9"/>
+                                   Fill="LightGray" VerticalAlignment="Top" Margin="2,9"/>
                     </DockPanel>
                     <DockPanel Margin="30,0,30,0" >
                         <TextBlock x:Name="Property2" Style="{StaticResource ResourceKey=desc1}"/>
                         <TextBlock x:Name="Value2" Style="{StaticResource ResourceKey=desc2}"/>
                         <Rectangle HorizontalAlignment="Stretch" Height="1" SnapsToDevicePixels="True" 
-                                   Fill="Black" VerticalAlignment="Top" Margin="2,9"/>
+                                   Fill="LightGray" VerticalAlignment="Top" Margin="2,9"/>
                     </DockPanel>
                     <DockPanel Margin="30,0,30,0" >
                         <TextBlock x:Name="Property3" Style="{StaticResource ResourceKey=desc1}"/>
                         <TextBlock x:Name="Value3" Style="{StaticResource ResourceKey=desc2}"/>
                         <Rectangle HorizontalAlignment="Stretch" Height="1" SnapsToDevicePixels="True" 
-                                   Fill="Black" VerticalAlignment="Top" Margin="2,9"/>
+                                   Fill="LightGray" VerticalAlignment="Top" Margin="2,9"/>
                     </DockPanel>
                     <DockPanel Margin="30,0,30,0" >
                         <TextBlock Text="Гарантия" Style="{StaticResource ResourceKey=desc1}"/>
                         <TextBlock x:Name="Warranty" Style="{StaticResource ResourceKey=desc2}"/>
                         <Rectangle HorizontalAlignment="Stretch" Height="1" SnapsToDevicePixels="True" 
-                                   Fill="Black" VerticalAlignment="Top" Margin="2,9"/>
+                                   Fill="LightGray" VerticalAlignment="Top" Margin="2,9"/>
                     </DockPanel>
                 </StackPanel>
             </DockPanel>
