@@ -240,7 +240,7 @@
     </None>
     <Content Include="ApplianceStore_log.ldf">
       <DependentUpon>ApplianceStore.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\Images\Products\Refregerators\GA-B459CLWL.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
