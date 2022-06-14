@@ -35,7 +35,6 @@ namespace project1.Views.Windows
         private decimal DisplayedDiscount = 0;
         public List<ShoppingCartProductControl> ShoppingCartList = new List<ShoppingCartProductControl>();
         public ObservableCollection<Products> Products = new ObservableCollection<Products>();
-        ApplianceStoreEntities db = new ApplianceStoreEntities();
         public ShoppingCartWindow(ObservableCollection<Products> products, Clients client)
         {
             InitializeComponent();
@@ -132,12 +131,12 @@ namespace project1.Views.Windows
                             _ClientID = ((CatalogWindow)Owner).Client.ClientID;
                         var purchase = new Purchases
                         {
-                            PurchaseID = (from p in db.Purchases
+                            PurchaseID = (from p in ApplianceStoreEntities.Context.Purchases
                                           select p.PurchaseID).ToList().Last() + 1,
                             ClientID = _ClientID
                         };
-                        db.Purchases.Add(purchase);
-                        db.SaveChanges();
+                        ApplianceStoreEntities.Context.Purchases.Add(purchase);
+                        ApplianceStoreEntities.Context.SaveChanges();
                         decimal sum = 0;
                         foreach (ShoppingCartProductControl p in ShoppingCartList)
                         {
@@ -145,25 +144,25 @@ namespace project1.Views.Windows
                             {
                                 PurchaseItems item = new PurchaseItems
                                 {
-                                    PurchaseID = (from pur in db.Purchases
+                                    PurchaseID = (from pur in ApplianceStoreEntities.Context.Purchases
                                                   select pur).ToList().Last().PurchaseID,
                                     ProductID = p.Product.ProductID,
                                     ProductCount = p.ProductCount
                                 };
-                                db.PurchaseItems.Add(item);
+                                ApplianceStoreEntities.Context.PurchaseItems.Add(item);
                                 sum += item.ProductCount *
-                                    (from product in db.Products
+                                    (from product in ApplianceStoreEntities.Context.Products
                                      where product.ProductID == item.ProductID
                                      select product)
                                      .Single().Price ?? 0;
                             }
                         }
-                        var client = (from c in db.Clients
+                        var client = (from c in ApplianceStoreEntities.Context.Clients
                                       where c.ClientID == _ClientID
                                       select c)
                                       .Single();
                         client.Account += sum;
-                        List<DiscountLevels> lvls = (from l in db.DiscountLevels select l).ToList();
+                        List<DiscountLevels> lvls = (from l in ApplianceStoreEntities.Context.DiscountLevels select l).ToList();
                         bool IsUpgraded = false;
                         if (client.DiscountLevel != lvls.Count - 1)
                         {
@@ -189,7 +188,7 @@ namespace project1.Views.Windows
                         else
                             MessageBox.Show("Для получения товарного чека подойдите на кассу",
                                 "Заказ оформлен успешно.", MessageBoxButton.OK, MessageBoxImage.Information);
-                        db.SaveChanges();
+                        ApplianceStoreEntities.Context.SaveChanges();
                         this.Close();
                         AuthorizationWindow a = new AuthorizationWindow();
                         a.Show();
@@ -220,7 +219,7 @@ namespace project1.Views.Windows
                 Word.Bookmarks bookmarks = doc.Bookmarks;
 
                 var lastPurchase = (from purchase 
-                                    in db.Purchases 
+                                    in ApplianceStoreEntities.Context.Purchases 
                                     select purchase).ToList().Last();
                 decimal sum = 0;
                 foreach (var item in lastPurchase.PurchaseItems)
@@ -232,7 +231,7 @@ namespace project1.Views.Windows
                     switch (bookmark.Name)
                     {
                         case "Адрес": bookmark.Range.Text = "410028, Саратовская обл., Саратов, Сакко и Ванцетти, 15"; break;
-                        case "Дата": bookmark.Range.Text = (from p in db.Purchases select p.PurchaseDate).ToList().Last().ToString(); break;
+                        case "Дата": bookmark.Range.Text = (from p in ApplianceStoreEntities.Context.Purchases select p.PurchaseDate).ToList().Last().ToString(); break;
                         case "КоличествоНаименований": bookmark.Range.Text = lastPurchase.PurchaseItems.Count.ToString(); break;
                         case "НомерЧека": bookmark.Range.Text = lastPurchase.PurchaseID.ToString(); break;
                         case "Продавец": bookmark.Range.Text = "Профессионально-педагогический колледж СГТУ им. Гагарина Ю.А."; break;

@@ -97,11 +97,11 @@
                                 <TextBlock DockPanel.Dock="Top" Text="Цена" Style="{DynamicResource FilterHeader}" Margin="5,0,0,5"/>
                                 <UniformGrid Rows="1" Columns="2">
                                     <TextBlock Text="Цена от" Foreground="DarkGray" Margin="15,0,5,5" />
-                                    <TextBox x:Name="PriceFromTextBox" TextChanged="PriceFromTextBox_TextChanged" />
+                                    <TextBox x:Name="PriceFromTextBox" TextChanged="PriceFromTextBox_TextChanged" PreviewTextInput="PriceFromTextBox_PreviewTextInput" />
                                 </UniformGrid>
                                 <UniformGrid Rows="1" Columns="2">
                                     <TextBlock Text="Цена до" Foreground="DarkGray" Margin="15,0,0,5"/>
-                                    <TextBox x:Name="PriceToTextBox" TextChanged="PriceToTextBox_TextChanged"/>
+                                    <TextBox x:Name="PriceToTextBox" TextChanged="PriceToTextBox_TextChanged" PreviewTextInput="PriceToTextBox_PreviewTextInput"/>
                                 </UniformGrid>
                             </DockPanel>
                         </Border>

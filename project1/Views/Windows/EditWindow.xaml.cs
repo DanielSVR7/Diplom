@@ -21,7 +21,6 @@ namespace project1.Views.Windows
 {
     public partial class EditWindow : Window, INotifyPropertyChanged
     {
-        ApplianceStoreEntities db;
         private Products _Product;
         public Products Product { get => _Product; set => Set(ref _Product, value); }
         #region PropertyChanged
@@ -38,26 +37,17 @@ namespace project1.Views.Windows
             return true;
         }
         #endregion
-        public EditWindow(Products product, ApplianceStoreEntities DB)
+        public EditWindow(Products product)
         {
-            db = DB;
             DataContext = this;
             _Product = product;
             InitializeComponent();
-            Refresh();
+            FillBoxes();
         }
-        private void Refresh()
+        private void FillBoxes()
         {
-            CategoriesCB.ItemsSource = db.Categories.ToArray();
-            ManufacturersCB.ItemsSource = db.Manufacturers.ToArray();
-            ColorsCB.ItemsSource = db.Colors.ToArray();
-            if (Product.Category != 0)
-            {
-                CategoriesCB.SelectedIndex = Product.Category - 1;
-                ManufacturersCB.SelectedIndex = (int)Product.Manufacturer - 1;
-                ColorsCB.SelectedIndex = (int)Product.Color - 1;
-                ImageTB.Text = Product.Image.Substring(22);
-            }
+            CategoriesComboBox.ItemsSource = ApplianceStoreEntities.Context.Categories.ToList();
+            ManufacturersComboBox.ItemsSource = ApplianceStoreEntities.Context.Manufacturers.ToList();
         }
 
         private void LoadImageButton_Click(object sender, RoutedEventArgs e)
@@ -75,33 +65,7 @@ namespace project1.Views.Windows
         {
             try
             {
-                if (CategoriesCB.SelectedIndex != -1 && ManufacturersCB.SelectedIndex != -1 && ModelTB.Text != string.Empty)
-                {
-                    bool isNew;
-                    if (Product.ProductID == 0)
-                        isNew = true;
-                    else
-                        isNew = false;
-                    Product.Category = ((Categories)CategoriesCB.SelectedItem).CategoryID;
-                    Product.Manufacturer = ((Manufacturers)ManufacturersCB.SelectedItem).ManufacturerID;
-                    Product.Model = ModelTB.Text;
-                    Product.Price = decimal.Parse(PriceTB.Text.Replace('.',','));
-                    Product.Width = decimal.Parse(WidthTB.Text.Replace('.', ','));
-                    Product.Height = decimal.Parse(HeightTB.Text.Replace('.', ','));
-                    Product.Depth = decimal.Parse(DepthTB.Text.Replace('.', ','));
-                    Product.Warranty = short.Parse(WarrantyTB.Text);
-                    Product.Color = ((Models.Colors)ColorsCB.SelectedItem).ColorID;
-                    Product.Image = ImageTB.Text;
-                    if (isNew)
-                    {
-                        Product.ProductID = (from p in db.Products select p).ToList().Last().ProductID + 1;
-                        db.Products.Add(Product);
-                    }
-                    db.SaveChanges();
-                    MessageBox.Show("Успешно!");
-                }
-                else
-                    MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
             catch
             {

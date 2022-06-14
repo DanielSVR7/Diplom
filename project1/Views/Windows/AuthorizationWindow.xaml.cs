@@ -1,6 +1,4 @@
 ﻿using project1.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +10,6 @@ namespace project1.Views.Windows
 {
     public partial class AuthorizationWindow : Window
     {
-        ApplianceStoreEntities db = new ApplianceStoreEntities();
         public AuthorizationWindow()
         {
             InitializeComponent();
@@ -27,7 +24,7 @@ namespace project1.Views.Windows
                 string _password = PasswordBox.Password;
                 try
                 {
-                    var _client = (from client in db.Clients 
+                    var _client = (from client in ApplianceStoreEntities.Context.Clients
                                    where _login == client.PhoneNumber && _password == client.Password
                                    select client).Single();
                     WelcomeMessage.Text += "\n" + _client.Firstname + ' ' + _client.Lastname + '!';
@@ -42,8 +39,8 @@ namespace project1.Views.Windows
                 }
                 catch
                 {
-                    var _manager = (from manager in db.Managers 
-                                    where _login == manager.Login && _password == manager.Password 
+                    var _manager = (from manager in ApplianceStoreEntities.Context.Managers
+                                    where _login == manager.Login && _password == manager.Password
                                     select manager).Single();
                     WelcomeMessage.Text = _manager.FullName;
                     WelcomeMessage.Visibility = Visibility.Visible;
@@ -57,7 +54,7 @@ namespace project1.Views.Windows
                     c.Show();
                     this.Close();
                 }
-                
+
             }
             catch       //Если пара логина и пароля не найдена в базе данных
             {
@@ -71,9 +68,8 @@ namespace project1.Views.Windows
 
         private void RegisterLink_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            RegistrationWindow r = new RegistrationWindow(db);
+            RegistrationWindow r = new RegistrationWindow();
             r.ShowDialog();
-            db = new ApplianceStoreEntities();
         }
     }
 }

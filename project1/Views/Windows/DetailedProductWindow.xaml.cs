@@ -1,15 +1,11 @@
 ﻿using project1.Models;
 using project1.Views.Controls;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace project1.Views.Windows
 {

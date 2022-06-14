@@ -7,11 +7,9 @@ namespace project1.Views.Windows
 {
     public partial class RegistrationWindow : Window
     {
-        ApplianceStoreEntities db;
-        public RegistrationWindow(ApplianceStoreEntities context)
+        public RegistrationWindow()
         {
             InitializeComponent();
-            db = context;
         }
 
         private void regButton_Click(object sender, RoutedEventArgs e)
@@ -24,15 +22,15 @@ namespace project1.Views.Windows
                 {
                     var client = new Clients
                     {
-                        ClientID = (from c in db.Clients select c).ToList().Last().ClientID + 1,
+                        ClientID = (from c in ApplianceStoreEntities.Context.Clients select c).ToList().Last().ClientID + 1,
                         Surname = SurnameTB.Text,
                         Firstname = FirstnameTB.Text,
                         Lastname = LastnameTB.Text,
                         PhoneNumber = PhoneTB.Text,
                         Password = Encryption.Encode(PasswordTB.Password)
                 };
-                    db.Clients.Add(client);
-                    db.SaveChanges();
+                    ApplianceStoreEntities.Context.Clients.Add(client);
+                    ApplianceStoreEntities.Context.SaveChanges();
                     this.Close();
                 }
                 catch (Exception ex)

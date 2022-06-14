@@ -15,23 +15,23 @@
         <StackPanel>
             <UniformGrid Columns="2" Rows="10" Margin="20,10">
                 <TextBlock Text="Категория"/>
-                <ComboBox x:Name="CategoriesCB" Margin="5" SelectedItem="{Binding Product.Categories}"/>
+                <ComboBox x:Name="CategoriesComboBox" Margin="5" SelectedItem="{Binding Product.Categories}" />
                 <TextBlock Text="Производитель"/>
-                <ComboBox x:Name="ManufacturersCB" Margin="5" SelectedItem="{Binding Product.Manufacturers}"/>
+                <ComboBox x:Name="ManufacturersComboBox" Margin="5" SelectedItem="{Binding Product.Manufacturers}"/>
                 <TextBlock Text="Модель"/>
-                <TextBox x:Name="ModelTB" Margin="5" Text="{Binding Product.Model}"/>
+                <TextBox Margin="5" Text="{Binding Product.Model}"/>
                 <TextBlock Text="Цена"/>
-                <TextBox x:Name="PriceTB" Margin="5" Text="{Binding Product.Price}"/>
+                <TextBox Margin="5" Text="{Binding Product.Price}"/>
                 <TextBlock Text="Ширина"/>
-                <TextBox x:Name="WidthTB" Margin="5" Text="{Binding Product.Width}"/>
+                <TextBox Margin="5" Text="{Binding Product.Width}"/>
                 <TextBlock Text="Высота"/>
-                <TextBox x:Name="HeightTB" Margin="5" Text="{Binding Product.Height}"/>
+                <TextBox Margin="5" Text="{Binding Product.Height}"/>
                 <TextBlock Text="Глубина"/>
-                <TextBox x:Name="DepthTB" Margin="5" Text="{Binding Product.Depth}"/>
+                <TextBox Margin="5" Text="{Binding Product.Depth}"/>
                 <TextBlock Text="Гарантия"/>
-                <TextBox x:Name="WarrantyTB" Margin="5" Text="{Binding Product.Warranty}"/>
+                <TextBox Margin="5" Text="{Binding Product.Warranty}"/>
                 <TextBlock Text="Цвет"/>
-                <ComboBox x:Name="ColorsCB" Margin="5" SelectedItem="{Binding Product.Colors}"/>
+                <ComboBox x:Name="ColorsComboBox" Margin="5" SelectedItem="{Binding Product.Colors}"/>
                 <Button x:Name="LoadImageButton" Content="Загрузить изображение" Click="LoadImageButton_Click"/>
             </UniformGrid>
             <TextBlock x:Name="ImageTB" Margin="5"/>

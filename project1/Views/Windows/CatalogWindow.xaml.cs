@@ -1,5 +1,6 @@
 ﻿using project1.Models;
 using project1.Views.Controls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,8 +15,6 @@ namespace project1.Views.Windows
 {
     public partial class CatalogWindow : Window, INotifyPropertyChanged
     {
-        public ApplianceStoreEntities db = new ApplianceStoreEntities();
-        
         List<Products> DisplayedProducts = new List<Products>();
         private Clients _Client;
         public Clients Client { get => _Client; set => Set(ref _Client, value); }
@@ -47,11 +46,12 @@ namespace project1.Views.Windows
             InitializeComponent();
             ChangeCategory(1);
             Refresh();
+            DropFilterButton.Visibility = Visibility.Collapsed;
         }
 
         public void Refresh()
         {
-            foreach (var c in db.Categories)
+            foreach (var c in ApplianceStoreEntities.Context.Categories)
             {
                 Button btn = new Button { Margin = new Thickness(5, 5, 5, 0), Content = c, Tag = c.CategoryID };
                 btn.Click += new RoutedEventHandler(CtgrsClick);
@@ -65,10 +65,10 @@ namespace project1.Views.Windows
         public void ChangeCategory(int categoryID)
         {
             DisplayedProducts.Clear();
-            SelectedCategory = (from c in db.Categories
+            SelectedCategory = (from c in ApplianceStoreEntities.Context.Categories
                                 where c.CategoryID == categoryID
                                 select c).Single();
-            DisplayedProducts = (from p in db.Products
+            DisplayedProducts = (from p in ApplianceStoreEntities.Context.Products
                                  where p.Category == SelectedCategory.CategoryID
                                  select p).ToList();
 
@@ -94,10 +94,12 @@ namespace project1.Views.Windows
             if (SearchTB.Text == string.Empty && PriceFromTextBox.Text == string.Empty && PriceToTextBox.Text == string.Empty)
             {
                 ChangeCategory(SelectedCategory.CategoryID);
+                DropFilterButton.Visibility = Visibility.Collapsed;
                 return;
             }
             else
             {
+                DropFilterButton.Visibility = Visibility.Visible;
                 ChangeCategory(SelectedCategory.CategoryID);
                 if (text != string.Empty)
                 {
@@ -146,7 +148,7 @@ namespace project1.Views.Windows
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
-            EditWindow ew = new EditWindow(new Products(), db);
+            EditWindow ew = new EditWindow(new Products());
             ew.Show();
         }
 
@@ -156,6 +158,7 @@ namespace project1.Views.Windows
             PriceFromTextBox.Clear();
             PriceToTextBox.Clear();
             ChangeCategory(SelectedCategory.CategoryID);
+            DropFilterButton.Visibility = Visibility.Collapsed;
         }
 
         private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
@@ -171,6 +174,16 @@ namespace project1.Views.Windows
         private void PriceToTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             FilterProducts();
+        }
+
+        private void PriceFromTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
+        }
+
+        private void PriceToTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
     }
 }

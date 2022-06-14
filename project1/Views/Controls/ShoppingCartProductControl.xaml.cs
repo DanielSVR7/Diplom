@@ -1,22 +1,10 @@
 ﻿using project1.Models;
 using project1.Views.Windows;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace project1.Views.Controls
 {
@@ -76,7 +64,7 @@ namespace project1.Views.Controls
                     }
                 case 3:
                     {
-                        ProductTitle = "Стиральная машина " + (Product.DirectDrive ?? false ? "с прямым приводом " : "без прямого привода" );
+                        ProductTitle = "Стиральная машина " + (Product.DirectDrive ?? false ? "с прямым приводом " : "без прямого привода");
                         break;
                     }
                 case 4:
@@ -84,8 +72,8 @@ namespace project1.Views.Controls
                         ProductTitle = "Микроволновая печь " + Product.InternalVolume + " л. ";
                         break;
                     }
-                default: 
-                    { 
+                default:
+                    {
                         ProductTitle = "Товар  ";
                         break;
                     }

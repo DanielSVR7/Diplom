@@ -19,6 +19,16 @@ namespace project1.Models
             : base("name=ApplianceStoreEntities")
         {
         }
+        private static ApplianceStoreEntities _Context;
+        public static ApplianceStoreEntities Context
+        {
+            get
+            {
+                if (_Context == null)
+                    _Context = new ApplianceStoreEntities();
+                return _Context;
+            }
+        }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

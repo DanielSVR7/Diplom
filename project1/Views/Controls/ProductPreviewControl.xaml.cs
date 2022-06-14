@@ -1,13 +1,12 @@
 ﻿using project1.Models;
 using project1.Views.Windows;
-using System.Linq;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
 
 namespace project1.Views.Controls
 {
@@ -29,7 +28,6 @@ namespace project1.Views.Controls
         }
         #endregion
 
-        readonly ApplianceStoreEntities db = new ApplianceStoreEntities();
         private Products _Product;
         private string _ProductImage;
         public string ProductImage { get => _ProductImage; set => Set(ref _ProductImage, value); }
@@ -163,7 +161,7 @@ namespace project1.Views.Controls
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            EditWindow ew = new EditWindow(Product, Owner.db);
+            EditWindow ew = new EditWindow(Product);
             ew.Show();
         }
 
@@ -172,9 +170,9 @@ namespace project1.Views.Controls
             if (MessageBox.Show("Вы уверены, что хотите удалить данный товар?", "Требуется подтверждение",
                 MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             {
-                var deleted_product = (from p in db.Products where Product.ProductID == p.ProductID select p).First();
-                db.Products.Remove(deleted_product);
-                db.SaveChanges();
+                var deleted_product = (from p in ApplianceStoreEntities.Context.Products where Product.ProductID == p.ProductID select p).First();
+                ApplianceStoreEntities.Context.Products.Remove(deleted_product);
+                ApplianceStoreEntities.Context.SaveChanges();
                 Owner.ChangeCategory(Owner.SelectedCategory.CategoryID);
             }
         }
