@@ -25,5 +25,13 @@ namespace project1.Models
     
         public virtual Clients Clients { get; set; }
         public virtual ICollection<PurchaseItems> PurchaseItems { get; set; }
+
+        public Clients Clients1
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

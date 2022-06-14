@@ -75,7 +75,7 @@ namespace project1.Views.Windows
                 }
             }
         }
-
+        
         private void SelectAllCheckBox_Click(object sender, RoutedEventArgs e)
         {
             if (((CheckBox)sender).IsChecked == true)

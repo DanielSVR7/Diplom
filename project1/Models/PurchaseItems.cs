@@ -20,5 +20,21 @@ namespace project1.Models
     
         public virtual Products Products { get; set; }
         public virtual Purchases Purchases { get; set; }
+
+        public Purchases Purchases1
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Products p
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace project1.Views.Controls
         public string ProductTitle { get => _ProductTitle; set => Set(ref _ProductTitle, value); }
 
         private bool _IsButtonEnabled = true;
-        public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value);}
+        public bool IsButtonEnabled { get => _IsButtonEnabled; set => Set(ref _IsButtonEnabled, value); }
 
         readonly CatalogWindow Owner;
         public ProductPreviewControl(Products product, CatalogWindow owner)
@@ -52,84 +52,93 @@ namespace project1.Views.Controls
             {
                 ManufacturerName.Text = Product.Manufacturers.CompanyName;
                 Warranty.Text = Product.Warranty.ToString() + " месяцев";
-                if (Product.Category == 1)
+                switch (Product.Category)
                 {
-                    ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + "\" (" + 
-                        Product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
-                         "Телевизор " + Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' +
-                         Product.Colors.ColorName + " [" + Product.ScreenResolutions.ScreenResolutionName + ", " +
-                         Product.ScreenResolutions.ScreenResolution + ", " + Product.BacklightTypes.BacklightTypeName + ", " +
-                         Product.OperatingSystems.OperatingSystemName + ']';
-                    Property1.Text = "Разрешение экрана";
-                    Property2.Text = "Поддержка SmartTV";
-                    Property3.Text = "Поддержка HDR";
-                    Value1.Text = Product.ScreenResolutions.ScreenResolutionName + " (" + Product.ScreenResolutions.ScreenResolution + ')';
-                    if (Product.SmartTVSupport == false || Product.SmartTVSupport == null)
-                        Value2.Text = "Нет";
-                    else
-                        Value2.Text = "Есть";
-                    if (Product.HDRSupport == false || Product.HDRSupport == null)
-                        Value3.Text = "Нет";
-                    else
-                        Value3.Text = "Есть";
+
+                    case 1:
+                        {
+                            ProductTitle = Product.ScreenSizes.ScreenSizeInInches.ToString() + "\" (" +
+                                Product.ScreenSizes.ScreenSizeInCentimeters.ToString() + " см) " +
+                                 "Телевизор " + Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' +
+                                 Product.Colors.ColorName + " [" + Product.ScreenResolutions.ScreenResolutionName + ", " +
+                                 Product.ScreenResolutions.ScreenResolution + ", " + Product.BacklightTypes.BacklightTypeName + ", " +
+                                 Product.OperatingSystems.OperatingSystemName + ']';
+                            Property1.Text = "Разрешение экрана";
+                            Property2.Text = "Поддержка SmartTV";
+                            Property3.Text = "Поддержка HDR";
+                            Value1.Text = Product.ScreenResolutions.ScreenResolutionName + " (" + Product.ScreenResolutions.ScreenResolution + ')';
+                            if (Product.SmartTVSupport == false || Product.SmartTVSupport == null)
+                                Value2.Text = "Нет";
+                            else
+                                Value2.Text = "Есть";
+                            if (Product.HDRSupport == false || Product.HDRSupport == null)
+                                Value3.Text = "Нет";
+                            else
+                                Value3.Text = "Есть";
+                            break;
+                        }
+                    case 2:
+                        {
+                            ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ' + Product.Manufacturers.CompanyName + ' ' +
+                                Product.Model + ' ' + Product.Colors.ColorName + " [" + (Product.RefrigeratorVolume + Product.FreezerVolume).ToString() + " л, " +
+                                Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
+                            Property1.Text = "Компоновка";
+                            Property2.Text = "Инверторный компрессор";
+                            Property3.Text = "Зона свежести";
+                            TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
+                            Value1.Text = ti.ToTitleCase(Product.FreezerLocations.FreezerLocationName);
+                            if (Product.InverterCompressor == false || Product.InverterCompressor == null)
+                                Value2.Text = "Нет";
+                            else
+                                Value2.Text = "Есть";
+                            if (Product.FreshnessZone == false || Product.FreshnessZone == null)
+                                Value3.Text = "Нет";
+                            else
+                                Value3.Text = "Есть";
+                            break;
+                        }
+                    case 3:
+                        {
+                            ProductTitle = "Стиральная машина " + Product.Manufacturers.CompanyName + ' ' + Product.Model +
+                                " [стирка -  " + Product.LaundryLoad + " кг, расход " + Product.WaterConsumption + " л, отжим - " +
+                                Product.MaximumSpinSpeed + " об/мин, программ - " + Product.NumberOfPrograms + ']';
+                            Property1.Text = "Потребление воды";
+                            Value1.Text = Product.WaterConsumption + " л";
+                            Property2.Text = "Отжим";
+                            Value2.Text = Product.MaximumSpinSpeed + " об/мин";
+                            Property3.Text = "Диапазон температур";
+                            Value3.Text = Product.TemperatureRange + " °C";
+                            break;
+                        }
+                    case 4:
+                        {
+                            ProductTitle = "Микроволновая печь " + Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' +
+                                Product.Colors.ColorName + "[" + Product.InternalVolume + " л]";
+                            Property1.Text = "Страна-производитель";
+                            Value1.Text = Product.Manufacturers.Country;
+                            Property2.Text = "Внутренний объём";
+                            Value2.Text = Product.InternalVolume + " л";
+                            Property3.Text = "Наличие гриля";
+                            if (Product.Grill == false || Product.Grill == null)
+                                Value3.Text = "Нет";
+                            else
+                                Value3.Text = "Есть";
+                            break;
+                        }
+                    default:
+                        {
+                            ProductTitle = Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName +
+                                " [" + Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
+                            Property1.Text = "Категория";
+                            Property2.Text = "Энергетический класс";
+                            Property3.Text = "Потребление энергии";
+                            Value1.Text = Product.Categories.CategoryName;
+                            Value2.Text = "нет данных";
+                            Value3.Text = "нет данных";
+                            break;
+                        }
                 }
-                else if (Product.Category == 2)
-                {
-                    ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ' + Product.Manufacturers.CompanyName + ' ' +
-                        Product.Model + ' ' + Product.Colors.ColorName + " [" + (Product.RefrigeratorVolume + Product.FreezerVolume).ToString() + " л, " +
-                        Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
-                    Property1.Text = "Компоновка";
-                    Property2.Text = "Инверторный компрессор";
-                    Property3.Text = "Зона свежести";
-                    TextInfo ti = CultureInfo.CurrentCulture.TextInfo;
-                    Value1.Text = ti.ToTitleCase(Product.FreezerLocations.FreezerLocationName);
-                    if (Product.InverterCompressor == false || Product.InverterCompressor == null)
-                        Value2.Text = "Нет";
-                    else
-                        Value2.Text = "Есть";
-                    if (Product.FreshnessZone == false || Product.FreshnessZone == null)
-                        Value3.Text = "Нет";
-                    else
-                        Value3.Text = "Есть";
-                }
-                else if (product.Category == 3)
-                {
-                    ProductTitle = "Стиральная машина " + Product.Manufacturer + ' ' + Product.Model + 
-                        " [стирка -  " + Product.LaundryLoad + " кг, расход " + Product.WaterConsumption + " л, отжим - " + 
-                        Product.MaximumSpinSpeed + " об/мин, программ - " + Product.NumberOfPrograms + ']';
-                    Property1.Text = "Потребление воды";
-                    Value1.Text = Product.WaterConsumption + " л";
-                    Property2.Text = "Отжим";
-                    Value2.Text = Product.MaximumSpinSpeed + " об/мин";
-                    Property3.Text = "Диапазон температур";
-                    Value3.Text = Product.TemperatureRange + " °C";
-                }
-                else if (product.Category == 4)
-                {
-                    ProductTitle = "Микроволновая печь " + Product.Manufacturer + ' ' + Product.Model + ' ' + 
-                        Product.Colors.ColorName + "[" + Product.InternalVolume + " л]";
-                    Property1.Text = "Страна-производитель";
-                    Value1.Text = Product.Manufacturers.Country;
-                    Property2.Text = "Внутренний объём";
-                    Value2.Text = Product.InternalVolume + " л";
-                    Property3.Text = "Наличие гриля";
-                    if (Product.Grill == false || Product.Grill == null)
-                        Value3.Text = "Нет";
-                    else
-                        Value3.Text = "Есть";
-                }
-                else
-                {
-                    ProductTitle = Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName +
-                        " [" + Product.Width + " см x " + Product.Height + " см x " + Product.Depth + " см]";
-                    Property1.Text = "Категория";
-                    Property2.Text = "Энергетический класс";
-                    Property3.Text = "Потребление энергии";
-                    Value1.Text = Product.Categories.CategoryName;
-                    Value2.Text = "нет данных";
-                    Value3.Text = "нет данных";
-                }
-                if(Owner.IsAdmin)
+                if (Owner.IsAdmin)
                 {
                     EditButton.Visibility = Visibility.Visible;
                     DeleteButton.Visibility = Visibility.Visible;
@@ -144,7 +153,7 @@ namespace project1.Views.Controls
             {
                 Owner = Owner
             };
-            d.Show();
+            d.ShowDialog();
         }
         public void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
@@ -160,7 +169,7 @@ namespace project1.Views.Controls
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            if(MessageBox.Show("Вы уверены, что хотите удалить данный товар?", "Требуется подтверждение",
+            if (MessageBox.Show("Вы уверены, что хотите удалить данный товар?", "Требуется подтверждение",
                 MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             {
                 var deleted_product = (from p in db.Products where Product.ProductID == p.ProductID select p).First();

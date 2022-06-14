@@ -65,7 +65,6 @@ namespace project1.Views.Windows
         public void ChangeCategory(int categoryID)
         {
             DisplayedProducts.Clear();
-            
             SelectedCategory = (from c in db.Categories
                                 where c.CategoryID == categoryID
                                 select c).Single();
@@ -82,7 +81,6 @@ namespace project1.Views.Windows
                 MainBox.Children.Clear();
                 foreach (var p in DisplayedProducts)
                 {
-
                     ProductPreviewControl pw = new ProductPreviewControl(p, this);
                     if (ShoppingCartList.Contains(p))
                         pw.IsButtonEnabled = false;
@@ -90,24 +88,45 @@ namespace project1.Views.Windows
                 }
             }
         }
-        public void FilterProducts(string filter)
+        public void FilterProducts()
         {
-            if (filter == null)
-                DisplayProducts();
+            string text = SearchTB.Text;
+            if (SearchTB.Text == string.Empty && PriceFromTextBox.Text == string.Empty && PriceToTextBox.Text == string.Empty)
+            {
+                ChangeCategory(SelectedCategory.CategoryID);
+                return;
+            }
             else
             {
-                MainBox.Children.Clear();
-                foreach (var p in DisplayedProducts)
+                ChangeCategory(SelectedCategory.CategoryID);
+                if (text != string.Empty)
                 {
-                    ProductPreviewControl pw = new ProductPreviewControl(p, this);
-                    if (pw.ProductTitle.ToLower().Contains(filter.ToLower()))
-                    {
-                        if (ShoppingCartList.Contains(p))
-                            pw.IsButtonEnabled = false;
-                        MainBox.Children.Add(pw);
+                    DisplayedProducts = DisplayedProducts.Where(
+                        p => p.Model.ToLower().StartsWith(text.ToLower()) ||
+                        (p.Manufacturers?.CompanyName.ToLower().StartsWith(text.ToLower()) ?? false) ||
+                        (p.BacklightTypes?.BacklightTypeName.ToLower().Contains(text.ToLower()) ?? false) ||
+                        p.Categories.CategoryName.ToLower().StartsWith(text.ToLower()) ||
+                        (p.Colors.ColorName.ToLower()?.StartsWith(text.ToLower()) ?? false) ||
+                        (p.FreezerLocations?.FreezerLocationName.ToLower().Contains(text.ToLower()) ?? false) ||
+                        (p.OperatingSystems?.OperatingSystemName.ToLower().Contains(text.ToLower()) ?? false) ||
+                        (p.ScreenResolutions?.ScreenResolutionName.ToLower().Contains(text.ToLower()) ?? false) ||
+                        (p.ScreenSizes?.ScreenSizeInCentimeters.ToString().StartsWith(text.ToLower()) ?? false) ||
+                        (p.ScreenSizes?.ScreenSizeInInches.ToString().StartsWith(text.ToLower()) ?? false) ||
+                        (p.Manufacturers?.Country.ToString().StartsWith(text.ToLower()) ?? false)
 
-                    }
+                    ).ToList();
                 }
+                if (PriceFromTextBox.Text != string.Empty)
+                {
+                    decimal priceFrom = decimal.Parse(PriceFromTextBox.Text);
+                    DisplayedProducts = DisplayedProducts.Where(p => p.Price >= priceFrom).ToList(); ;
+                }
+                if (PriceToTextBox.Text != string.Empty)
+                {
+                    decimal priceTo = decimal.Parse(PriceToTextBox.Text);
+                    DisplayedProducts = DisplayedProducts.Where(p => p.Price <= priceTo).ToList(); ;
+                }
+                DisplayProducts();
             }
         }
         public void AddProductToDisplay(Products product)
@@ -133,22 +152,25 @@ namespace project1.Views.Windows
 
         private void DropFilterButton_Click(object sender, RoutedEventArgs e)
         {
-            FilterProducts(null);
-            FilterTB.Clear();
+            SearchTB.Clear();
+            PriceFromTextBox.Clear();
+            PriceToTextBox.Clear();
+            ChangeCategory(SelectedCategory.CategoryID);
         }
 
-        private void FilterTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(FilterTB.Text != string.Empty)
-            {
-                DropFilterButton.Visibility = Visibility.Visible;
-                FilterProducts(FilterTB.Text);
-            }
-            else
-            {
-                FilterProducts(null);
-                DropFilterButton.Visibility = Visibility.Collapsed;
-            }
+            FilterProducts();
+        }
+
+        private void PriceFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterProducts();
+        }
+
+        private void PriceToTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterProducts();
         }
     }
 }

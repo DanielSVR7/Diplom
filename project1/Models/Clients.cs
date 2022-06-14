@@ -32,5 +32,13 @@ namespace project1.Models
     
         public virtual DiscountLevels DiscountLevels { get; set; }
         public virtual ICollection<Purchases> Purchases { get; set; }
+
+        public DiscountLevels DiscountLevels1
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

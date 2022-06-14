@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="project1.Models.BacklightTypes">
+    <Position X="11.5" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAQ=</HashCode>
+      <FileName>Models\BacklightTypes.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Categories">
+    <Position X="11.5" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAgAAAEAAAAAAAAACAAAAAAAEAAAAAAAAQ=</HashCode>
+      <FileName>Models\Categories.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Clients">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAQEAAACIAAEAIAAAAQAAABAACAAACAAAAAAAAAEA=</HashCode>
+      <FileName>Models\Clients.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DiscountLevels1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Colors">
+    <Position X="11.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAEACAAAAAAw=</HashCode>
+      <FileName>Models\Colors.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.DiscountLevels">
+    <Position X="0.5" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAACAAEEQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DiscountLevels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project1.Models.EnergyClasses">
+    <Position X="11.5" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAiAAAAAAAAAAAEAAAAAAAAQ=</HashCode>
+      <FileName>Models\EnergyClasses.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.FreezerLocations">
+    <Position X="14.25" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAABAAAQ=</HashCode>
+      <FileName>Models\FreezerLocations.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Managers">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAIAAAAAAAAAAACAAAQAAAAAAA=</HashCode>
+      <FileName>Models\Managers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project1.Models.Manufacturers">
+    <Position X="14.25" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAAAAAAAAEAAAAAAAAAAIAAAAAAEAAAACAAAQ=</HashCode>
+      <FileName>Models\Manufacturers.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.OperatingSystems">
+    <Position X="14.25" Y="6.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAQ=</HashCode>
+      <FileName>Models\OperatingSystems.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Products">
+    <Position X="7.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>GgwAAAAABQDgEQAEAApAQUAAAABZEDEgDAoEoGQACIA=</HashCode>
+      <FileName>Models\Products.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project1.Models.PurchaseItems">
+    <Position X="5.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAAAAQIAAAAACAAAAAAAAAAAEAAAAAAAAQ=</HashCode>
+      <FileName>Models\PurchaseItems.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Purchases1" />
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.Purchases">
+    <Position X="4.25" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEJAAAQAAKAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Purchases.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Clients1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.ScreenResolutions">
+    <Position X="4.75" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAABAAAAACEAAAAAAAAQ=</HashCode>
+      <FileName>Models\ScreenResolutions.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="project1.Models.ScreenSizes">
+    <Position X="4.75" Y="8" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAEAQAAAAAAQ=</HashCode>
+      <FileName>Models\ScreenSizes.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="p" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

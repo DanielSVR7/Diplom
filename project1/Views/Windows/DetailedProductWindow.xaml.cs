@@ -104,7 +104,18 @@ namespace project1.Views.Windows
         }
         private void AddToShoppingCartButton_Click(object sender, RoutedEventArgs e)
         {
+            OneClickPurchase.IsEnabled = false;
+            AddToShoppingCartButton.IsEnabled = false;
             owner.AddToShoppingCartButton_Click(sender, e);
+        }
+
+        private void OneClickPurchaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OneClickPurchase.IsEnabled = false;
+            AddToShoppingCartButton.IsEnabled = false;
+            owner.AddToShoppingCartButton_Click(sender, e);
+            this.Close();
+
         }
     }
 }

@@ -92,8 +92,8 @@
                             <TextBlock Text="{Binding Price}" FontSize="20" VerticalAlignment="Center"/>
                         </Border>
                         <UniformGrid Grid.Column="1" Columns="2" Margin="60,0,0,0">
-                            <Button Content="Купить в 1 клик" Margin="5,0" />
-                            <Button Content="Добавить в корзину" Margin="5,0" Click="AddToShoppingCartButton_Click" IsEnabled="{Binding IsButtonEnabled}"/>
+                        <Button x:Name="OneClickPurchase"  Content="Купить в 1 клик" Margin="5,0" Click="OneClickPurchaseButton_Click" IsEnabled="{Binding IsButtonEnabled}"/>
+                        <Button x:Name="AddToShoppingCartButton" Content="Добавить в корзину" Margin="5,0" Click="AddToShoppingCartButton_Click" IsEnabled="{Binding IsButtonEnabled}"/>
                         </UniformGrid>
                     </Grid>
                 <Border  Style="{StaticResource MainBorder}" Margin="0,20">

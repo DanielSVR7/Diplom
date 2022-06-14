@@ -24,5 +24,13 @@ namespace project1.Models
         public string ScreenResolution { get; set; }
     
         public virtual ICollection<Products> Products { get; set; }
+
+        public Products p
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

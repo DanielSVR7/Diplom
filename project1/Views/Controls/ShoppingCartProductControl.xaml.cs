@@ -62,15 +62,34 @@ namespace project1.Views.Controls
             Product = product;
             ProductImage = Directory.GetCurrentDirectory() + '/' + Product.Image;
             InitializeComponent();
-            if (Product.Category == 1)
+            switch (Product.Category)
             {
-                ProductTitle = Product.ScreenSizes.ScreenSizeInInches + "\" " + "Телевизор ";
+                case 1:
+                    {
+                        ProductTitle = Product.ScreenSizes.ScreenSizeInInches + "\" " + "Телевизор ";
+                        break;
+                    }
+                case 2:
+                    {
+                        ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ';
+                        break;
+                    }
+                case 3:
+                    {
+                        ProductTitle = "Стиральная машина " + (Product.DirectDrive ?? false ? "с прямым приводом " : "без прямого привода" );
+                        break;
+                    }
+                case 4:
+                    {
+                        ProductTitle = "Микроволновая печь " + Product.InternalVolume + " л. ";
+                        break;
+                    }
+                default: 
+                    { 
+                        ProductTitle = "Товар  ";
+                        break;
+                    }
             }
-            else if (Product.Category == 2)
-            {
-                ProductTitle = "Холодильник " + Product.FreezerLocations.FreezerLocationName + ' ';
-            }
-            else { ProductTitle = "fucked up"; }
             ProductTitle += Product.Manufacturers.CompanyName + ' ' + Product.Model + ' ' + Product.Colors.ColorName;
         }
 
@@ -89,9 +108,9 @@ namespace project1.Views.Controls
 
         private void CountTextBlock_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(ProductCount == 0)
+            if (ProductCount == 0)
                 IsSelected = false;
-            else 
+            else
                 IsSelected = true;
             Owner.UpdateInfo();
         }

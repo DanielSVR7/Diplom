@@ -23,5 +23,13 @@ namespace project1.Models
         public string ColorName { get; set; }
     
         public virtual ICollection<Products> Products { get; set; }
+
+        public Products p
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }
