@@ -73,9 +73,9 @@
                         </StackPanel.Resources>
                         <TextBlock Text="Пользователь:" Margin="10,10,0,0"/>
                         <Separator/>
-                        <TextBlock Text="Свириденко" Margin="10,0"/>
-                        <TextBlock Text="Даниил" Margin="10,0"/>
-                        <TextBlock Text="Дмитриевич" Margin="10,0,0,10"/>
+                        <TextBlock x:Name="SurnameTB" Margin="10,0"/>
+                        <TextBlock x:Name="NameTB" Margin="10,0"/>
+                        <TextBlock x:Name="LastnameTB" Margin="10,0,0,10"/>
                         <Separator/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Ваша скидка :" Margin="10,10,0,10"/>

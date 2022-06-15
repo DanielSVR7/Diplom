@@ -41,6 +41,13 @@ namespace project1.Views.Windows
             Products = products;
             DisplayedDiscount = client.DiscountLevels.PercentDiscount;
             DiscountTextBlock.Text = DisplayedDiscount.ToString();
+            SurnameTB.Text = client.Surname.ToString();
+            if (client.Firstname != null)
+            {
+                NameTB.Text = client.Firstname.ToString();
+            }
+            if (client.Lastname != null)
+                LastnameTB.Text = client.Lastname.ToString();
             UpdateProducts();
         }
         public void UpdateProducts()
