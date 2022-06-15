@@ -171,8 +171,27 @@ namespace project1.Views.Controls
                 MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             {
                 var deleted_product = (from p in ApplianceStoreEntities.Context.Products where Product.ProductID == p.ProductID select p).First();
-                ApplianceStoreEntities.Context.Products.Remove(deleted_product);
-                ApplianceStoreEntities.Context.SaveChanges();
+                try
+                {
+                    var deleted_purchases = (from p in ApplianceStoreEntities.Context.PurchaseItems where p.ProductID == deleted_product.ProductID select p).ToList();
+                    if (MessageBox.Show("Вместе с удалением данного товара будут удалено записей о заказах: " + deleted_purchases.Count + ". Подтверждаете удаление?", "Требуется подтверждение",
+                        MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
+                    {
+                        foreach (var p in deleted_purchases)
+                        {
+                            ApplianceStoreEntities.Context.PurchaseItems.Remove(p);
+                            
+                        }
+                        ApplianceStoreEntities.Context.Products.Remove(deleted_product);
+                        ApplianceStoreEntities.Context.SaveChanges();
+                    }
+                    else return;
+                }
+                catch
+                {
+                    ApplianceStoreEntities.Context.Products.Remove(deleted_product);
+                    ApplianceStoreEntities.Context.SaveChanges();
+                }
                 Owner.ChangeCategory(Owner.SelectedCategory.CategoryID);
             }
         }

@@ -40,7 +40,7 @@
             <Image x:Name="img" DockPanel.Dock="Left" Source="{Binding Path=ProductImage, TargetNullValue={x:Null}}" 
                    Margin="15,10" MinWidth="100" MaxWidth="200" MaxHeight="160" />
             <UniformGrid Rows="3" DockPanel.Dock="Right" >
-                <TextBlock Text="{Binding Product.Price}" HorizontalAlignment="Right" 
+                <TextBlock Text="{Binding Product.Price, StringFormat=n}" HorizontalAlignment="Right" 
                            Margin="10,10" FontSize="18"/>
                 <UniformGrid Columns="2">
                     <Button x:Name="EditButton" Content="Изменить" Margin="10,10" Visibility="Hidden" Click="EditButton_Click"/>
