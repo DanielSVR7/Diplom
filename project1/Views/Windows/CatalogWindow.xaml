@@ -37,8 +37,8 @@
     </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Файл">
-                <MenuItem/>
+            <MenuItem Header="Файл" Click="MenuItem_Click">
+                <MenuItem x:Name="CloseApplication" Header="Выход"/>
             </MenuItem>
             <MenuItem Header="Корзина" Click="ShoppingCartButton_Click"/>
             <MenuItem x:Name="AddProductButton" Header="Добавить товар" 

@@ -185,5 +185,10 @@ namespace project1.Views.Windows
         {
             if (!Char.IsDigit(e.Text, 0)) e.Handled = true;
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
