@@ -83,16 +83,16 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="10,10,0,0">
                     <StackPanel>
-                        <Border Style="{StaticResource BordersStyle}" Margin="5,15,0,0">
+                        <Border Style="{StaticResource BordersStyle}" Margin="5,15,0,10">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text=" Ключевые слова" Style="{DynamicResource FilterHeader}" Margin="5,0,0,5"/>
-                                <TextBlock DockPanel.Dock="Top" Text=" Начните вводить текст для поиска" Foreground="DarkGray"/>
+                                <TextBlock DockPanel.Dock="Top" Text=" Начните вводить текст для поиска" Foreground="DarkGray" Margin="10,0,0,0"/>
                                 <StackPanel MaxHeight="70" DockPanel.Dock="Top">
                                     <TextBox x:Name="SearchTB" Margin="3,0" Height="25" TextChanged="SearchTB_TextChanged" FontSize="16"/>
                                 </StackPanel>
                             </DockPanel>
                         </Border>
-                        <Border Style="{StaticResource BordersStyle}" Margin="5,5,0,0">
+                        <Border Style="{StaticResource BordersStyle}" Margin="5,5,0,10">
                             <DockPanel>
                                 <TextBlock DockPanel.Dock="Top" Text="Цена" Style="{DynamicResource FilterHeader}" Margin="5,0,0,5"/>
                                 <UniformGrid Rows="1" Columns="2">
@@ -100,7 +100,7 @@
                                     <TextBox x:Name="PriceFromTextBox" TextChanged="PriceFromTextBox_TextChanged" PreviewTextInput="PriceFromTextBox_PreviewTextInput" />
                                 </UniformGrid>
                                 <UniformGrid Rows="1" Columns="2">
-                                    <TextBlock Text="Цена до" Foreground="DarkGray" Margin="15,0,0,5"/>
+                                    <TextBlock Text="Цена до" Foreground="DarkGray" Margin="15,0,5,5" HorizontalAlignment="Right"/>
                                     <TextBox x:Name="PriceToTextBox" TextChanged="PriceToTextBox_TextChanged" PreviewTextInput="PriceToTextBox_PreviewTextInput"/>
                                 </UniformGrid>
                             </DockPanel>

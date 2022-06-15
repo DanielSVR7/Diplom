@@ -7,34 +7,109 @@
         xmlns:windows="clr-namespace:project1.Views.Windows" 
         d:DataContext="{d:DesignInstance Type=windows:EditWindow}"
         mc:Ignorable="d"
-        Title="Редактор" Height="500" Width="400" Icon="../../Data/Images/Icons/icon.png">
+        Title="Редактор" Height="800" Width="400" Icon="../../Data/Images/Icons/icon.png">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="23"/>
+
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="23"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="5,2"/>
+            <Setter Property="IsThreeState" Value="False"/>
+        </Style>
+    </Window.Resources>
     <DockPanel>
-        <UniformGrid DockPanel.Dock="Bottom" Margin="100,40">
+        <UniformGrid DockPanel.Dock="Bottom" Margin="100,10">
             <Button x:Name="SaveButton" Content="Сохранить" Click="SaveButton_Click"/>
         </UniformGrid>
         <StackPanel>
-            <UniformGrid Columns="2" Rows="10" Margin="20,10">
+            <UniformGrid Columns="2" Rows="11" Margin="20,10">
                 <TextBlock Text="Категория"/>
-                <ComboBox x:Name="CategoriesComboBox" Margin="5" SelectedItem="{Binding Product.Categories}" />
+                <ComboBox x:Name="CategoriesComboBox" SelectedItem="{Binding Product.Categories}" SelectionChanged="CategoriesComboBox_SelectionChanged" />
                 <TextBlock Text="Производитель"/>
-                <ComboBox x:Name="ManufacturersComboBox" Margin="5" SelectedItem="{Binding Product.Manufacturers}"/>
+                <ComboBox x:Name="ManufacturersComboBox" SelectedItem="{Binding Product.Manufacturers}"/>
                 <TextBlock Text="Модель"/>
-                <TextBox Margin="5" Text="{Binding Product.Model}"/>
+                <TextBox Text="{Binding Product.Model}"/>
                 <TextBlock Text="Цена"/>
-                <TextBox Margin="5" Text="{Binding Product.Price}"/>
+                <TextBox Text="{Binding Product.Price}"/>
                 <TextBlock Text="Ширина"/>
-                <TextBox Margin="5" Text="{Binding Product.Width}"/>
+                <TextBox Text="{Binding Product.Width}"/>
                 <TextBlock Text="Высота"/>
-                <TextBox Margin="5" Text="{Binding Product.Height}"/>
+                <TextBox Text="{Binding Product.Height}"/>
                 <TextBlock Text="Глубина"/>
-                <TextBox Margin="5" Text="{Binding Product.Depth}"/>
+                <TextBox Text="{Binding Product.Depth}"/>
                 <TextBlock Text="Гарантия"/>
-                <TextBox Margin="5" Text="{Binding Product.Warranty}"/>
+                <TextBox Text="{Binding Product.Warranty}"/>
                 <TextBlock Text="Цвет"/>
                 <ComboBox x:Name="ColorsComboBox" Margin="5" SelectedItem="{Binding Product.Colors}"/>
-                <Button x:Name="LoadImageButton" Content="Загрузить изображение" Click="LoadImageButton_Click"/>
+                <TextBlock Text="Потребление электроэнергии"/>
+                <TextBox Text="{Binding Product.PowerConsumption}"/>
+                <TextBlock Text="Класс энергоэффективности"/>
+                <ComboBox x:Name="EnergyClassesComboBox" SelectedItem="{Binding Product.EnergyClasses}"/>
             </UniformGrid>
-            <TextBlock x:Name="ImageTB" Margin="5"/>
+            <UniformGrid Columns="2" Rows="1" Margin="20,0">
+                <TextBlock Text="Описание"/>
+                <TextBox Text="{Binding Product.Description}" Margin="5,0" TextWrapping="Wrap" Height="50" VerticalScrollBarVisibility="Auto"/>
+            </UniformGrid>
+            <UniformGrid x:Name="ForTVs" Columns="2" Rows="7" Margin="20,10" Visibility="Collapsed">
+                <TextBlock Text="Диагональ экрана"/>
+                <ComboBox x:Name="ScreenSizesComboBox" SelectedItem="{Binding Product.ScreenSizes}"/>
+                <TextBlock Text="Резрешение экрана"/>
+                <ComboBox x:Name="ScreenResolutionsComboBox" SelectedItem="{Binding Product.ScreenResolutions}"/>
+                <TextBlock Text="Тип подсветки"/>
+                <ComboBox x:Name="BacklightTypesComboBox" SelectedItem="{Binding Product.BacklightTypes}"/>
+                <TextBlock Text="Операционная система"/>
+                <ComboBox x:Name="OperatingSystemsComboBox" SelectedItem="{Binding Product.OperatingSystems}"/>
+                <TextBlock Text="Поддержка Smart TV"/>
+                <CheckBox IsChecked="{Binding Product.SmartTVSupport}"/>
+                <TextBlock Text="Bluetooth"/>
+                <CheckBox IsChecked="{Binding Product.Bluetooth}"/>
+                <TextBlock Text="Поддержка HDR"/>
+                <CheckBox IsChecked="{Binding Product.HDRSupport}"/>
+            </UniformGrid>
+            <UniformGrid x:Name="ForRefregerators" Columns="2" Rows="7" Margin="20,10" Visibility="Collapsed">
+                <TextBlock Text="Компоновка"/>
+                <ComboBox x:Name="FreezerLocationsComboBox" SelectedItem="{Binding Product.FreezerLocations}"/>
+                <TextBlock Text="Объём морозильной камеры"/>
+                <TextBox Text="{Binding Product.FreezerVolume}"/>
+                <TextBlock Text="Объём холодильной камеры"/>
+                <TextBox Text="{Binding Product.RefrigeratorVolume}" />
+                <TextBlock Text="Зона свежести"/>
+                <CheckBox IsChecked="{Binding Product.FreshnessZone}"/>
+                <TextBlock Text="Инверторный компрессор"/>
+                <CheckBox IsChecked="{Binding Product.InverterCompressor}"/>
+                <TextBlock Text="Температурный дисплей"/>
+                <CheckBox IsChecked="{Binding Product.TemperatureDisplay}"/>
+            </UniformGrid>
+            <UniformGrid x:Name="ForWashingMachines" Columns="2" Rows="6" Margin="20,10" Visibility="Collapsed">
+                <TextBlock Text="Максимальная загрузка"/>
+                <TextBox Text="{Binding Product.LaundryLoad}"/>
+                <TextBlock Text="Количество программ"/>
+                <TextBox Text="{Binding Product.NumberOfPrograms}"/>
+                <TextBlock Text="Максимальная скорость отжима"/>
+                <TextBox Text="{Binding Product.MaximumSpinSpeed}"/>
+                <TextBlock Text="Температурный диапазон"/>
+                <TextBox Text="{Binding Product.TemperatureRange}"/>
+                <TextBlock Text="Потребление воды"/>
+                <TextBox Text="{Binding Product.WaterConsumption}"/>
+                <TextBlock Text="Прямой привод"/>
+                <CheckBox IsChecked="{Binding Product.DirectDrive}"/>
+            </UniformGrid>
+            <UniformGrid x:Name="ForMicrowawes" Columns="2" Rows="2" Margin="20,10" Visibility="Collapsed">
+                <TextBlock Text="Внутренний объём"/>
+                <TextBox Text="{Binding Product.InternalVolume}"/>
+                <TextBlock Text="Гриль"/>
+                <CheckBox IsChecked="{Binding Product.Grill}" />
+            </UniformGrid>
+            <UniformGrid Margin="20,0">
+                <Button x:Name="LoadImageButton" Content="Загрузить изображение" Click="LoadImageButton_Click"/>
+                <TextBlock x:Name="ImageTB" Margin="5"/>
+            </UniformGrid>
         </StackPanel>
     </DockPanel>
 </Window>

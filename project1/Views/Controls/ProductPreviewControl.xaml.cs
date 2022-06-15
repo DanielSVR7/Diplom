@@ -162,7 +162,7 @@ namespace project1.Views.Controls
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             EditWindow ew = new EditWindow(Product);
-            ew.Show();
+            ew.ShowDialog();
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)

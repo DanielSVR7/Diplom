@@ -27,8 +27,8 @@ namespace project1.Views.Windows
                         Firstname = FirstnameTB.Text,
                         Lastname = LastnameTB.Text,
                         PhoneNumber = PhoneTB.Text,
-                        Password = Encryption.Encode(PasswordTB.Password)
-                };
+                        Password = PasswordTB.Password
+                    };
                     ApplianceStoreEntities.Context.Clients.Add(client);
                     ApplianceStoreEntities.Context.SaveChanges();
                     this.Close();

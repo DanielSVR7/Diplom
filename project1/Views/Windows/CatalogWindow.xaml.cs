@@ -149,7 +149,7 @@ namespace project1.Views.Windows
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             EditWindow ew = new EditWindow(new Products());
-            ew.Show();
+            ew.ShowDialog();
         }
 
         private void DropFilterButton_Click(object sender, RoutedEventArgs e)
