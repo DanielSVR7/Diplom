@@ -185,5 +185,10 @@ namespace project1.Views.Windows
                 case 3: ForMicrowawes.Visibility = Visibility.Visible; break;
             }
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, 0)) e.Handled = true;
+        }
     }
 }

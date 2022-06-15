@@ -37,19 +37,19 @@
                 <TextBlock Text="Модель"/>
                 <TextBox Text="{Binding Product.Model}"/>
                 <TextBlock Text="Цена"/>
-                <TextBox Text="{Binding Product.Price}"/>
+                <TextBox Text="{Binding Product.Price, StringFormat=n}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Ширина"/>
-                <TextBox Text="{Binding Product.Width}"/>
+                <TextBox Text="{Binding Product.Width}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Высота"/>
-                <TextBox Text="{Binding Product.Height}"/>
+                <TextBox Text="{Binding Product.Height}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Глубина"/>
-                <TextBox Text="{Binding Product.Depth}"/>
+                <TextBox Text="{Binding Product.Depth}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Гарантия"/>
-                <TextBox Text="{Binding Product.Warranty}"/>
+                <TextBox Text="{Binding Product.Warranty}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Цвет"/>
                 <ComboBox x:Name="ColorsComboBox" Margin="5" SelectedItem="{Binding Product.Colors}"/>
                 <TextBlock Text="Потребление электроэнергии"/>
-                <TextBox Text="{Binding Product.PowerConsumption}"/>
+                <TextBox Text="{Binding Product.PowerConsumption}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Класс энергоэффективности"/>
                 <ComboBox x:Name="EnergyClassesComboBox" SelectedItem="{Binding Product.EnergyClasses}"/>
             </UniformGrid>
@@ -77,9 +77,9 @@
                 <TextBlock Text="Компоновка"/>
                 <ComboBox x:Name="FreezerLocationsComboBox" SelectedItem="{Binding Product.FreezerLocations}"/>
                 <TextBlock Text="Объём морозильной камеры"/>
-                <TextBox Text="{Binding Product.FreezerVolume}"/>
+                <TextBox Text="{Binding Product.FreezerVolume}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Объём холодильной камеры"/>
-                <TextBox Text="{Binding Product.RefrigeratorVolume}" />
+                <TextBox Text="{Binding Product.RefrigeratorVolume}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Зона свежести"/>
                 <CheckBox IsChecked="{Binding Product.FreshnessZone}"/>
                 <TextBlock Text="Инверторный компрессор"/>
@@ -89,21 +89,21 @@
             </UniformGrid>
             <UniformGrid x:Name="ForWashingMachines" Columns="2" Rows="6" Margin="20,10" Visibility="Collapsed">
                 <TextBlock Text="Максимальная загрузка"/>
-                <TextBox Text="{Binding Product.LaundryLoad}"/>
+                <TextBox Text="{Binding Product.LaundryLoad}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Количество программ"/>
-                <TextBox Text="{Binding Product.NumberOfPrograms}"/>
+                <TextBox Text="{Binding Product.NumberOfPrograms}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Максимальная скорость отжима"/>
-                <TextBox Text="{Binding Product.MaximumSpinSpeed}"/>
+                <TextBox Text="{Binding Product.MaximumSpinSpeed}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Температурный диапазон"/>
                 <TextBox Text="{Binding Product.TemperatureRange}"/>
                 <TextBlock Text="Потребление воды"/>
-                <TextBox Text="{Binding Product.WaterConsumption}"/>
+                <TextBox Text="{Binding Product.WaterConsumption}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Прямой привод"/>
                 <CheckBox IsChecked="{Binding Product.DirectDrive}"/>
             </UniformGrid>
             <UniformGrid x:Name="ForMicrowawes" Columns="2" Rows="2" Margin="20,10" Visibility="Collapsed">
                 <TextBlock Text="Внутренний объём"/>
-                <TextBox Text="{Binding Product.InternalVolume}"/>
+                <TextBox Text="{Binding Product.InternalVolume}" PreviewTextInput="TextBox_PreviewTextInput"/>
                 <TextBlock Text="Гриль"/>
                 <CheckBox IsChecked="{Binding Product.Grill}" />
             </UniformGrid>
