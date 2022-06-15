@@ -20,8 +20,7 @@ namespace project1.Views.Windows
             try         //Попытка авторизоваться
             {
                 string _login = loginTextBox.Text;
-                //string _password = Encryption.Encode(PasswordBox.Password);
-                string _password = PasswordBox.Password;
+                string _password = Encryption.Encode(PasswordBox.Password);
                 try
                 {
                     var _client = (from client in ApplianceStoreEntities.Context.Clients
@@ -39,6 +38,7 @@ namespace project1.Views.Windows
                 }
                 catch
                 {
+                    _password = Encryption.Decode(_password);
                     var _manager = (from manager in ApplianceStoreEntities.Context.Managers
                                     where _login == manager.Login && _password == manager.Password
                                     select manager).Single();
